@@ -14,39 +14,44 @@ using AutoRiceMill.EntityFrameworkCore;
 using AutoRiceMill.EntityFrameworkCore.Seed.Host;
 using AutoRiceMill.EntityFrameworkCore.Seed.Tenants;
 using AutoRiceMill.MultiTenancy;
+using AutoRiceMill.Tests.TestDatas;
 
 namespace AutoRiceMill.Tests
 {
     public abstract class AutoRiceMillTestBase : AbpIntegratedTestBase<AutoRiceMillTestModule>
     {
-        protected AutoRiceMillTestBase()
+        public AutoRiceMillTestBase()
         {
-            void NormalizeDbContext(AutoRiceMillDbContext context)
-            {
-                context.EntityChangeEventHelper = NullEntityChangeEventHelper.Instance;
-                context.EventBus = NullEventBus.Instance;
-                context.SuppressAutoSetTenantId = true;
-            }
-
-            // Seed initial data for host
-            AbpSession.TenantId = null;
-            UsingDbContext(context =>
-            {
-                NormalizeDbContext(context);
-                new InitialHostDbBuilder(context).Create();
-                new DefaultTenantBuilder(context).Create();
-            });
-
-            // Seed initial data for default tenant
-            AbpSession.TenantId = 1;
-            UsingDbContext(context =>
-            {
-                NormalizeDbContext(context);
-                new TenantRoleAndUserBuilder(context, 1).Create();
-            });
-
-            LoginAsDefaultTenantAdmin();
+            UsingDbContext(context => new TestDataBuilder(context).Build());
         }
+        //protected AutoRiceMillTestBase()
+        //{
+        //    void NormalizeDbContext(AutoRiceMillDbContext context)
+        //    {
+        //        context.EntityChangeEventHelper = NullEntityChangeEventHelper.Instance;
+        //        context.EventBus = NullEventBus.Instance;
+        //        context.SuppressAutoSetTenantId = true;
+        //    }
+
+        //    // Seed initial data for host
+        //    AbpSession.TenantId = null;
+        //    UsingDbContext(context =>
+        //    {
+        //        NormalizeDbContext(context);
+        //        new InitialHostDbBuilder(context).Create();
+        //        new DefaultTenantBuilder(context).Create();
+        //    });
+
+        //    // Seed initial data for default tenant
+        //    AbpSession.TenantId = 1;
+        //    UsingDbContext(context =>
+        //    {
+        //        NormalizeDbContext(context);
+        //        new TenantRoleAndUserBuilder(context, 1).Create();
+        //    });
+
+        //    LoginAsDefaultTenantAdmin();
+        //}
 
         #region UsingDbContext
 

@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{ECE3DE6E-174D-4A3C-A0F0-1DAEFEB0DD7C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Johan.Repository</RootNamespace>
+    <AssemblyName>Johan.Repository</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common.cs" />
+    <Compile Include="CommonLib\CommonData.cs" />
+    <Compile Include="CommonLib\ReportViewModel.cs" />
+    <Compile Include="DAL\DBalancePaddyRepository.cs" />
+    <Compile Include="DAL\DBalanceRepository.cs" />
+    <Compile Include="DAL\DCarRepository.cs" />
+    <Compile Include="DAL\DConsumptionRepository.cs" />
+    <Compile Include="DAL\DDuePaymentRepository.cs" />
+    <Compile Include="DAL\DEmployeeRepository.cs" />
+    <Compile Include="DAL\DHuskSellRepository.cs" />
+    <Compile Include="DAL\DIncomeRepository.cs" />
+    <Compile Include="DAL\Disposible.cs" />
+    <Compile Include="DAL\DLoanerRepository.cs" />
+    <Compile Include="DAL\DLoanPaymentRepository.cs" />
+    <Compile Include="DAL\DLoginUserRepository.cs" />
+    <Compile Include="DAL\DPaddyDuesRepository.cs" />
+    <Compile Include="DAL\DPaddyRepository.cs" />
+    <Compile Include="DAL\DPaddyTransferRepository.cs" />
+    <Compile Include="DAL\DParticleSellRepository.cs" />
+    <Compile Include="DAL\DPartyRepository.cs" />
+    <Compile Include="DAL\DProductRepository.cs" />
+    <Compile Include="DAL\DReportRepository.cs" />
+    <Compile Include="DAL\DRiceRepository.cs" />
+    <Compile Include="DAL\DSectorRepository.cs" />
+    <Compile Include="DAL\DStockRepository.cs" />
+    <Compile Include="DAL\DUserRepository.cs" />
+    <Compile Include="DAL\DWithdrawRepository.cs" />
+    <Compile Include="DAL\DZoneRepository.cs" />
+    <Compile Include="IDAL\IBalancePaddyRepository.cs" />
+    <Compile Include="IDAL\IBalanceRepository.cs" />
+    <Compile Include="IDAL\ICarRepository.cs" />
+    <Compile Include="IDAL\IConsumptionRepository.cs" />
+    <Compile Include="IDAL\IDuePaymentRepository.cs" />
+    <Compile Include="IDAL\IEmployeeRepository.cs" />
+    <Compile Include="IDAL\IHuskSellRepository.cs" />
+    <Compile Include="IDAL\IIncomeRepository.cs" />
+    <Compile Include="IDAL\ILoanerRepository.cs" />
+    <Compile Include="IDAL\ILoanPaymentRepository.cs" />
+    <Compile Include="IDAL\ILoginUserRepository.cs" />
+    <Compile Include="IDAL\IPaddyDuesRepository.cs" />
+    <Compile Include="IDAL\IPaddyRepository.cs" />
+    <Compile Include="IDAL\IPaddyTransferRepository.cs" />
+    <Compile Include="IDAL\IParticleSellRepository.cs" />
+    <Compile Include="IDAL\IPartyRepository.cs" />
+    <Compile Include="IDAL\IProductRepository.cs" />
+    <Compile Include="IDAL\IReportRepository.cs" />
+    <Compile Include="IDAL\IRiceRepository.cs" />
+    <Compile Include="IDAL\ISectorRepository.cs" />
+    <Compile Include="IDAL\IStockRepository.cs" />
+    <Compile Include="IDAL\IUserRepository.cs" />
+    <Compile Include="IDAL\IWithdrawRepository.cs" />
+    <Compile Include="IDAL\IZoneRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Johan.DATA\Johan.DATA.csproj">
+      <Project>{4c1ba6d6-e544-494d-b91e-ac845ccb328f}</Project>
+      <Name>Johan.DATA</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

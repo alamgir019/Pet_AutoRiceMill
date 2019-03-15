@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0726260514524844befbe33e7b804461" Name="Diagram1" ZoomLevel="72">
+        <EntityTypeShape EntityType="JohanAgroFoodDBModel.STK_Balance" Width="1.5" PointX="6" PointY="18.25" />
+        <EntityTypeShape EntityType="JohanAgroFoodDBModel.STK_tblStock" Width="1.5" PointX="3.75" PointY="17.25" />
+        <EntityTypeShape EntityType="JohanAgroFoodDBModel.tblBuy" Width="1.5" PointX="8.25" PointY="21.5" />
+        <EntityTypeShape EntityType="JohanAgroFoodDBModel.tblCollection" Width="1.5" PointX="5.25" PointY="26.125" />
+        <EntityTypeShape EntityType="JohanAgroFoodDBModel.tblCommonElement" Width="1.5" PointX="0.75" PointY="18.375" />
+        <EntityTypeShape EntityType="JohanAgroFoodDBModel.tblCostingSource" Width="1.5" PointX="10.5" PointY="16.5" />
+        <EntityTypeShape EntityType="JohanAgroFoodDBModel.tblIncomeSource" Width="1.5" PointX="8.25" PointY="16.875" />
+        <EntityTypeShape EntityType="JohanAgroFoodDBModel.tblLoanar" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="JohanAgroFoodDBModel.tblParty" Width="1.5" PointX="3" PointY="21.25" />
+        <EntityTypeShape EntityType="JohanAgroFoodDBModel.tblPayable" Width="1.5" PointX="13.5" PointY="17.75" />
+        <EntityTypeShape EntityType="JohanAgroFoodDBModel.tblPayment" Width="1.5" PointX="13.5" PointY="22.125" />
+        <EntityTypeShape EntityType="JohanAgroFoodDBModel.tblProduct" Width="1.5" PointX="0.75" PointY="22.125" />
+        <EntityTypeShape EntityType="JohanAgroFoodDBModel.tblProductPrice" Width="1.5" PointX="3" PointY="39.5" />
+        <EntityTypeShape EntityType="JohanAgroFoodDBModel.tblSell" Width="1.5" PointX="16.5" PointY="18.875" />
+        <EntityTypeShape EntityType="JohanAgroFoodDBModel.tblUser" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="JohanAgroFoodDBModel.tblInterest" Width="1.5" PointX="2.75" PointY="3.75" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_STK_tblRice_STK_tblStock" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_STK_tblRice_tblProduct" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_tblSell_STK_stock" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_tblbuy_tblParty" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_tblBuy_tblProduct" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_tblCostingSource_tblBuy" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_tblPayment_tblBuy" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_RICE_tblCollection_RICE_tblSell" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_tblCollection_tblParty" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_tblCostingSource_tblCommonElement" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_tblIncomeSource_tblIncomeSource" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_tblParty_tblCommonElement" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_tblCostingSource_tblSell" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_tblIncomeSource_tblParty" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_tblPayable_tblIncomeSource" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_tblSell_tblIncomeSource" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_tblParty_tblProduct" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_tblPayable_tblParty" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_tblPayment_tblParty" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_tblSell_tblParty" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_tblPayable_tblSell" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_RICE_tblSell_tblProduct" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_tblProductPrice_tblProduct" />
+        <EntityTypeShape EntityType="JohanAgroFoodDBModel.STK_Transaction" Width="1.5" PointX="18.75" PointY="19.375" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_STK_Transaction_STK_tblStock" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_STK_Transaction_tblProduct" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_STK_Transaction_tblSell" />
+        <EntityTypeShape EntityType="JohanAgroFoodDBModel.STK_tblPaddy" Width="1.5" PointX="10.5" PointY="26" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_STK_tblPaddy_STK_tblStock" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_STK_tblPaddy_tblProduct" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_STK_tblstkPaddy_tblBuy" />
+        <EntityTypeShape EntityType="JohanAgroFoodDBModel.BagTransaction" Width="1.5" PointX="10.5" PointY="21.75" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_BagTransaction_Party" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_BagTransaction_tblBuy" />
+        <EntityTypeShape EntityType="JohanAgroFoodDBModel.tblDue" Width="1.5" PointX="15.75" PointY="24.625" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_tblDues_tblBuy" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_tblDues_tblCostingSource" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_tblDues_tblParty" />
+        <EntityTypeShape EntityType="JohanAgroFoodDBModel.OpeningBalance" Width="1.5" PointX="5.25" PointY="22.625" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_OpeningBalance_tblParty" />
+        <EntityTypeShape EntityType="JohanAgroFoodDBModel.SalaryPayment" Width="1.5" PointX="7.625" PointY="1.125" />
+        <EntityTypeShape EntityType="JohanAgroFoodDBModel.Employee" Width="1.5" PointX="5.375" PointY="0.875" />
+        <AssociationConnector Association="JohanAgroFoodDBModel.FK_SalaryPayment_Employee" />
+        <EntityTypeShape EntityType="JohanAgroFoodDBModel.PaddyTransaction" Width="1.5" PointX="5.375" PointY="4.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

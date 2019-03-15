@@ -1,0 +1,134 @@
+﻿@model Johan.DATA.tblLoanar
+@{
+    ViewBag.Title = "লোনার";
+}
+<script src="~/App/Components/Loaner/loanerController.js"></script>
+<script src="~/App/Components/Loaner/loanerService.js"></script>
+<div class="row">
+    <div style="height:20px;"></div>
+</div>
+<div ng-controller="loanerController" class="row">
+    <div class="col-md-4">
+        <form class="form-horizontal" name="loanerForm" novalidate>
+            <div class="form-group">
+                <div class="col-sm-8 col-md-offset-2">
+                    <h4>লোনার</h4>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name" class="col-sm-4 control-label">লোনারের নাম</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" name="name" data-ng-model="loaner.name" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="contactNo" class="col-sm-4 control-label">মোবাইল নাম্বার</label>
+                <div class="col-sm-8">
+                    <bangla-number input-value="loaner.contact" output-value="loaner.contactNo" required="true" />
+                    @*<input type="text" class="form-control" name="contactNo" data-ng-model="loaner.contactNo" required>*@
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="area" class="col-sm-4 control-label">এলাকা</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" name="area" data-ng-model="loaner.area">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="district" class="col-sm-4 control-label">জেলা</label>
+                <div class="col-sm-8">
+                    <select class="form-control" ng-model="loaner.district">
+                        <option value="ঢাকা">ঢাকা</option>
+                        <option value="ঝিনাইদাহ">ঝিনাইদাহ</option>
+                        <option value="কুষ্টিয়া">কুষ্টিয়া</option>
+                        <option value="মাগুরা">মাগুরা</option>
+                    </select>
+                    <span class="error" ng-show="partyForm.district.$error.required">required</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="area" class="col-sm-4 control-label">টাকার পরিমাণ</label>
+                <div class="col-sm-8">
+                    <bangla-number input-value="loaner.amnt" output-value="loaner.amount" required="true" />
+                    @*<input type="text" class="form-control" name="area" data-ng-model="loaner.amount">*@
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="area" class="col-sm-4 control-label">ইন্টারেস্ট</label>
+                <div class="col-sm-8">
+                    <bangla-number input-value="loaner.intst" output-value="loaner.interest" required="true" />
+                    @*<input type="text" class="form-control" name="area" data-ng-model="loaner.interest">*@
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+
+                    <button type="button" class="btn btn-success" ng-click="save(loaner)">সেভ
+                        @*<span class="glyphicon glyphicon-save" aria-hidden="true"></span>*@
+                    </button>
+                    <button class="btn btn-success" ng-click="reset()">
+                        <span class="glyphicon glyphicon-refresh" aria-hidden="true">রিসেট</span>
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <div class="col-sm-8">
+                <h4>লোনারের তালিকা</h4>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>নাম</th>
+                        <th>মোবাইল</th>
+                        <th>এলাকা</th>
+                        <th>জেলা</th>
+                        <th>পরিমাণ</th>
+                        <th>ইন্টারেস্ট</th>
+                        <th width="40%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="ln in loaners">
+                        <td>{{ln.name}}</td>
+                        <td>{{ln.contact}}</td>
+                        <td>{{ln.area}}</td>
+                        <td>{{ln.district}}</td>
+                        <td>{{ln.amnt}}</td>
+                        <td>{{ln.intst}}</td>
+                        <td>
+                            <button class="btn btn-default" value="Edit" ng-click="edit(ln)">
+                                @*<span class="glyphicon glyphicon-pencil"></span>*@ পরিবর্তন
+                            </button>
+                            <button class="btn btn-default" value="Delete" ng-click="delete(ln)">
+                                @*<span class="glyphicon glyphicon-trash" aria-hidden="true"> Delete</span>*@ মূছুন
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" style="top:40%; height:100px; overflow:hidden; outline:none;" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4 class="modal-title" id="myModalLabel">Please wait....</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

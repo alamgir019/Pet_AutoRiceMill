@@ -1,0 +1,14 @@
+﻿fieldset.fsStyle {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: small;
+    font-weight: normal;
+    border: 1px solid #999999;
+    padding: 4px;
+    margin: 5px;
+}
+
+.gridStyle {
+    border: 1px solid rgb(212,212,212);
+    /*width: 400px;*/ 
+    /*height: 300px*/
+}

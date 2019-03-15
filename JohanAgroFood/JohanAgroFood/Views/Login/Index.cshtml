@@ -1,0 +1,45 @@
+﻿@model Johan.DATA.tblUser
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>সেলস ম্যানেজমেন্ট সফটওয়্যার</title>
+    @Styles.Render("~/Content/css")
+    @*@Scripts.Render("~/bundles/modernizr")*@
+    <link href="~/Assets/css/signin.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="container">
+        @using (Html.BeginForm("Index", "Login", FormMethod.Post, new { @class = "form-signin", role = "form" }))
+        {
+            @*@Html.AntiForgeryToken()*@
+            <h1 class="form-signin-heading">সাইন ইন করুনঃ</h1>
+            @Html.ValidationSummary(true)
+            @Html.LabelFor(m => m.userId, new { @class = "sr-only" })
+            @Html.TextBoxFor(m => m.userId, new { @class = "form-control", @autofocus = "", @placeholder = "ব্যাবহারকারীর নাম", @required = "" })
+            @*@Html.ValidationMessageFor(m => m.USERNAME)*@
+            @Html.LabelFor(m => m.password, new { @class = "sr-only" })
+            @Html.PasswordFor(m => m.password,
+                         new { @class = "form-control", @autofocus = "", @placeholder = "ব্যাবহারকারীর পাসওয়ার্ড", @required = "", @type = "password" })
+            @*@Html.ValidationMessageFor(m => m.USERPASSWORD)*@
+            @*<div class="checkbox">
+                <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                </label>
+            </div>*@
+            <button type="submit" class="btn btn-lg btn-primary btn-block">সাইন ইন</button>
+        }
+        @*<li>@Html.ActionLink("Login", "Index", "Home")</li>*@
+
+    </div>
+
+</body>
+</html>

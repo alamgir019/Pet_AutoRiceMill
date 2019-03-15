@@ -1,0 +1,955 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="JohanAgroFoodDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BagTransaction">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="partyId" Type="int" />
+    <Property Name="rcvId" Type="bigint" />
+    <Property Name="comRcvBag" Type="int" />
+    <Property Name="rcvPrice" Type="float" />
+    <Property Name="comSentBag" Type="int" />
+    <Property Name="sentPrice" Type="float" />
+    <Property Name="date" Type="date" />
+    <Property Name="bagDues" Type="int" />
+    <Property Name="priceDues" Type="float" />
+    <Property Name="isActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="empName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="address" Type="nvarchar" MaxLength="1000" />
+    <Property Name="designation" Type="nvarchar" MaxLength="50" />
+    <Property Name="contact" Type="nvarchar" MaxLength="50" />
+    <Property Name="joiningDate" Type="date" Nullable="false" />
+    <Property Name="currentSalary" Type="float" Nullable="false" />
+    <Property Name="active" Type="bit" />
+  </EntityType>
+  <EntityType Name="OpeningBalance">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="partyId" Type="int" Nullable="false" />
+    <Property Name="balance" Type="float" Nullable="false" />
+    <Property Name="date" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PaddyTransaction">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="openingStock" Type="float" Nullable="false" />
+    <Property Name="stockId" Type="int" Nullable="false" />
+    <Property Name="prodId" Type="int" Nullable="false" />
+    <Property Name="rcvQty" Type="float" />
+    <Property Name="releaseQty" Type="float" />
+    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="buyId" Type="bigint" />
+    <Property Name="bagWeight" Type="float" />
+    <Property Name="millCost" Type="float" />
+    <Property Name="serial" Type="int" />
+    <Property Name="fromStock" Type="int" />
+  </EntityType>
+  <EntityType Name="SalaryPayment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="empId" Type="bigint" Nullable="false" />
+    <Property Name="paidAmount" Type="float" Nullable="false" />
+    <Property Name="month" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="year" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="date" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="STK_Balance">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="stockId" Type="int" />
+    <Property Name="productId" Type="int" />
+    <Property Name="sackQuantity" Type="float" />
+    <Property Name="sackWeight" Type="float" />
+  </EntityType>
+  <EntityType Name="STK_tblPaddy">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="stockId" Type="int" Nullable="false" />
+    <Property Name="productId" Type="int" Nullable="false" />
+    <Property Name="paddRcvId" Type="bigint" Nullable="false" />
+    <Property Name="sackWeight" Type="float" Nullable="false" />
+    <Property Name="sackQuantity" Type="float" Nullable="false" />
+    <Property Name="createDate" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="STK_tblStock">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="stockName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="stockAddress" Type="nvarchar" MaxLength="50" />
+    <Property Name="createDate" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="STK_Transaction">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="openingStock" Type="float" Nullable="false" />
+    <Property Name="stockId" Type="int" Nullable="false" />
+    <Property Name="prodId" Type="int" Nullable="false" />
+    <Property Name="rcvQty" Type="float" />
+    <Property Name="sellQty" Type="float" />
+    <Property Name="operation" Type="smallint" />
+    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="sellId" Type="bigint" />
+  </EntityType>
+  <EntityType Name="tblBuy">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="partyId" Type="int" Nullable="false" />
+    <Property Name="stockId" Type="int" Nullable="false" />
+    <Property Name="productId" Type="int" Nullable="false" />
+    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="noOfBag" Type="int" Nullable="false" />
+    <Property Name="quantityPerBag" Type="float" Nullable="false" />
+    <Property Name="unit" Type="tinyint" Nullable="false" />
+    <Property Name="price" Type="float" Nullable="false" />
+    <Property Name="truckNumber" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblCollection">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="partyId" Type="int" Nullable="false" />
+    <Property Name="sellId" Type="bigint" />
+    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="collAmount" Type="float" />
+    <Property Name="dueAmount" Type="float" />
+    <Property Name="discount" Type="float" />
+  </EntityType>
+  <EntityType Name="tblCommonElement">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="elementName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="elementCode" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblCostingSource">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="partyId" Type="int" />
+    <Property Name="amount" Type="float" Nullable="false" />
+    <Property Name="sourceName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="srcDescription" Type="nvarchar" MaxLength="50" />
+    <Property Name="srcDescId" Type="int" Nullable="false" />
+    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="sellId" Type="bigint" />
+    <Property Name="buyId" Type="bigint" />
+    <Property Name="labourCostPerBag" Type="float" />
+    <Property Name="transportCost" Type="float" />
+    <Property Name="isDue" Type="int" />
+  </EntityType>
+  <EntityType Name="tblDues">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="partyId" Type="int" Nullable="false" />
+    <Property Name="buyId" Type="bigint" />
+    <Property Name="costingId" Type="bigint" />
+    <Property Name="openingBalance" Type="float" />
+    <Property Name="amount" Type="float" />
+    <Property Name="date" Type="date" />
+    <Property Name="isActive" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="tblIncomeSource">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="partyId" Type="int" />
+    <Property Name="amount" Type="float" Nullable="false" />
+    <Property Name="sourceName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="description" Type="nvarchar" MaxLength="50" />
+    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="srcDescId" Type="int" Nullable="false" />
+    <Property Name="isDue" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'JohanAgroFoodDB.dbo.tblInterest' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tblInterest">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="loanarId" />
+      <PropertyRef Name="intrestAmt" />
+      <PropertyRef Name="date" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="loanarId" Type="int" Nullable="false" />
+    <Property Name="intrestAmt" Type="float" Nullable="false" />
+    <Property Name="date" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblLoanar">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="contactNo" Type="bigint" />
+    <Property Name="area" Type="nvarchar" MaxLength="50" />
+    <Property Name="district" Type="nvarchar" MaxLength="50" />
+    <Property Name="amount" Type="float" Nullable="false" />
+    <Property Name="interest" Type="float" Nullable="false" />
+    <Property Name="createDate" Type="date" Nullable="false" />
+    <Property Name="lastUpdate" Type="date" />
+  </EntityType>
+  <EntityType Name="tblParty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="productId" Type="int" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="contactNo" Type="bigint" />
+    <Property Name="area" Type="nvarchar" MaxLength="50" />
+    <Property Name="districtId" Type="int" />
+    <Property Name="zoneId" Type="int" />
+    <Property Name="isCashParty" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblPayable">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="partyId" Type="int" Nullable="false" />
+    <Property Name="openingBalance" Type="float" />
+    <Property Name="amount" Type="float" />
+    <Property Name="date" Type="date" />
+    <Property Name="isActive" Type="tinyint" />
+    <Property Name="sellId" Type="bigint" />
+    <Property Name="incSrcId" Type="bigint" />
+  </EntityType>
+  <EntityType Name="tblPayment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="partyId" Type="int" Nullable="false" />
+    <Property Name="buyId" Type="bigint" />
+    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="paidAmount" Type="float" />
+    <Property Name="totalAmount" Type="float" />
+    <Property Name="discount" Type="float" />
+  </EntityType>
+  <EntityType Name="tblProduct">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="productName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="parentId" Type="int" />
+  </EntityType>
+  <EntityType Name="tblProductPrice">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="productId" Type="int" />
+    <Property Name="unitPrice" Type="float" />
+    <Property Name="date" Type="date" />
+    <Property Name="active" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblSell">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="partyId" Type="int" Nullable="false" />
+    <Property Name="productId" Type="int" Nullable="false" />
+    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="noOfBag" Type="int" Nullable="false" />
+    <Property Name="quantity" Type="float" Nullable="false" />
+    <Property Name="unit" Type="int" Nullable="false" />
+    <Property Name="unitPrice" Type="float" />
+    <Property Name="stockId" Type="int" />
+    <Property Name="incSrcId" Type="bigint" />
+    <Property Name="transportCost" Type="float" />
+    <Property Name="truckNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="description" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblUser">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userId" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="firstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="lastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="userType" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_BagTransaction_Party">
+    <End Role="tblParty" Type="Self.tblParty" Multiplicity="0..1" />
+    <End Role="BagTransaction" Type="Self.BagTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblParty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BagTransaction">
+        <PropertyRef Name="partyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BagTransaction_tblBuy">
+    <End Role="tblBuy" Type="Self.tblBuy" Multiplicity="0..1" />
+    <End Role="BagTransaction" Type="Self.BagTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBuy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BagTransaction">
+        <PropertyRef Name="rcvId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OpeningBalance_tblParty">
+    <End Role="tblParty" Type="Self.tblParty" Multiplicity="1" />
+    <End Role="OpeningBalance" Type="Self.OpeningBalance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblParty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OpeningBalance">
+        <PropertyRef Name="partyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RICE_tblCollection_RICE_tblSell">
+    <End Role="tblSell" Type="Self.tblSell" Multiplicity="0..1" />
+    <End Role="tblCollection" Type="Self.tblCollection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSell">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblCollection">
+        <PropertyRef Name="sellId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RICE_tblSell_tblProduct">
+    <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="1" />
+    <End Role="tblSell" Type="Self.tblSell" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduct">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblSell">
+        <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalaryPayment_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="SalaryPayment" Type="Self.SalaryPayment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SalaryPayment">
+        <PropertyRef Name="empId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_STK_tblPaddy_STK_tblStock">
+    <End Role="STK_tblStock" Type="Self.STK_tblStock" Multiplicity="1" />
+    <End Role="STK_tblPaddy" Type="Self.STK_tblPaddy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="STK_tblStock">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="STK_tblPaddy">
+        <PropertyRef Name="stockId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_STK_tblPaddy_tblProduct">
+    <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="1" />
+    <End Role="STK_tblPaddy" Type="Self.STK_tblPaddy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduct">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="STK_tblPaddy">
+        <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_STK_tblRice_STK_tblStock">
+    <End Role="STK_tblStock" Type="Self.STK_tblStock" Multiplicity="0..1" />
+    <End Role="STK_Balance" Type="Self.STK_Balance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="STK_tblStock">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="STK_Balance">
+        <PropertyRef Name="stockId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_STK_tblRice_tblProduct">
+    <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="0..1" />
+    <End Role="STK_Balance" Type="Self.STK_Balance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduct">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="STK_Balance">
+        <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_STK_tblstkPaddy_tblBuy">
+    <End Role="tblBuy" Type="Self.tblBuy" Multiplicity="1" />
+    <End Role="STK_tblPaddy" Type="Self.STK_tblPaddy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBuy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="STK_tblPaddy">
+        <PropertyRef Name="paddRcvId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_STK_Transaction_STK_tblStock">
+    <End Role="STK_tblStock" Type="Self.STK_tblStock" Multiplicity="1" />
+    <End Role="STK_Transaction" Type="Self.STK_Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="STK_tblStock">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="STK_Transaction">
+        <PropertyRef Name="stockId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_STK_Transaction_tblProduct">
+    <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="1" />
+    <End Role="STK_Transaction" Type="Self.STK_Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduct">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="STK_Transaction">
+        <PropertyRef Name="prodId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblbuy_tblParty">
+    <End Role="tblParty" Type="Self.tblParty" Multiplicity="1" />
+    <End Role="tblBuy" Type="Self.tblBuy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblParty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblBuy">
+        <PropertyRef Name="partyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBuy_tblProduct">
+    <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="1" />
+    <End Role="tblBuy" Type="Self.tblBuy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduct">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblBuy">
+        <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblCollection_tblParty">
+    <End Role="tblParty" Type="Self.tblParty" Multiplicity="1" />
+    <End Role="tblCollection" Type="Self.tblCollection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblParty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblCollection">
+        <PropertyRef Name="partyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblCostingSource_tblBuy">
+    <End Role="tblBuy" Type="Self.tblBuy" Multiplicity="0..1" />
+    <End Role="tblCostingSource" Type="Self.tblCostingSource" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBuy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblCostingSource">
+        <PropertyRef Name="buyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblCostingSource_tblCommonElement">
+    <End Role="tblCommonElement" Type="Self.tblCommonElement" Multiplicity="1" />
+    <End Role="tblCostingSource" Type="Self.tblCostingSource" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCommonElement">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblCostingSource">
+        <PropertyRef Name="srcDescId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblCostingSource_tblSell">
+    <End Role="tblSell" Type="Self.tblSell" Multiplicity="0..1" />
+    <End Role="tblCostingSource" Type="Self.tblCostingSource" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSell">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblCostingSource">
+        <PropertyRef Name="sellId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblDues_tblBuy">
+    <End Role="tblBuy" Type="Self.tblBuy" Multiplicity="0..1" />
+    <End Role="tblDues" Type="Self.tblDues" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBuy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblDues">
+        <PropertyRef Name="buyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblDues_tblCostingSource">
+    <End Role="tblCostingSource" Type="Self.tblCostingSource" Multiplicity="0..1" />
+    <End Role="tblDues" Type="Self.tblDues" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCostingSource">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblDues">
+        <PropertyRef Name="costingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblDues_tblParty">
+    <End Role="tblParty" Type="Self.tblParty" Multiplicity="1" />
+    <End Role="tblDues" Type="Self.tblDues" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblParty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblDues">
+        <PropertyRef Name="partyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblIncomeSource_tblcommonelement">
+    <End Role="tblCommonElement" Type="Self.tblCommonElement" Multiplicity="1" />
+    <End Role="tblIncomeSource" Type="Self.tblIncomeSource" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCommonElement">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblIncomeSource">
+        <PropertyRef Name="srcDescId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblIncomeSource_tblParty">
+    <End Role="tblParty" Type="Self.tblParty" Multiplicity="0..1" />
+    <End Role="tblIncomeSource" Type="Self.tblIncomeSource" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblParty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblIncomeSource">
+        <PropertyRef Name="partyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblParty_tblCommonElement">
+    <End Role="tblCommonElement" Type="Self.tblCommonElement" Multiplicity="0..1" />
+    <End Role="tblParty" Type="Self.tblParty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCommonElement">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblParty">
+        <PropertyRef Name="districtId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblParty_tblProduct">
+    <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="0..1" />
+    <End Role="tblParty" Type="Self.tblParty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduct">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblParty">
+        <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblPayable_tblIncomeSource">
+    <End Role="tblIncomeSource" Type="Self.tblIncomeSource" Multiplicity="0..1" />
+    <End Role="tblPayable" Type="Self.tblPayable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblIncomeSource">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblPayable">
+        <PropertyRef Name="incSrcId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblPayable_tblParty">
+    <End Role="tblParty" Type="Self.tblParty" Multiplicity="1" />
+    <End Role="tblPayable" Type="Self.tblPayable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblParty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblPayable">
+        <PropertyRef Name="partyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblPayable_tblSell">
+    <End Role="tblSell" Type="Self.tblSell" Multiplicity="0..1" />
+    <End Role="tblPayable" Type="Self.tblPayable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSell">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblPayable">
+        <PropertyRef Name="sellId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblPayment_tblBuy">
+    <End Role="tblBuy" Type="Self.tblBuy" Multiplicity="0..1" />
+    <End Role="tblPayment" Type="Self.tblPayment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBuy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblPayment">
+        <PropertyRef Name="buyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblPayment_tblParty">
+    <End Role="tblParty" Type="Self.tblParty" Multiplicity="1" />
+    <End Role="tblPayment" Type="Self.tblPayment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblParty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblPayment">
+        <PropertyRef Name="partyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblProductPrice_tblProduct">
+    <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="0..1" />
+    <End Role="tblProductPrice" Type="Self.tblProductPrice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduct">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblProductPrice">
+        <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSell_STK_stock">
+    <End Role="STK_tblStock" Type="Self.STK_tblStock" Multiplicity="0..1" />
+    <End Role="tblSell" Type="Self.tblSell" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="STK_tblStock">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblSell">
+        <PropertyRef Name="stockId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSell_tblIncomeSource">
+    <End Role="tblIncomeSource" Type="Self.tblIncomeSource" Multiplicity="0..1" />
+    <End Role="tblSell" Type="Self.tblSell" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblIncomeSource">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblSell">
+        <PropertyRef Name="incSrcId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSell_tblParty">
+    <End Role="tblParty" Type="Self.tblParty" Multiplicity="1" />
+    <End Role="tblSell" Type="Self.tblSell" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblParty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblSell">
+        <PropertyRef Name="partyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="func_paddyparta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="stockId" Type="int" Mode="In" />
+    <Parameter Name="productId" Type="int" Mode="In" />
+    <Parameter Name="fromDate" Type="date" Mode="In" />
+    <Parameter Name="toDate" Type="date" Mode="In" />
+  </Function>
+  <Function Name="sp_getDailyPaddyBuy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="todayDate" Type="date" Mode="In" />
+  </Function>
+  <Function Name="sp_GetDailySellInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="parentProd" Type="int" Mode="In" />
+    <Parameter Name="todayDate" Type="date" Mode="In" />
+  </Function>
+  <Function Name="sp_GetHuskIncWithd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="parentProd" Type="int" Mode="In" />
+    <Parameter Name="fromDate" Type="date" Mode="In" />
+    <Parameter Name="toDate" Type="date" Mode="In" />
+  </Function>
+  <Function Name="sp_GetHuskInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="partyId" Type="int" Mode="In" />
+    <Parameter Name="parentProd" Type="int" Mode="In" />
+    <Parameter Name="fromDate" Type="date" Mode="In" />
+    <Parameter Name="toDate" Type="date" Mode="In" />
+  </Function>
+  <Function Name="sp_GetPaddyBuyInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_GetPaddyInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="partyId" Type="int" Mode="In" />
+    <Parameter Name="parentProd" Type="int" Mode="In" />
+    <Parameter Name="fromDate" Type="date" Mode="In" />
+    <Parameter Name="toDate" Type="date" Mode="In" />
+  </Function>
+  <Function Name="sp_GetProductInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="partyId" Type="int" Mode="In" />
+    <Parameter Name="parentProd" Type="int" Mode="In" />
+    <Parameter Name="fromDate" Type="date" Mode="In" />
+    <Parameter Name="toDate" Type="date" Mode="In" />
+  </Function>
+  <Function Name="sp_getProductSellInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="productId" Type="int" Mode="In" />
+    <Parameter Name="paerntId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetStockInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="stockId" Type="int" Mode="In" />
+    <Parameter Name="productId" Type="int" Mode="In" />
+    <Parameter Name="fromDate" Type="date" Mode="In" />
+    <Parameter Name="toDate" Type="date" Mode="In" />
+  </Function>
+  <Function Name="sp_RptPaddyStockInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="stockId" Type="int" Mode="In" />
+    <Parameter Name="productId" Type="int" Mode="In" />
+    <Parameter Name="fromDate" Type="date" Mode="In" />
+    <Parameter Name="toDate" Type="date" Mode="In" />
+  </Function>
+  <Function Name="sp_rptParticleGeneral" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="fromDate" Type="date" Mode="In" />
+    <Parameter Name="toDate" Type="date" Mode="In" />
+  </Function>
+  <EntityContainer Name="JohanAgroFoodDBModelStoreContainer">
+    <EntitySet Name="BagTransaction" EntityType="Self.BagTransaction" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OpeningBalance" EntityType="Self.OpeningBalance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PaddyTransaction" EntityType="Self.PaddyTransaction" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalaryPayment" EntityType="Self.SalaryPayment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="STK_Balance" EntityType="Self.STK_Balance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="STK_tblPaddy" EntityType="Self.STK_tblPaddy" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="STK_tblStock" EntityType="Self.STK_tblStock" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="STK_Transaction" EntityType="Self.STK_Transaction" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblBuy" EntityType="Self.tblBuy" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblCollection" EntityType="Self.tblCollection" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblCommonElement" EntityType="Self.tblCommonElement" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblCostingSource" EntityType="Self.tblCostingSource" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblDues" EntityType="Self.tblDues" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblIncomeSource" EntityType="Self.tblIncomeSource" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblLoanar" EntityType="Self.tblLoanar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblParty" EntityType="Self.tblParty" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblPayable" EntityType="Self.tblPayable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblPayment" EntityType="Self.tblPayment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProduct" EntityType="Self.tblProduct" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProductPrice" EntityType="Self.tblProductPrice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblSell" EntityType="Self.tblSell" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblInterest" EntityType="Self.tblInterest" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tblInterest].[ID] AS [ID], 
+    [tblInterest].[loanarId] AS [loanarId], 
+    [tblInterest].[intrestAmt] AS [intrestAmt], 
+    [tblInterest].[date] AS [date]
+    FROM [dbo].[tblInterest] AS [tblInterest]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_BagTransaction_Party" Association="Self.FK_BagTransaction_Party">
+      <End Role="tblParty" EntitySet="tblParty" />
+      <End Role="BagTransaction" EntitySet="BagTransaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BagTransaction_tblBuy" Association="Self.FK_BagTransaction_tblBuy">
+      <End Role="tblBuy" EntitySet="tblBuy" />
+      <End Role="BagTransaction" EntitySet="BagTransaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OpeningBalance_tblParty" Association="Self.FK_OpeningBalance_tblParty">
+      <End Role="tblParty" EntitySet="tblParty" />
+      <End Role="OpeningBalance" EntitySet="OpeningBalance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RICE_tblCollection_RICE_tblSell" Association="Self.FK_RICE_tblCollection_RICE_tblSell">
+      <End Role="tblSell" EntitySet="tblSell" />
+      <End Role="tblCollection" EntitySet="tblCollection" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RICE_tblSell_tblProduct" Association="Self.FK_RICE_tblSell_tblProduct">
+      <End Role="tblProduct" EntitySet="tblProduct" />
+      <End Role="tblSell" EntitySet="tblSell" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalaryPayment_Employee" Association="Self.FK_SalaryPayment_Employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="SalaryPayment" EntitySet="SalaryPayment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_STK_tblPaddy_STK_tblStock" Association="Self.FK_STK_tblPaddy_STK_tblStock">
+      <End Role="STK_tblStock" EntitySet="STK_tblStock" />
+      <End Role="STK_tblPaddy" EntitySet="STK_tblPaddy" />
+    </AssociationSet>
+    <AssociationSet Name="FK_STK_tblPaddy_tblProduct" Association="Self.FK_STK_tblPaddy_tblProduct">
+      <End Role="tblProduct" EntitySet="tblProduct" />
+      <End Role="STK_tblPaddy" EntitySet="STK_tblPaddy" />
+    </AssociationSet>
+    <AssociationSet Name="FK_STK_tblRice_STK_tblStock" Association="Self.FK_STK_tblRice_STK_tblStock">
+      <End Role="STK_tblStock" EntitySet="STK_tblStock" />
+      <End Role="STK_Balance" EntitySet="STK_Balance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_STK_tblRice_tblProduct" Association="Self.FK_STK_tblRice_tblProduct">
+      <End Role="tblProduct" EntitySet="tblProduct" />
+      <End Role="STK_Balance" EntitySet="STK_Balance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_STK_tblstkPaddy_tblBuy" Association="Self.FK_STK_tblstkPaddy_tblBuy">
+      <End Role="tblBuy" EntitySet="tblBuy" />
+      <End Role="STK_tblPaddy" EntitySet="STK_tblPaddy" />
+    </AssociationSet>
+    <AssociationSet Name="FK_STK_Transaction_STK_tblStock" Association="Self.FK_STK_Transaction_STK_tblStock">
+      <End Role="STK_tblStock" EntitySet="STK_tblStock" />
+      <End Role="STK_Transaction" EntitySet="STK_Transaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_STK_Transaction_tblProduct" Association="Self.FK_STK_Transaction_tblProduct">
+      <End Role="tblProduct" EntitySet="tblProduct" />
+      <End Role="STK_Transaction" EntitySet="STK_Transaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblbuy_tblParty" Association="Self.FK_tblbuy_tblParty">
+      <End Role="tblParty" EntitySet="tblParty" />
+      <End Role="tblBuy" EntitySet="tblBuy" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBuy_tblProduct" Association="Self.FK_tblBuy_tblProduct">
+      <End Role="tblProduct" EntitySet="tblProduct" />
+      <End Role="tblBuy" EntitySet="tblBuy" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblCollection_tblParty" Association="Self.FK_tblCollection_tblParty">
+      <End Role="tblParty" EntitySet="tblParty" />
+      <End Role="tblCollection" EntitySet="tblCollection" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblCostingSource_tblBuy" Association="Self.FK_tblCostingSource_tblBuy">
+      <End Role="tblBuy" EntitySet="tblBuy" />
+      <End Role="tblCostingSource" EntitySet="tblCostingSource" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblCostingSource_tblCommonElement" Association="Self.FK_tblCostingSource_tblCommonElement">
+      <End Role="tblCommonElement" EntitySet="tblCommonElement" />
+      <End Role="tblCostingSource" EntitySet="tblCostingSource" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblCostingSource_tblSell" Association="Self.FK_tblCostingSource_tblSell">
+      <End Role="tblSell" EntitySet="tblSell" />
+      <End Role="tblCostingSource" EntitySet="tblCostingSource" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblDues_tblBuy" Association="Self.FK_tblDues_tblBuy">
+      <End Role="tblBuy" EntitySet="tblBuy" />
+      <End Role="tblDues" EntitySet="tblDues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblDues_tblCostingSource" Association="Self.FK_tblDues_tblCostingSource">
+      <End Role="tblCostingSource" EntitySet="tblCostingSource" />
+      <End Role="tblDues" EntitySet="tblDues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblDues_tblParty" Association="Self.FK_tblDues_tblParty">
+      <End Role="tblParty" EntitySet="tblParty" />
+      <End Role="tblDues" EntitySet="tblDues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblIncomeSource_tblcommonelement" Association="Self.FK_tblIncomeSource_tblcommonelement">
+      <End Role="tblCommonElement" EntitySet="tblCommonElement" />
+      <End Role="tblIncomeSource" EntitySet="tblIncomeSource" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblIncomeSource_tblParty" Association="Self.FK_tblIncomeSource_tblParty">
+      <End Role="tblParty" EntitySet="tblParty" />
+      <End Role="tblIncomeSource" EntitySet="tblIncomeSource" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblParty_tblCommonElement" Association="Self.FK_tblParty_tblCommonElement">
+      <End Role="tblCommonElement" EntitySet="tblCommonElement" />
+      <End Role="tblParty" EntitySet="tblParty" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblParty_tblProduct" Association="Self.FK_tblParty_tblProduct">
+      <End Role="tblProduct" EntitySet="tblProduct" />
+      <End Role="tblParty" EntitySet="tblParty" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblPayable_tblIncomeSource" Association="Self.FK_tblPayable_tblIncomeSource">
+      <End Role="tblIncomeSource" EntitySet="tblIncomeSource" />
+      <End Role="tblPayable" EntitySet="tblPayable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblPayable_tblParty" Association="Self.FK_tblPayable_tblParty">
+      <End Role="tblParty" EntitySet="tblParty" />
+      <End Role="tblPayable" EntitySet="tblPayable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblPayable_tblSell" Association="Self.FK_tblPayable_tblSell">
+      <End Role="tblSell" EntitySet="tblSell" />
+      <End Role="tblPayable" EntitySet="tblPayable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblPayment_tblBuy" Association="Self.FK_tblPayment_tblBuy">
+      <End Role="tblBuy" EntitySet="tblBuy" />
+      <End Role="tblPayment" EntitySet="tblPayment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblPayment_tblParty" Association="Self.FK_tblPayment_tblParty">
+      <End Role="tblParty" EntitySet="tblParty" />
+      <End Role="tblPayment" EntitySet="tblPayment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblProductPrice_tblProduct" Association="Self.FK_tblProductPrice_tblProduct">
+      <End Role="tblProduct" EntitySet="tblProduct" />
+      <End Role="tblProductPrice" EntitySet="tblProductPrice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSell_STK_stock" Association="Self.FK_tblSell_STK_stock">
+      <End Role="STK_tblStock" EntitySet="STK_tblStock" />
+      <End Role="tblSell" EntitySet="tblSell" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSell_tblIncomeSource" Association="Self.FK_tblSell_tblIncomeSource">
+      <End Role="tblIncomeSource" EntitySet="tblIncomeSource" />
+      <End Role="tblSell" EntitySet="tblSell" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSell_tblParty" Association="Self.FK_tblSell_tblParty">
+      <End Role="tblParty" EntitySet="tblParty" />
+      <End Role="tblSell" EntitySet="tblSell" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

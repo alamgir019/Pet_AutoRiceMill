@@ -1,0 +1,68 @@
+﻿<script src="~/App/Components/HuskSell/huskSellController.js"></script>
+<script src="~/App/Components/HuskSell/huskSellService.js"></script>
+<script src="~/App/Components/Common/commonSvc.js"></script>
+
+
+<div class="pageContainer" ng-controller="huskSellController">
+    <div class="row">
+        <div style="height: 30px;"></div>
+    </div>
+
+    <div class="row">
+
+        <fieldset class="scheduler-border">
+            <legend class="scheduler-border">তুষ বিক্রয়ের রিপোর্ট</legend>
+        </fieldset>
+
+        <form class="form-horizontal">
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="Party" class="col-md-4 control-label">পার্টিঃ</label>
+                    <div class="col-md-8">
+                        <typeahead items="parties" model="huskReport.partyName" value="huskReport.partyId" />
+                        @*<select class="form-control" ng-model="huskReport.partyId" ng-options="party.ID as party.name for party in parties" id="Party">
+                            <option value=""></option>
+                        </select>*@
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fromdate" class="col-md-4 control-label">আরম্ভের তারিখঃ</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" ng-model="huskReport.fromDate" id="fromdate">
+                    </div>
+                    <script type="text/javascript">
+                        $("#fromdate").datepicker({ dateFormat: 'dd-mm-yy' });
+                    </script>
+                </div>
+
+                <div class="form-group">
+                    <label for="todate" class="col-md-4 control-label">শেষ তারিখঃ</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" ng-model="huskReport.toDate" id="todate" />
+                    </div>
+                    <script type="text/javascript">
+                        $("#todate").datepicker({ dateFormat: 'dd-mm-yy' });
+                    </script>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <a class="btn btn-success" id="link-6" target="_blank" ng-href="/HuskSell/Preview?partyId={{huskReport.partyId}}&from={{huskReport.fromDate}}&to={{huskReport.toDate}}">রিপোর্ট দেখুন</a>
+                    <button class="btn btn-success" ng-click="cancelReport()">
+                        <span class="glyphicon glyphicon-refresh" aria-hidden="true">বাতিল</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" style="top:40%; height:100px; overflow:hidden; outline:none;" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4 class="modal-title" id="myModalLabel">Please wait....</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html ng-app='johanApp'>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>সেলস ম্যানেজমেন্ট সফটওয়্যার</title>
+
+    @*css files*@
+    @Styles.Render("~/Content/css")
+    <link href="~/Assets/css/style.css" rel="stylesheet" />
+    <link href="~/Assets/css/jquery-ui-1.11.4.css" rel="stylesheet" />
+    <link href="~/Assets/libs/UiGrid/ui-grid-unstable.css" rel="stylesheet" />
+
+    @*3rd party libraries*@
+    <script src="~/Assets/js/jquery-1.10.2.min.js"></script>
+    <script src="~/Assets/libs/angular-1.3.14/angular.min.js"></script>
+    <script src="~/Assets/libs/angular-1.3.14/angular-route.js"></script>
+    <script src="~/Assets/js/jquery.validate.min.js"></script>
+    <script src="~/Assets/js/jquery-ui-1.11.4.js"></script>
+    <script src="~/Assets/libs/angular-1.3.14/angular-animate.min.js"></script>
+    <script src="~/Assets/libs/UiGrid/ui-grid-unstable.js"></script>
+    @Scripts.Render("~/bundles/modernizr")
+
+    @*custom jquery files*@
+    <script src="~/App/app.js"></script>
+    <script src="~/App/Shared/Services/baseDataSvc.js"></script>
+    <script src="~/App/Shared/Services/convertSvc.js"></script>
+    <script src="~/App/Shared/Directives/Validation.js"></script>
+    <script src="~/App/Shared/Filters/filters.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("জোহান এগ্রো ফুড", "Index", "Home", null, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("হোম", "Index", "Home")</li>
+                    <li class="dropdown">
+                        <a aria-expanded="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">স্টক ম্যানেজমেন্ট<span class="caret"></span></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li>@Html.ActionLink("স্টক সমূহ", "StockIndex", "Stock")</li>
+                            <li>@Html.ActionLink("ধানের স্টক স্থানান্তর", "PaddyTransfer", "PaddyTransfer")</li>
+                            <li>@Html.ActionLink("প্রোডাক্টের স্টক", "ProductStock", "Stock")</li>
+                            <li>@Html.ActionLink("ক্ষুদের স্টক", "ParticleStock", "ParticleSell")</li>
+                            <li>@Html.ActionLink("জের স্থানান্তর", "BalanceIndex", "BalanceTransfer")</li>
+                            <li>@Html.ActionLink("ধানের জের স্থানান্তর", "BalancepaddyIndex", "BalanceTransferPaddy")</li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a aria-expanded="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">রিপোর্ট<span class="caret"></span></a>
+                        <ul role="menu" class="dropdown-menu">
+                            
+                            <li>@Html.ActionLink("প্রোডাক্টের রিপোর্ট", "rptRiceInfo", "Rice")</li>
+                            <li>@Html.ActionLink("প্রোডাক্টের স্টক রিপোর্ট", "rptStockInfo", "Stock")</li>
+                            <li>@Html.ActionLink("ক্ষুদের সাধারণ হিসাব", "rptParticleGeneral", "ParticleSell")</li>
+                            <li>@Html.ActionLink("তুষের রিপোর্ট", "rptHuskInfo", "HuskSell")</li>
+                            <li>@Html.ActionLink("তুষের সাধারণ হিসাব", "rptHuskIncWithd", "HuskSell")</li>
+                            <li>@Html.ActionLink("ধানের রিপোর্ট", "rptPaddyInfo", "Paddy")</li>
+                            <li>@Html.ActionLink("ধানের হোলার খরচ", "rptHollarConsump", "Report")</li>
+                            <li>@Html.ActionLink("ধানের স্টক রিপোর্ট", "rptPaddyStock", "Report")</li>
+                            <li>@Html.ActionLink("স্টকের রিপোর্ট", "rptStockInfo", "Stock")</li>
+                            <li>@Html.ActionLink("প্রতিদিনের রিপোর্ট", "rptDailySellInfo", "Report")</li>
+                            <li>@Html.ActionLink("প্রতিদিনের ধানের রিপোর্ট", "paddyDailyBuy", "Report")</li>
+                            <li>@Html.ActionLink("খরচের রিপোর্ট", "rptOtherConsump", "Report")</li>
+                            <li>@Html.ActionLink("আয়ের রিপোর্ট", "rptIncome", "Report")</li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a aria-expanded="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">বিক্রয় সমূহ <span class="caret"></span></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li>@Html.ActionLink("চাল বিক্রয়", "RiceInfoIndex", "Rice")</li>
+                            <li>@Html.ActionLink("তুষ বিক্রয়", "HuskInfoIndex", "HuskSell")</li>
+                            <li>@Html.ActionLink("ক্ষুদ বিক্রয়", "ParticleInfoIndex", "ParticleSell")</li>
+                            <li>@Html.ActionLink("ধান ক্রয়", "PaddyInfoIndex", "Paddy")</li>
+                            <li>@Html.ActionLink("ব্যাগ প্রদান", "ReturnBag", "PaddyDues")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a aria-expanded="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">খাত সমূহ <span class="caret"></span></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li>@Html.ActionLink("খরচের খাত", "ConsumptionIndex", "Consumption")</li>
+                            <li>@Html.ActionLink("ইনকামের খাত", "IncomeIndex", "Income")</li>
+                            <li>@Html.ActionLink("বকেয়া পরিশোধ", "Index", "DuePayment")</li>
+                            <li>@Html.ActionLink("ধানের ঋণ পরিশোধ", "LoanPayment", "LoanPayment")</li>
+                            <li>@Html.ActionLink("বেতন প্রদান", "salary", "Employee")</li>
+                            @*<li>@Html.ActionLink("টাকা উত্তোলন", "Withdraw", "Withdraw")</li>*@
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a aria-expanded="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">বেসিক সেটআপ <span class="caret"></span></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li>@Html.ActionLink("বাবহারকারী", "Index", "User")</li>
+                            <li>@Html.ActionLink("পার্টি", "Index", "Party")</li>
+                            <li>@Html.ActionLink("কর্মকর্তা/কর্মচারী", "employee", "Employee")</li>
+                            <li>@Html.ActionLink("লোনার", "LoanerIndex", "Loaner")</li>
+                            <li>@Html.ActionLink("খাত", "SectorIndex", "Sector")</li>
+                            <li>@Html.ActionLink("জোন", "zone", "Sector")</li>
+                            <li>@Html.ActionLink("জেলা", "district", "Sector")</li>
+                            <li>@Html.ActionLink("প্রোডাক্ট", "ProductIndex", "Product")</li>
+                            <li>@Html.ActionLink("গাড়ি", "CarIndex", "Car")</li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("আমাদের সম্পর্কে", "About", "Home")</li>
+                    @*<li>@Html.ActionLink("যোগাযোগ", "Contact", "Home")</li>*@
+
+                    <li>@Html.ActionLink("সাইন আউট", "Logout", "Login")</li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><img src="~/Assets/images/logo.jpg" /> </li>
+                </ul>
+                @*@Html.Partial("_LoginPartial")*@
+            </div>
+        </div>
+    </div>
+    <div class="container body-content" style="min-height:400px;">
+        @RenderBody()
+
+    </div>
+    <hr />
+    <footer>
+        <div>
+            <div class="col-md-6 col-md-offset-4">
+                <p>&copy; @DateTime.Now.Year - Development By Johan Group</p>
+            </div>
+        </div>
+
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+</body>
+</html>

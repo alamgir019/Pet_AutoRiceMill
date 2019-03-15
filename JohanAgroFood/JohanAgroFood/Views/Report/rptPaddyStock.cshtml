@@ -1,0 +1,77 @@
+﻿<script src="~/App/Components/Report/reportCtrl.js"></script>
+<script src="~/App/Components/Report/reportSvc.js"></script>
+<script src="~/App/Components/Common/commonSvc.js"></script>
+<div class="pageContainer" ng-controller="reportCtrl">
+    <div class="row">
+        <div style="height: 30px;"></div>
+    </div>
+
+    <div class="row">
+
+        <fieldset class="scheduler-border">
+            <legend class="scheduler-border">ধানের স্টক রিপোর্ট</legend>
+        </fieldset>
+
+        <form class="form-horizontal">
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="name" class="col-sm-4 control-label">স্টক</label>
+                    <div class="col-sm-8">
+                        <select type="text" class="form-control" name="sname" data-ng-model="stockReport.stockId"
+                                ng-options="stock.ID as stock.stockName for stock in stocks" required>
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+                @*<div class="form-group">
+                    <label for="typename" class="col-sm-4 control-label">প্রোডাক্টের ধরন</label>
+                    <div class="col-sm-8">
+                        <select type="text" class="form-control" name="typename" data-ng-model="stockReport.parentId"
+                                ng-options="parent.ID as parent.productName for parent in parents" ng-change="getChildProdRpt()" required>
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>*@
+
+                <div class="form-group">
+                    <label for="name" class="col-sm-4 control-label">ধানের নামঃ</label>
+                    <div class="col-sm-8">
+                        <select type="text" class="form-control" name="pname" data-ng-model="stockReport.productId"
+                                ng-options="paddy.ID as paddy.productName for paddy in paddys" required>
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="fromdate" class="col-md-4 control-label">আরম্ভের তারিখঃ</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" ng-model="stockReport.fromDate" id="fromdate"/>
+                    </div>
+                    <script type="text/javascript">
+                        $("#fromdate").datepicker({ dateFormat: 'dd-mm-yy' });
+                    </script>
+                </div>
+
+                <div class="form-group">
+                    <label for="todate" class="col-md-4 control-label">শেষ তারিখঃ</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" ng-model="stockReport.toDate" id="todate" />
+                    </div>
+                    <script type="text/javascript">
+                        $("#todate").datepicker({ dateFormat: 'dd-mm-yy' });
+                    </script>
+                </div>
+            </div>@*stockId={{stockReport.stockId}}&*@
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <a class="btn btn-success" id="link-6" target="_blank" ng-href="/Report/PaddyStock?stockId={{stockReport.stockId}}&productId={{stockReport.productId}}&from={{stockReport.fromDate}}&to={{stockReport.toDate}}">রিপোর্ট দেখুন</a>
+                    <button class="btn btn-success" ng-click="cancelReport()">
+                        <span class="glyphicon glyphicon-refresh" aria-hidden="true">বাতিল</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

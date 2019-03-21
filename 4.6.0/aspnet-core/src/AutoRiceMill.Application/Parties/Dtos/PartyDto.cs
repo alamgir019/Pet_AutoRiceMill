@@ -8,7 +8,7 @@ using System.Text;
 namespace AutoRiceMill.Parties.Dtos
 {
     [AutoMapFrom(typeof(Party))]
-    public class PartyListDto : EntityDto, IHasCreationTime
+    public class PartyDto : EntityDto, IHasCreationTime
     {
         public string Name { get; set; }
         public string ContactNo { get; set; }

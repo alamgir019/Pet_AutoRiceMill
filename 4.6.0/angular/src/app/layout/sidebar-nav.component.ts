@@ -32,9 +32,11 @@ export class SideBarNavComponent extends AppComponentBase {
                 new MenuItem('Faq', '', '', 'https://aspnetzero.com/Faq?ref=abptmpl'),
                 new MenuItem('Documents', '', '', 'https://aspnetzero.com/Documents?ref=abptmpl')
             ])
+        ]),
+        new MenuItem(this.l('Configuration'),'','settings','/app/config',[
+            new MenuItem(this.l('Parties'),'Pages.Parties','people','/app/parties')
         ])
     ];
-
     constructor(
         injector: Injector
     ) {

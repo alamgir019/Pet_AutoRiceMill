@@ -127,7 +127,6 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     if (baseUrl) {
         return baseUrl;
     }
-
     return '/';
 }
 
@@ -136,6 +135,5 @@ function getDocumentOrigin() {
         const port = document.location.port ? ':' + document.location.port : '';
         return document.location.protocol + '//' + document.location.hostname + port;
     }
-
     return document.location.origin;
 }

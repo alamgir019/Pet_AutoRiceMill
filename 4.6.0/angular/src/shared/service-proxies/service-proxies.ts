@@ -204,6 +204,72 @@ export class ConfigurationServiceProxy {
 }
 
 @Injectable()
+export class PartyServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl ? baseUrl : "";
+    }
+
+    /**
+     * @param isActive (optional) 
+     * @return Success
+     */
+    getAll(isActive: boolean | null | undefined): Observable<ListResultDtoOfPartyDto> {
+        let url_ = this.baseUrl + "/api/services/app/Party/GetAll?";
+        if (isActive !== undefined)
+            url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAll(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAll(<any>response_);
+                } catch (e) {
+                    return <Observable<ListResultDtoOfPartyDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ListResultDtoOfPartyDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetAll(response: HttpResponseBase): Observable<ListResultDtoOfPartyDto> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? ListResultDtoOfPartyDto.fromJS(resultData200) : new ListResultDtoOfPartyDto();
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ListResultDtoOfPartyDto>(<any>null);
+    }
+}
+
+@Injectable()
 export class RoleServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -1928,12 +1994,141 @@ export interface IChangeUiThemeInput {
     theme: string;
 }
 
+export class ListResultDtoOfPartyDto implements IListResultDtoOfPartyDto {
+    items: PartyDto[] | undefined;
+
+    constructor(data?: IListResultDtoOfPartyDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            if (data["items"] && data["items"].constructor === Array) {
+                this.items = [];
+                for (let item of data["items"])
+                    this.items.push(PartyDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ListResultDtoOfPartyDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new ListResultDtoOfPartyDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (this.items && this.items.constructor === Array) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data; 
+    }
+
+    clone(): ListResultDtoOfPartyDto {
+        const json = this.toJSON();
+        let result = new ListResultDtoOfPartyDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IListResultDtoOfPartyDto {
+    items: PartyDto[] | undefined;
+}
+
+export class PartyDto implements IPartyDto {
+    name: string | undefined;
+    contactNo: string | undefined;
+    area: string | undefined;
+    districtId: number | undefined;
+    zoneId: number | undefined;
+    isCashParty: boolean | undefined;
+    isActive: boolean | undefined;
+    productId: number | undefined;
+    creationTime: moment.Moment | undefined;
+    id: number | undefined;
+
+    constructor(data?: IPartyDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.name = data["name"];
+            this.contactNo = data["contactNo"];
+            this.area = data["area"];
+            this.districtId = data["districtId"];
+            this.zoneId = data["zoneId"];
+            this.isCashParty = data["isCashParty"];
+            this.isActive = data["isActive"];
+            this.productId = data["productId"];
+            this.creationTime = data["creationTime"] ? moment(data["creationTime"].toString()) : <any>undefined;
+            this.id = data["id"];
+        }
+    }
+
+    static fromJS(data: any): PartyDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new PartyDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["contactNo"] = this.contactNo;
+        data["area"] = this.area;
+        data["districtId"] = this.districtId;
+        data["zoneId"] = this.zoneId;
+        data["isCashParty"] = this.isCashParty;
+        data["isActive"] = this.isActive;
+        data["productId"] = this.productId;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
+        data["id"] = this.id;
+        return data; 
+    }
+
+    clone(): PartyDto {
+        const json = this.toJSON();
+        let result = new PartyDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IPartyDto {
+    name: string | undefined;
+    contactNo: string | undefined;
+    area: string | undefined;
+    districtId: number | undefined;
+    zoneId: number | undefined;
+    isCashParty: boolean | undefined;
+    isActive: boolean | undefined;
+    productId: number | undefined;
+    creationTime: moment.Moment | undefined;
+    id: number | undefined;
+}
+
 export class CreateRoleDto implements ICreateRoleDto {
     name: string;
     displayName: string;
     normalizedName: string | undefined;
     description: string | undefined;
-    isStatic: boolean | undefined;
     permissions: string[] | undefined;
 
     constructor(data?: ICreateRoleDto) {
@@ -1951,7 +2146,6 @@ export class CreateRoleDto implements ICreateRoleDto {
             this.displayName = data["displayName"];
             this.normalizedName = data["normalizedName"];
             this.description = data["description"];
-            this.isStatic = data["isStatic"];
             if (data["permissions"] && data["permissions"].constructor === Array) {
                 this.permissions = [];
                 for (let item of data["permissions"])
@@ -1973,7 +2167,6 @@ export class CreateRoleDto implements ICreateRoleDto {
         data["displayName"] = this.displayName;
         data["normalizedName"] = this.normalizedName;
         data["description"] = this.description;
-        data["isStatic"] = this.isStatic;
         if (this.permissions && this.permissions.constructor === Array) {
             data["permissions"] = [];
             for (let item of this.permissions)
@@ -1995,7 +2188,6 @@ export interface ICreateRoleDto {
     displayName: string;
     normalizedName: string | undefined;
     description: string | undefined;
-    isStatic: boolean | undefined;
     permissions: string[] | undefined;
 }
 
@@ -2004,7 +2196,6 @@ export class RoleDto implements IRoleDto {
     displayName: string;
     normalizedName: string | undefined;
     description: string | undefined;
-    isStatic: boolean | undefined;
     permissions: string[] | undefined;
     id: number | undefined;
 
@@ -2023,7 +2214,6 @@ export class RoleDto implements IRoleDto {
             this.displayName = data["displayName"];
             this.normalizedName = data["normalizedName"];
             this.description = data["description"];
-            this.isStatic = data["isStatic"];
             if (data["permissions"] && data["permissions"].constructor === Array) {
                 this.permissions = [];
                 for (let item of data["permissions"])
@@ -2046,7 +2236,6 @@ export class RoleDto implements IRoleDto {
         data["displayName"] = this.displayName;
         data["normalizedName"] = this.normalizedName;
         data["description"] = this.description;
-        data["isStatic"] = this.isStatic;
         if (this.permissions && this.permissions.constructor === Array) {
             data["permissions"] = [];
             for (let item of this.permissions)
@@ -2069,7 +2258,6 @@ export interface IRoleDto {
     displayName: string;
     normalizedName: string | undefined;
     description: string | undefined;
-    isStatic: boolean | undefined;
     permissions: string[] | undefined;
     id: number | undefined;
 }

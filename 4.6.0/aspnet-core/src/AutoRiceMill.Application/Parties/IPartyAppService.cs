@@ -10,6 +10,6 @@ namespace AutoRiceMill.Parties
 {
     public interface IPartyAppService: IApplicationService
     {
-        Task<ListResultDto<PartyListDto>> GetAll(GetAllPartiesInput input);
+        Task<ListResultDto<PartyDto>> GetAll(GetAllPartiesInput input);
     }
 }

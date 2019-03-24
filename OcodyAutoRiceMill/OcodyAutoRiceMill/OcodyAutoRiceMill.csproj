@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TypeScriptToolsVersion>3.0</TypeScriptToolsVersion>
+    <ApplicationIcon />
+    <OutputType>Exe</OutputType>
+    <StartupObject />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="client1\**" />
+    <Compile Remove="Client\**" />
+    <Content Remove="client1\**" />
+    <Content Remove="Client\**" />
+    <EmbeddedResource Remove="client1\**" />
+    <EmbeddedResource Remove="Client\**" />
+    <None Remove="client1\**" />
+    <None Remove="Client\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+    <PackageReference Include="AutoQueryable.AspNetCore.Filter" Version="0.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="3.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="3.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OcodyAutoRiceMill.Api.Common\OcodyAutoRiceMill.Api.Common.csproj" />
+    <ProjectReference Include="..\OcodyAutoRiceMill.Api.Models\OcodyAutoRiceMill.Api.Models.csproj" />
+    <ProjectReference Include="..\OcodyAutoRiceMill.Data.Access\OcodyAutoRiceMill.Data.Access.csproj" />
+    <ProjectReference Include="..\OcodyAutoRiceMill.Data.Model\OcodyAutoRiceMill.Data.Model.csproj" />
+    <ProjectReference Include="..\OcodyAutoRiceMill.Queries\OcodyAutoRiceMill.Queries.csproj" />
+    <ProjectReference Include="..\OcodyAutoRiceMill.Security\OcodyAutoRiceMill.Security.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,58 @@
+﻿<script src="~/App/Components/Rice/riceSellController.js"></script>
+<script src="~/App/Components/Rice/riceSellService.js"></script>
+<script src="~/App/Components/Party/partyService.js"></script>
+<script src="~/App/Components/Product/productService.js"></script>
+
+<div class="pageContainer" ng-controller="riceSellController">
+    <div class="row">
+        <div style="height: 30px;"></div>
+    </div>
+
+    <div class="row">
+
+        <fieldset class="scheduler-border">
+            <legend class="scheduler-border">ধান বিক্রয়ের রিপোর্ট</legend>
+        </fieldset>
+
+        <form class="form-horizontal">
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="Party" class="col-md-4 control-label">পার্টিঃ</label>
+                    <div class="col-md-8">
+                        <select class="form-control" ng-model="riceReport.partyId" ng-options="party.ID as party.name for party in parties" id="Party">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fromdate" class="col-md-4 control-label">শেষ তারিখঃ</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" ng-model="riceReport.fromDate" id="fromdate">
+                    </div>
+                    <script type="text/javascript">
+                        $("#fromdate").datepicker({ dateFormat: 'dd-mm-yy' });
+                    </script>
+                </div>
+
+                <div class="form-group">
+                    <label for="todate" class="col-md-4 control-label">শেষ তারিখঃ</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" ng-model="riceReport.toDate" id="todate" />
+                    </div>
+                    <script type="text/javascript">
+                        $("#todate").datepicker({ dateFormat: 'dd-mm-yy' });
+                    </script>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <a class="btn btn-success" id="link-6" ng-href="/Rice/Preview?partyId={{riceReport.partyId}}&from={{riceReport.fromDate}}&to={{riceReport.toDate}}">রিপোর্ট দেখুন</a>
+                    <button class="btn btn-success" ng-click="cancelReport()">
+                        <span class="glyphicon glyphicon-refresh" aria-hidden="true">বাতিল</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

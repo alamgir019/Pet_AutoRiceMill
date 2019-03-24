@@ -1,0 +1,1166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="JohanAgroFoodDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="JohanAgroFoodDBEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="sp_getProductSellInfo" ReturnType="Collection(JohanAgroFoodDBModel.sp_getProductSellInfo_Result)">
+      <Parameter Name="productId" Mode="In" Type="Int32" />
+      <Parameter Name="paerntId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetHuskInfo" ReturnType="Collection(JohanAgroFoodDBModel.sp_GetHuskInfo_Result)">
+      <Parameter Name="partyId" Mode="In" Type="Int32" />
+      <Parameter Name="parentProd" Mode="In" Type="Int32" />
+      <Parameter Name="fromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="toDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetStockInfo" ReturnType="Collection(JohanAgroFoodDBModel.sp_GetStockInfo_Result)">
+      <Parameter Name="stockId" Mode="In" Type="Int32" />
+      <Parameter Name="productId" Mode="In" Type="Int32" />
+      <Parameter Name="fromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="toDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetDailySellInfo" ReturnType="Collection(JohanAgroFoodDBModel.sp_GetDailySellInfo_Result)">
+      <Parameter Name="parentProd" Mode="In" Type="Int32" />
+      <Parameter Name="todayDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetProductInfo" ReturnType="Collection(JohanAgroFoodDBModel.sp_GetProductInfo_Result)">
+      <Parameter Name="partyId" Mode="In" Type="Int32" />
+      <Parameter Name="parentProd" Mode="In" Type="Int32" />
+      <Parameter Name="fromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="toDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetHuskIncWithd" ReturnType="Collection(JohanAgroFoodDBModel.sp_GetHuskIncWithd_Result)">
+      <Parameter Name="parentProd" Mode="In" Type="Int32" />
+      <Parameter Name="fromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="toDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <EntitySet Name="STK_Balance" EntityType="JohanAgroFoodDBModel.STK_Balance" />
+    <EntitySet Name="STK_tblStock" EntityType="JohanAgroFoodDBModel.STK_tblStock" />
+    <EntitySet Name="tblBuys" EntityType="JohanAgroFoodDBModel.tblBuy" />
+    <EntitySet Name="tblCollections" EntityType="JohanAgroFoodDBModel.tblCollection" />
+    <EntitySet Name="tblCommonElements" EntityType="JohanAgroFoodDBModel.tblCommonElement" />
+    <EntitySet Name="tblCostingSources" EntityType="JohanAgroFoodDBModel.tblCostingSource" />
+    <EntitySet Name="tblIncomeSources" EntityType="JohanAgroFoodDBModel.tblIncomeSource" />
+    <EntitySet Name="tblLoanars" EntityType="JohanAgroFoodDBModel.tblLoanar" />
+    <EntitySet Name="tblParties" EntityType="JohanAgroFoodDBModel.tblParty" />
+    <EntitySet Name="tblPayables" EntityType="JohanAgroFoodDBModel.tblPayable" />
+    <EntitySet Name="tblPayments" EntityType="JohanAgroFoodDBModel.tblPayment" />
+    <EntitySet Name="tblProducts" EntityType="JohanAgroFoodDBModel.tblProduct" />
+    <EntitySet Name="tblProductPrices" EntityType="JohanAgroFoodDBModel.tblProductPrice" />
+    <EntitySet Name="tblSells" EntityType="JohanAgroFoodDBModel.tblSell" />
+    <EntitySet Name="tblUsers" EntityType="JohanAgroFoodDBModel.tblUser" />
+    <EntitySet Name="tblInterests" EntityType="JohanAgroFoodDBModel.tblInterest" />
+    <AssociationSet Name="FK_STK_tblRice_STK_tblStock" Association="JohanAgroFoodDBModel.FK_STK_tblRice_STK_tblStock">
+      <End Role="STK_tblStock" EntitySet="STK_tblStock" />
+      <End Role="STK_Balance" EntitySet="STK_Balance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_STK_tblRice_tblProduct" Association="JohanAgroFoodDBModel.FK_STK_tblRice_tblProduct">
+      <End Role="tblProduct" EntitySet="tblProducts" />
+      <End Role="STK_Balance" EntitySet="STK_Balance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSell_STK_stock" Association="JohanAgroFoodDBModel.FK_tblSell_STK_stock">
+      <End Role="STK_tblStock" EntitySet="STK_tblStock" />
+      <End Role="tblSell" EntitySet="tblSells" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblbuy_tblParty" Association="JohanAgroFoodDBModel.FK_tblbuy_tblParty">
+      <End Role="tblParty" EntitySet="tblParties" />
+      <End Role="tblBuy" EntitySet="tblBuys" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblBuy_tblProduct" Association="JohanAgroFoodDBModel.FK_tblBuy_tblProduct">
+      <End Role="tblProduct" EntitySet="tblProducts" />
+      <End Role="tblBuy" EntitySet="tblBuys" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblCostingSource_tblBuy" Association="JohanAgroFoodDBModel.FK_tblCostingSource_tblBuy">
+      <End Role="tblBuy" EntitySet="tblBuys" />
+      <End Role="tblCostingSource" EntitySet="tblCostingSources" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblPayment_tblBuy" Association="JohanAgroFoodDBModel.FK_tblPayment_tblBuy">
+      <End Role="tblBuy" EntitySet="tblBuys" />
+      <End Role="tblPayment" EntitySet="tblPayments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RICE_tblCollection_RICE_tblSell" Association="JohanAgroFoodDBModel.FK_RICE_tblCollection_RICE_tblSell">
+      <End Role="tblSell" EntitySet="tblSells" />
+      <End Role="tblCollection" EntitySet="tblCollections" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblCollection_tblParty" Association="JohanAgroFoodDBModel.FK_tblCollection_tblParty">
+      <End Role="tblParty" EntitySet="tblParties" />
+      <End Role="tblCollection" EntitySet="tblCollections" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblCostingSource_tblCommonElement" Association="JohanAgroFoodDBModel.FK_tblCostingSource_tblCommonElement">
+      <End Role="tblCommonElement" EntitySet="tblCommonElements" />
+      <End Role="tblCostingSource" EntitySet="tblCostingSources" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblIncomeSource_tblIncomeSource" Association="JohanAgroFoodDBModel.FK_tblIncomeSource_tblIncomeSource">
+      <End Role="tblCommonElement" EntitySet="tblCommonElements" />
+      <End Role="tblIncomeSource" EntitySet="tblIncomeSources" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblParty_tblCommonElement" Association="JohanAgroFoodDBModel.FK_tblParty_tblCommonElement">
+      <End Role="tblCommonElement" EntitySet="tblCommonElements" />
+      <End Role="tblParty" EntitySet="tblParties" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblCostingSource_tblSell" Association="JohanAgroFoodDBModel.FK_tblCostingSource_tblSell">
+      <End Role="tblSell" EntitySet="tblSells" />
+      <End Role="tblCostingSource" EntitySet="tblCostingSources" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblIncomeSource_tblParty" Association="JohanAgroFoodDBModel.FK_tblIncomeSource_tblParty">
+      <End Role="tblParty" EntitySet="tblParties" />
+      <End Role="tblIncomeSource" EntitySet="tblIncomeSources" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblPayable_tblIncomeSource" Association="JohanAgroFoodDBModel.FK_tblPayable_tblIncomeSource">
+      <End Role="tblIncomeSource" EntitySet="tblIncomeSources" />
+      <End Role="tblPayable" EntitySet="tblPayables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSell_tblIncomeSource" Association="JohanAgroFoodDBModel.FK_tblSell_tblIncomeSource">
+      <End Role="tblIncomeSource" EntitySet="tblIncomeSources" />
+      <End Role="tblSell" EntitySet="tblSells" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblParty_tblProduct" Association="JohanAgroFoodDBModel.FK_tblParty_tblProduct">
+      <End Role="tblProduct" EntitySet="tblProducts" />
+      <End Role="tblParty" EntitySet="tblParties" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblPayable_tblParty" Association="JohanAgroFoodDBModel.FK_tblPayable_tblParty">
+      <End Role="tblParty" EntitySet="tblParties" />
+      <End Role="tblPayable" EntitySet="tblPayables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblPayment_tblParty" Association="JohanAgroFoodDBModel.FK_tblPayment_tblParty">
+      <End Role="tblParty" EntitySet="tblParties" />
+      <End Role="tblPayment" EntitySet="tblPayments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSell_tblParty" Association="JohanAgroFoodDBModel.FK_tblSell_tblParty">
+      <End Role="tblParty" EntitySet="tblParties" />
+      <End Role="tblSell" EntitySet="tblSells" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblPayable_tblSell" Association="JohanAgroFoodDBModel.FK_tblPayable_tblSell">
+      <End Role="tblSell" EntitySet="tblSells" />
+      <End Role="tblPayable" EntitySet="tblPayables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RICE_tblSell_tblProduct" Association="JohanAgroFoodDBModel.FK_RICE_tblSell_tblProduct">
+      <End Role="tblProduct" EntitySet="tblProducts" />
+      <End Role="tblSell" EntitySet="tblSells" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblProductPrice_tblProduct" Association="JohanAgroFoodDBModel.FK_tblProductPrice_tblProduct">
+      <End Role="tblProduct" EntitySet="tblProducts" />
+      <End Role="tblProductPrice" EntitySet="tblProductPrices" />
+    </AssociationSet>
+    <EntitySet Name="STK_Transaction" EntityType="JohanAgroFoodDBModel.STK_Transaction" />
+    <AssociationSet Name="FK_STK_Transaction_STK_tblStock" Association="JohanAgroFoodDBModel.FK_STK_Transaction_STK_tblStock">
+      <End Role="STK_tblStock" EntitySet="STK_tblStock" />
+      <End Role="STK_Transaction" EntitySet="STK_Transaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_STK_Transaction_tblProduct" Association="JohanAgroFoodDBModel.FK_STK_Transaction_tblProduct">
+      <End Role="tblProduct" EntitySet="tblProducts" />
+      <End Role="STK_Transaction" EntitySet="STK_Transaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_STK_Transaction_tblSell" Association="JohanAgroFoodDBModel.FK_STK_Transaction_tblSell">
+      <End Role="tblSell" EntitySet="tblSells" />
+      <End Role="STK_Transaction" EntitySet="STK_Transaction" />
+    </AssociationSet>
+    <EntitySet Name="STK_tblPaddy" EntityType="JohanAgroFoodDBModel.STK_tblPaddy" />
+    <AssociationSet Name="FK_STK_tblPaddy_STK_tblStock" Association="JohanAgroFoodDBModel.FK_STK_tblPaddy_STK_tblStock">
+      <End Role="STK_tblStock" EntitySet="STK_tblStock" />
+      <End Role="STK_tblPaddy" EntitySet="STK_tblPaddy" />
+    </AssociationSet>
+    <AssociationSet Name="FK_STK_tblPaddy_tblProduct" Association="JohanAgroFoodDBModel.FK_STK_tblPaddy_tblProduct">
+      <End Role="tblProduct" EntitySet="tblProducts" />
+      <End Role="STK_tblPaddy" EntitySet="STK_tblPaddy" />
+    </AssociationSet>
+    <AssociationSet Name="FK_STK_tblstkPaddy_tblBuy" Association="JohanAgroFoodDBModel.FK_STK_tblstkPaddy_tblBuy">
+      <End Role="tblBuy" EntitySet="tblBuys" />
+      <End Role="STK_tblPaddy" EntitySet="STK_tblPaddy" />
+    </AssociationSet>
+    <FunctionImport Name="sp_RptPaddyStockInfo" ReturnType="Collection(JohanAgroFoodDBModel.sp_RptPaddyStockInfo_Result)">
+      <Parameter Name="stockId" Mode="In" Type="Int32" />
+      <Parameter Name="productId" Mode="In" Type="Int32" />
+      <Parameter Name="fromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="toDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_rptParticleGeneral" ReturnType="Collection(JohanAgroFoodDBModel.sp_rptParticleGeneral_Result)">
+      <Parameter Name="fromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="toDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <EntitySet Name="BagTransactions" EntityType="JohanAgroFoodDBModel.BagTransaction" />
+    <AssociationSet Name="FK_BagTransaction_Party" Association="JohanAgroFoodDBModel.FK_BagTransaction_Party">
+      <End Role="tblParty" EntitySet="tblParties" />
+      <End Role="BagTransaction" EntitySet="BagTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BagTransaction_tblBuy" Association="JohanAgroFoodDBModel.FK_BagTransaction_tblBuy">
+      <End Role="tblBuy" EntitySet="tblBuys" />
+      <End Role="BagTransaction" EntitySet="BagTransactions" />
+    </AssociationSet>
+    <FunctionImport Name="sp_GetPaddyInfo" ReturnType="Collection(JohanAgroFoodDBModel.sp_GetPaddyInfo_Result)">
+      <Parameter Name="partyId" Mode="In" Type="Int32" />
+      <Parameter Name="parentProd" Mode="In" Type="Int32" />
+      <Parameter Name="fromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="toDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <EntitySet Name="tblDues" EntityType="JohanAgroFoodDBModel.tblDue" />
+    <AssociationSet Name="FK_tblDues_tblBuy" Association="JohanAgroFoodDBModel.FK_tblDues_tblBuy">
+      <End Role="tblBuy" EntitySet="tblBuys" />
+      <End Role="tblDue" EntitySet="tblDues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblDues_tblCostingSource" Association="JohanAgroFoodDBModel.FK_tblDues_tblCostingSource">
+      <End Role="tblCostingSource" EntitySet="tblCostingSources" />
+      <End Role="tblDue" EntitySet="tblDues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblDues_tblParty" Association="JohanAgroFoodDBModel.FK_tblDues_tblParty">
+      <End Role="tblParty" EntitySet="tblParties" />
+      <End Role="tblDue" EntitySet="tblDues" />
+    </AssociationSet>
+    <FunctionImport Name="func_paddyparta" ReturnType="Collection(Double)">
+      <Parameter Name="stockId" Mode="In" Type="Int32" />
+      <Parameter Name="productId" Mode="In" Type="Int32" />
+      <Parameter Name="fromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="toDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <EntitySet Name="OpeningBalances" EntityType="JohanAgroFoodDBModel.OpeningBalance" />
+    <AssociationSet Name="FK_OpeningBalance_tblParty" Association="JohanAgroFoodDBModel.FK_OpeningBalance_tblParty">
+      <End Role="tblParty" EntitySet="tblParties" />
+      <End Role="OpeningBalance" EntitySet="OpeningBalances" />
+    </AssociationSet>
+    <EntitySet Name="SalaryPayments" EntityType="JohanAgroFoodDBModel.SalaryPayment" />
+    <EntitySet Name="Employees" EntityType="JohanAgroFoodDBModel.Employee" />
+    <AssociationSet Name="FK_SalaryPayment_Employee" Association="JohanAgroFoodDBModel.FK_SalaryPayment_Employee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="SalaryPayment" EntitySet="SalaryPayments" />
+    </AssociationSet>
+    <EntitySet Name="PaddyTransactions" EntityType="JohanAgroFoodDBModel.PaddyTransaction" />
+    <FunctionImport Name="sp_GetPaddyBuyInfo" ReturnType="Collection(JohanAgroFoodDBModel.sp_GetPaddyBuyInfo_Result)" />
+    <FunctionImport Name="sp_getDailyPaddyBuy" ReturnType="Collection(JohanAgroFoodDBModel.sp_getDailyPaddyBuy_Result)">
+      <Parameter Name="todayDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="sp_getProductSellInfo_Result">
+    <Property Type="Int64" Name="ID" Nullable="false" />
+    <Property Type="Int32" Name="partyId" Nullable="false" />
+    <Property Type="Int32" Name="productId" Nullable="false" />
+    <Property Type="DateTime" Name="date" Nullable="false" />
+    <Property Type="Int32" Name="noOfBag" Nullable="false" />
+    <Property Type="Double" Name="quantity" Nullable="false" />
+    <Property Type="Int32" Name="unit" Nullable="false" />
+    <Property Type="Double" Name="unitPrice" Nullable="true" />
+    <Property Type="String" Name="partyName" Nullable="true" />
+    <Property Type="String" Name="productName" Nullable="true" />
+    <Property Type="Int32" Name="stockId" Nullable="true" />
+    <Property Type="String" Name="stockName" Nullable="true" />
+    <Property Type="Double" Name="amount" Nullable="true" />
+    <Property Type="Double" Name="transportCost" Nullable="true" />
+    <Property Type="String" Name="description" Nullable="true" />
+    <Property Type="String" Name="truckNumber" Nullable="true" />
+    <Property Type="Int64" Name="incSrcId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_GetHuskInfo_Result">
+    <Property Type="DateTime" Name="date" Nullable="false" />
+    <Property Type="String" Name="productName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="stockName" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="noOfBag" Nullable="false" />
+    <Property Type="Double" Name="quantityPerBag" Nullable="false" />
+    <Property Type="Double" Name="paidAmount" Nullable="true" />
+    <Property Type="String" Name="unit" Nullable="false" MaxLength="4" />
+    <Property Type="Double" Name="unitPrice" Nullable="true" />
+    <Property Type="Double" Name="transportCost" Nullable="true" />
+    <Property Type="Double" Name="totalPrice" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_GetStockInfo_Result">
+    <Property Type="DateTime" Name="date" Nullable="false" />
+    <Property Type="String" Name="stockName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="productName" Nullable="false" MaxLength="50" />
+    <Property Type="Double" Name="rcvQty" Nullable="true" />
+    <Property Type="Double" Name="totalRev" Nullable="true" />
+    <Property Type="Double" Name="sellQty" Nullable="true" />
+    <Property Type="Double" Name="totalSell" Nullable="true" />
+    <Property Type="Double" Name="openingStock" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_GetDailySellInfo_Result">
+    <Property Type="String" Name="name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="productName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="stockName" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="noOfBag" Nullable="false" />
+    <Property Type="Double" Name="quantityPerBag" Nullable="false" />
+    <Property Type="Double" Name="unitPrice" Nullable="true" />
+    <Property Type="Double" Name="totalPrice" Nullable="true" />
+    <Property Type="Double" Name="paidAmount" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_GetProductInfo_Result">
+    <Property Type="DateTime" Name="date" Nullable="false" />
+    <Property Type="String" Name="productName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="stockName" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="noOfBag" Nullable="false" />
+    <Property Type="Double" Name="quantityPerBag" Nullable="false" />
+    <Property Type="Double" Name="paidAmount" Nullable="true" />
+    <Property Type="String" Name="unit" Nullable="false" MaxLength="4" />
+    <Property Type="Double" Name="unitPrice" Nullable="true" />
+    <Property Type="Double" Name="bagPrice" Nullable="true" />
+    <Property Type="Double" Name="totalPrice" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_GetHuskIncWithd_Result">
+    <Property Type="DateTime" Name="date" Nullable="false" />
+    <Property Type="Double" Name="income" Nullable="false" />
+    <Property Type="String" Name="name" Nullable="true" MaxLength="50" />
+    <Property Type="Double" Name="withdraw" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="STK_Balance">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="stockId" Type="Int32" />
+    <Property Name="productId" Type="Int32" />
+    <Property Name="sackQuantity" Type="Double" />
+    <Property Name="sackWeight" Type="Double" />
+    <NavigationProperty Name="STK_tblStock" Relationship="JohanAgroFoodDBModel.FK_STK_tblRice_STK_tblStock" FromRole="STK_Balance" ToRole="STK_tblStock" />
+    <NavigationProperty Name="tblProduct" Relationship="JohanAgroFoodDBModel.FK_STK_tblRice_tblProduct" FromRole="STK_Balance" ToRole="tblProduct" />
+  </EntityType>
+  <EntityType Name="STK_tblStock">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="stockName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="stockAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="createDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="STK_Balance" Relationship="JohanAgroFoodDBModel.FK_STK_tblRice_STK_tblStock" FromRole="STK_tblStock" ToRole="STK_Balance" />
+    <NavigationProperty Name="tblSells" Relationship="JohanAgroFoodDBModel.FK_tblSell_STK_stock" FromRole="STK_tblStock" ToRole="tblSell" />
+    <NavigationProperty Name="STK_Transaction" Relationship="JohanAgroFoodDBModel.FK_STK_Transaction_STK_tblStock" FromRole="STK_tblStock" ToRole="STK_Transaction" />
+    <NavigationProperty Name="STK_tblPaddy" Relationship="JohanAgroFoodDBModel.FK_STK_tblPaddy_STK_tblStock" FromRole="STK_tblStock" ToRole="STK_tblPaddy" />
+  </EntityType>
+  <EntityType Name="tblBuy">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="partyId" Type="Int32" Nullable="false" />
+    <Property Name="stockId" Type="Int32" Nullable="false" />
+    <Property Name="productId" Type="Int32" Nullable="false" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="noOfBag" Type="Int32" Nullable="false" />
+    <Property Name="quantityPerBag" Type="Double" Nullable="false" />
+    <Property Name="unit" Type="Byte" Nullable="false" />
+    <Property Name="price" Type="Double" Nullable="false" />
+    <Property Name="truckNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblParty" Relationship="JohanAgroFoodDBModel.FK_tblbuy_tblParty" FromRole="tblBuy" ToRole="tblParty" />
+    <NavigationProperty Name="tblProduct" Relationship="JohanAgroFoodDBModel.FK_tblBuy_tblProduct" FromRole="tblBuy" ToRole="tblProduct" />
+    <NavigationProperty Name="tblCostingSources" Relationship="JohanAgroFoodDBModel.FK_tblCostingSource_tblBuy" FromRole="tblBuy" ToRole="tblCostingSource" />
+    <NavigationProperty Name="tblPayments" Relationship="JohanAgroFoodDBModel.FK_tblPayment_tblBuy" FromRole="tblBuy" ToRole="tblPayment" />
+    <NavigationProperty Name="STK_tblPaddy" Relationship="JohanAgroFoodDBModel.FK_STK_tblstkPaddy_tblBuy" FromRole="tblBuy" ToRole="STK_tblPaddy" />
+    <NavigationProperty Name="BagTransactions" Relationship="JohanAgroFoodDBModel.FK_BagTransaction_tblBuy" FromRole="tblBuy" ToRole="BagTransaction" />
+    <NavigationProperty Name="tblDues" Relationship="JohanAgroFoodDBModel.FK_tblDues_tblBuy" FromRole="tblBuy" ToRole="tblDue" />
+  </EntityType>
+  <EntityType Name="tblCollection">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="partyId" Type="Int32" Nullable="false" />
+    <Property Name="sellId" Type="Int64" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="collAmount" Type="Double" />
+    <Property Name="dueAmount" Type="Double" />
+    <Property Name="discount" Type="Double" />
+    <NavigationProperty Name="tblSell" Relationship="JohanAgroFoodDBModel.FK_RICE_tblCollection_RICE_tblSell" FromRole="tblCollection" ToRole="tblSell" />
+    <NavigationProperty Name="tblParty" Relationship="JohanAgroFoodDBModel.FK_tblCollection_tblParty" FromRole="tblCollection" ToRole="tblParty" />
+  </EntityType>
+  <EntityType Name="tblCommonElement">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="elementName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="elementCode" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="tblCostingSources" Relationship="JohanAgroFoodDBModel.FK_tblCostingSource_tblCommonElement" FromRole="tblCommonElement" ToRole="tblCostingSource" />
+    <NavigationProperty Name="tblIncomeSources" Relationship="JohanAgroFoodDBModel.FK_tblIncomeSource_tblIncomeSource" FromRole="tblCommonElement" ToRole="tblIncomeSource" />
+    <NavigationProperty Name="tblParties" Relationship="JohanAgroFoodDBModel.FK_tblParty_tblCommonElement" FromRole="tblCommonElement" ToRole="tblParty" />
+  </EntityType>
+  <EntityType Name="tblCostingSource">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="partyId" Type="Int32" />
+    <Property Name="amount" Type="Double" Nullable="false" />
+    <Property Name="sourceName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="srcDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="srcDescId" Type="Int32" Nullable="false" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="sellId" Type="Int64" />
+    <Property Name="buyId" Type="Int64" />
+    <Property Name="labourCostPerBag" Type="Double" />
+    <Property Name="transportCost" Type="Double" />
+    <Property Name="isDue" Type="Int32" />
+    <NavigationProperty Name="tblBuy" Relationship="JohanAgroFoodDBModel.FK_tblCostingSource_tblBuy" FromRole="tblCostingSource" ToRole="tblBuy" />
+    <NavigationProperty Name="tblCommonElement" Relationship="JohanAgroFoodDBModel.FK_tblCostingSource_tblCommonElement" FromRole="tblCostingSource" ToRole="tblCommonElement" />
+    <NavigationProperty Name="tblSell" Relationship="JohanAgroFoodDBModel.FK_tblCostingSource_tblSell" FromRole="tblCostingSource" ToRole="tblSell" />
+    <NavigationProperty Name="tblDues" Relationship="JohanAgroFoodDBModel.FK_tblDues_tblCostingSource" FromRole="tblCostingSource" ToRole="tblDue" />
+  </EntityType>
+  <EntityType Name="tblIncomeSource">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="partyId" Type="Int32" />
+    <Property Name="amount" Type="Double" Nullable="false" />
+    <Property Name="sourceName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="srcDescId" Type="Int32" Nullable="false" />
+    <Property Name="isDue" Type="Int32" />
+    <NavigationProperty Name="tblCommonElement" Relationship="JohanAgroFoodDBModel.FK_tblIncomeSource_tblIncomeSource" FromRole="tblIncomeSource" ToRole="tblCommonElement" />
+    <NavigationProperty Name="tblParty" Relationship="JohanAgroFoodDBModel.FK_tblIncomeSource_tblParty" FromRole="tblIncomeSource" ToRole="tblParty" />
+    <NavigationProperty Name="tblPayables" Relationship="JohanAgroFoodDBModel.FK_tblPayable_tblIncomeSource" FromRole="tblIncomeSource" ToRole="tblPayable" />
+    <NavigationProperty Name="tblSells" Relationship="JohanAgroFoodDBModel.FK_tblSell_tblIncomeSource" FromRole="tblIncomeSource" ToRole="tblSell" />
+  </EntityType>
+  <EntityType Name="tblLoanar">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="contactNo" Type="Int64" />
+    <Property Name="area" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="district" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="amount" Type="Double" Nullable="false" />
+    <Property Name="interest" Type="Double" Nullable="false" />
+    <Property Name="createDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="lastUpdate" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="tblParty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="productId" Type="Int32" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="contactNo" Type="Int64" />
+    <Property Name="area" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="districtId" Type="Int32" />
+    <Property Name="zoneId" Type="Int32" />
+    <Property Name="isCashParty" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="tblBuys" Relationship="JohanAgroFoodDBModel.FK_tblbuy_tblParty" FromRole="tblParty" ToRole="tblBuy" />
+    <NavigationProperty Name="tblCollections" Relationship="JohanAgroFoodDBModel.FK_tblCollection_tblParty" FromRole="tblParty" ToRole="tblCollection" />
+    <NavigationProperty Name="tblCommonElement" Relationship="JohanAgroFoodDBModel.FK_tblParty_tblCommonElement" FromRole="tblParty" ToRole="tblCommonElement" />
+    <NavigationProperty Name="tblIncomeSources" Relationship="JohanAgroFoodDBModel.FK_tblIncomeSource_tblParty" FromRole="tblParty" ToRole="tblIncomeSource" />
+    <NavigationProperty Name="tblProduct" Relationship="JohanAgroFoodDBModel.FK_tblParty_tblProduct" FromRole="tblParty" ToRole="tblProduct" />
+    <NavigationProperty Name="tblPayables" Relationship="JohanAgroFoodDBModel.FK_tblPayable_tblParty" FromRole="tblParty" ToRole="tblPayable" />
+    <NavigationProperty Name="tblPayments" Relationship="JohanAgroFoodDBModel.FK_tblPayment_tblParty" FromRole="tblParty" ToRole="tblPayment" />
+    <NavigationProperty Name="tblSells" Relationship="JohanAgroFoodDBModel.FK_tblSell_tblParty" FromRole="tblParty" ToRole="tblSell" />
+    <NavigationProperty Name="BagTransactions" Relationship="JohanAgroFoodDBModel.FK_BagTransaction_Party" FromRole="tblParty" ToRole="BagTransaction" />
+    <NavigationProperty Name="tblDues" Relationship="JohanAgroFoodDBModel.FK_tblDues_tblParty" FromRole="tblParty" ToRole="tblDue" />
+    <NavigationProperty Name="OpeningBalances" Relationship="JohanAgroFoodDBModel.FK_OpeningBalance_tblParty" FromRole="tblParty" ToRole="OpeningBalance" />
+  </EntityType>
+  <EntityType Name="tblPayable">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="partyId" Type="Int32" Nullable="false" />
+    <Property Name="openingBalance" Type="Double" />
+    <Property Name="amount" Type="Double" />
+    <Property Name="date" Type="DateTime" Precision="0" />
+    <Property Name="isActive" Type="Byte" />
+    <Property Name="sellId" Type="Int64" />
+    <Property Name="incSrcId" Type="Int64" />
+    <NavigationProperty Name="tblIncomeSource" Relationship="JohanAgroFoodDBModel.FK_tblPayable_tblIncomeSource" FromRole="tblPayable" ToRole="tblIncomeSource" />
+    <NavigationProperty Name="tblParty" Relationship="JohanAgroFoodDBModel.FK_tblPayable_tblParty" FromRole="tblPayable" ToRole="tblParty" />
+    <NavigationProperty Name="tblSell" Relationship="JohanAgroFoodDBModel.FK_tblPayable_tblSell" FromRole="tblPayable" ToRole="tblSell" />
+  </EntityType>
+  <EntityType Name="tblPayment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="partyId" Type="Int32" Nullable="false" />
+    <Property Name="buyId" Type="Int64" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="paidAmount" Type="Double" />
+    <Property Name="totalAmount" Type="Double" />
+    <Property Name="discount" Type="Double" />
+    <NavigationProperty Name="tblBuy" Relationship="JohanAgroFoodDBModel.FK_tblPayment_tblBuy" FromRole="tblPayment" ToRole="tblBuy" />
+    <NavigationProperty Name="tblParty" Relationship="JohanAgroFoodDBModel.FK_tblPayment_tblParty" FromRole="tblPayment" ToRole="tblParty" />
+  </EntityType>
+  <EntityType Name="tblProduct">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="productName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="parentId" Type="Int32" />
+    <NavigationProperty Name="STK_Balance" Relationship="JohanAgroFoodDBModel.FK_STK_tblRice_tblProduct" FromRole="tblProduct" ToRole="STK_Balance" />
+    <NavigationProperty Name="tblBuys" Relationship="JohanAgroFoodDBModel.FK_tblBuy_tblProduct" FromRole="tblProduct" ToRole="tblBuy" />
+    <NavigationProperty Name="tblParties" Relationship="JohanAgroFoodDBModel.FK_tblParty_tblProduct" FromRole="tblProduct" ToRole="tblParty" />
+    <NavigationProperty Name="tblSells" Relationship="JohanAgroFoodDBModel.FK_RICE_tblSell_tblProduct" FromRole="tblProduct" ToRole="tblSell" />
+    <NavigationProperty Name="tblProductPrices" Relationship="JohanAgroFoodDBModel.FK_tblProductPrice_tblProduct" FromRole="tblProduct" ToRole="tblProductPrice" />
+    <NavigationProperty Name="STK_Transaction" Relationship="JohanAgroFoodDBModel.FK_STK_Transaction_tblProduct" FromRole="tblProduct" ToRole="STK_Transaction" />
+    <NavigationProperty Name="STK_tblPaddy" Relationship="JohanAgroFoodDBModel.FK_STK_tblPaddy_tblProduct" FromRole="tblProduct" ToRole="STK_tblPaddy" />
+  </EntityType>
+  <EntityType Name="tblProductPrice">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="productId" Type="Int32" />
+    <Property Name="unitPrice" Type="Double" />
+    <Property Name="date" Type="DateTime" Precision="0" />
+    <Property Name="active" Type="Boolean" />
+    <NavigationProperty Name="tblProduct" Relationship="JohanAgroFoodDBModel.FK_tblProductPrice_tblProduct" FromRole="tblProductPrice" ToRole="tblProduct" />
+  </EntityType>
+  <EntityType Name="tblSell">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="partyId" Type="Int32" Nullable="false" />
+    <Property Name="productId" Type="Int32" Nullable="false" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="noOfBag" Type="Int32" Nullable="false" />
+    <Property Name="quantity" Type="Double" Nullable="false" />
+    <Property Name="unit" Type="Int32" Nullable="false" />
+    <Property Name="unitPrice" Type="Double" />
+    <Property Name="stockId" Type="Int32" />
+    <Property Name="incSrcId" Type="Int64" />
+    <Property Name="transportCost" Type="Double" />
+    <Property Name="truckNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="STK_tblStock" Relationship="JohanAgroFoodDBModel.FK_tblSell_STK_stock" FromRole="tblSell" ToRole="STK_tblStock" />
+    <NavigationProperty Name="tblCollections" Relationship="JohanAgroFoodDBModel.FK_RICE_tblCollection_RICE_tblSell" FromRole="tblSell" ToRole="tblCollection" />
+    <NavigationProperty Name="tblCostingSources" Relationship="JohanAgroFoodDBModel.FK_tblCostingSource_tblSell" FromRole="tblSell" ToRole="tblCostingSource" />
+    <NavigationProperty Name="tblIncomeSource" Relationship="JohanAgroFoodDBModel.FK_tblSell_tblIncomeSource" FromRole="tblSell" ToRole="tblIncomeSource" />
+    <NavigationProperty Name="tblParty" Relationship="JohanAgroFoodDBModel.FK_tblSell_tblParty" FromRole="tblSell" ToRole="tblParty" />
+    <NavigationProperty Name="tblPayables" Relationship="JohanAgroFoodDBModel.FK_tblPayable_tblSell" FromRole="tblSell" ToRole="tblPayable" />
+    <NavigationProperty Name="tblProduct" Relationship="JohanAgroFoodDBModel.FK_RICE_tblSell_tblProduct" FromRole="tblSell" ToRole="tblProduct" />
+    <NavigationProperty Name="STK_Transaction" Relationship="JohanAgroFoodDBModel.FK_STK_Transaction_tblSell" FromRole="tblSell" ToRole="STK_Transaction" />
+  </EntityType>
+  <EntityType Name="tblUser">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="userType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblInterest">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="loanarId" />
+      <PropertyRef Name="intrestAmt" />
+      <PropertyRef Name="date" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="loanarId" Type="Int32" Nullable="false" />
+    <Property Name="intrestAmt" Type="Double" Nullable="false" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+  </EntityType>
+  <Association Name="FK_STK_tblRice_STK_tblStock">
+    <End Type="JohanAgroFoodDBModel.STK_tblStock" Role="STK_tblStock" Multiplicity="0..1" />
+    <End Type="JohanAgroFoodDBModel.STK_Balance" Role="STK_Balance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="STK_tblStock">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="STK_Balance">
+        <PropertyRef Name="stockId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_STK_tblRice_tblProduct">
+    <End Type="JohanAgroFoodDBModel.tblProduct" Role="tblProduct" Multiplicity="0..1" />
+    <End Type="JohanAgroFoodDBModel.STK_Balance" Role="STK_Balance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduct">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="STK_Balance">
+        <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSell_STK_stock">
+    <End Type="JohanAgroFoodDBModel.STK_tblStock" Role="STK_tblStock" Multiplicity="0..1" />
+    <End Type="JohanAgroFoodDBModel.tblSell" Role="tblSell" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="STK_tblStock">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblSell">
+        <PropertyRef Name="stockId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblbuy_tblParty">
+    <End Type="JohanAgroFoodDBModel.tblParty" Role="tblParty" Multiplicity="1" />
+    <End Type="JohanAgroFoodDBModel.tblBuy" Role="tblBuy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblParty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblBuy">
+        <PropertyRef Name="partyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblBuy_tblProduct">
+    <End Type="JohanAgroFoodDBModel.tblProduct" Role="tblProduct" Multiplicity="1" />
+    <End Type="JohanAgroFoodDBModel.tblBuy" Role="tblBuy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduct">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblBuy">
+        <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblCostingSource_tblBuy">
+    <End Type="JohanAgroFoodDBModel.tblBuy" Role="tblBuy" Multiplicity="0..1" />
+    <End Type="JohanAgroFoodDBModel.tblCostingSource" Role="tblCostingSource" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBuy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblCostingSource">
+        <PropertyRef Name="buyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblPayment_tblBuy">
+    <End Type="JohanAgroFoodDBModel.tblBuy" Role="tblBuy" Multiplicity="0..1" />
+    <End Type="JohanAgroFoodDBModel.tblPayment" Role="tblPayment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBuy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblPayment">
+        <PropertyRef Name="buyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RICE_tblCollection_RICE_tblSell">
+    <End Type="JohanAgroFoodDBModel.tblSell" Role="tblSell" Multiplicity="0..1" />
+    <End Type="JohanAgroFoodDBModel.tblCollection" Role="tblCollection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSell">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblCollection">
+        <PropertyRef Name="sellId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblCollection_tblParty">
+    <End Type="JohanAgroFoodDBModel.tblParty" Role="tblParty" Multiplicity="1" />
+    <End Type="JohanAgroFoodDBModel.tblCollection" Role="tblCollection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblParty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblCollection">
+        <PropertyRef Name="partyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblCostingSource_tblCommonElement">
+    <End Type="JohanAgroFoodDBModel.tblCommonElement" Role="tblCommonElement" Multiplicity="1" />
+    <End Type="JohanAgroFoodDBModel.tblCostingSource" Role="tblCostingSource" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCommonElement">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblCostingSource">
+        <PropertyRef Name="srcDescId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblIncomeSource_tblIncomeSource">
+    <End Type="JohanAgroFoodDBModel.tblCommonElement" Role="tblCommonElement" Multiplicity="1" />
+    <End Type="JohanAgroFoodDBModel.tblIncomeSource" Role="tblIncomeSource" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCommonElement">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblIncomeSource">
+        <PropertyRef Name="srcDescId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblParty_tblCommonElement">
+    <End Type="JohanAgroFoodDBModel.tblCommonElement" Role="tblCommonElement" Multiplicity="0..1" />
+    <End Type="JohanAgroFoodDBModel.tblParty" Role="tblParty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCommonElement">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblParty">
+        <PropertyRef Name="districtId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblCostingSource_tblSell">
+    <End Type="JohanAgroFoodDBModel.tblSell" Role="tblSell" Multiplicity="0..1" />
+    <End Type="JohanAgroFoodDBModel.tblCostingSource" Role="tblCostingSource" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSell">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblCostingSource">
+        <PropertyRef Name="sellId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblIncomeSource_tblParty">
+    <End Type="JohanAgroFoodDBModel.tblParty" Role="tblParty" Multiplicity="0..1" />
+    <End Type="JohanAgroFoodDBModel.tblIncomeSource" Role="tblIncomeSource" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblParty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblIncomeSource">
+        <PropertyRef Name="partyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblPayable_tblIncomeSource">
+    <End Type="JohanAgroFoodDBModel.tblIncomeSource" Role="tblIncomeSource" Multiplicity="0..1" />
+    <End Type="JohanAgroFoodDBModel.tblPayable" Role="tblPayable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblIncomeSource">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblPayable">
+        <PropertyRef Name="incSrcId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSell_tblIncomeSource">
+    <End Type="JohanAgroFoodDBModel.tblIncomeSource" Role="tblIncomeSource" Multiplicity="0..1" />
+    <End Type="JohanAgroFoodDBModel.tblSell" Role="tblSell" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblIncomeSource">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblSell">
+        <PropertyRef Name="incSrcId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblParty_tblProduct">
+    <End Type="JohanAgroFoodDBModel.tblProduct" Role="tblProduct" Multiplicity="0..1" />
+    <End Type="JohanAgroFoodDBModel.tblParty" Role="tblParty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduct">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblParty">
+        <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblPayable_tblParty">
+    <End Type="JohanAgroFoodDBModel.tblParty" Role="tblParty" Multiplicity="1" />
+    <End Type="JohanAgroFoodDBModel.tblPayable" Role="tblPayable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblParty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblPayable">
+        <PropertyRef Name="partyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblPayment_tblParty">
+    <End Type="JohanAgroFoodDBModel.tblParty" Role="tblParty" Multiplicity="1" />
+    <End Type="JohanAgroFoodDBModel.tblPayment" Role="tblPayment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblParty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblPayment">
+        <PropertyRef Name="partyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSell_tblParty">
+    <End Type="JohanAgroFoodDBModel.tblParty" Role="tblParty" Multiplicity="1" />
+    <End Type="JohanAgroFoodDBModel.tblSell" Role="tblSell" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblParty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblSell">
+        <PropertyRef Name="partyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblPayable_tblSell">
+    <End Type="JohanAgroFoodDBModel.tblSell" Role="tblSell" Multiplicity="0..1" />
+    <End Type="JohanAgroFoodDBModel.tblPayable" Role="tblPayable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSell">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblPayable">
+        <PropertyRef Name="sellId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RICE_tblSell_tblProduct">
+    <End Type="JohanAgroFoodDBModel.tblProduct" Role="tblProduct" Multiplicity="1" />
+    <End Type="JohanAgroFoodDBModel.tblSell" Role="tblSell" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduct">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblSell">
+        <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblProductPrice_tblProduct">
+    <End Type="JohanAgroFoodDBModel.tblProduct" Role="tblProduct" Multiplicity="0..1" />
+    <End Type="JohanAgroFoodDBModel.tblProductPrice" Role="tblProductPrice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduct">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblProductPrice">
+        <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="STK_Transaction">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="openingStock" Type="Double" Nullable="false" />
+    <Property Name="stockId" Type="Int32" Nullable="false" />
+    <Property Name="prodId" Type="Int32" Nullable="false" />
+    <Property Name="rcvQty" Type="Double" />
+    <Property Name="sellQty" Type="Double" />
+    <Property Name="operation" Type="Int16" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="sellId" Type="Int64" />
+    <NavigationProperty Name="STK_tblStock" Relationship="JohanAgroFoodDBModel.FK_STK_Transaction_STK_tblStock" FromRole="STK_Transaction" ToRole="STK_tblStock" />
+    <NavigationProperty Name="tblProduct" Relationship="JohanAgroFoodDBModel.FK_STK_Transaction_tblProduct" FromRole="STK_Transaction" ToRole="tblProduct" />
+    <NavigationProperty Name="tblSell" Relationship="JohanAgroFoodDBModel.FK_STK_Transaction_tblSell" FromRole="STK_Transaction" ToRole="tblSell" />
+  </EntityType>
+  <Association Name="FK_STK_Transaction_STK_tblStock">
+    <End Type="JohanAgroFoodDBModel.STK_tblStock" Role="STK_tblStock" Multiplicity="1" />
+    <End Type="JohanAgroFoodDBModel.STK_Transaction" Role="STK_Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="STK_tblStock">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="STK_Transaction">
+        <PropertyRef Name="stockId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_STK_Transaction_tblProduct">
+    <End Type="JohanAgroFoodDBModel.tblProduct" Role="tblProduct" Multiplicity="1" />
+    <End Type="JohanAgroFoodDBModel.STK_Transaction" Role="STK_Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduct">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="STK_Transaction">
+        <PropertyRef Name="prodId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_STK_Transaction_tblSell">
+    <End Type="JohanAgroFoodDBModel.tblSell" Role="tblSell" Multiplicity="0..1" />
+    <End Type="JohanAgroFoodDBModel.STK_Transaction" Role="STK_Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSell">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="STK_Transaction">
+        <PropertyRef Name="sellId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="STK_tblPaddy">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="stockId" Type="Int32" Nullable="false" />
+    <Property Name="productId" Type="Int32" Nullable="false" />
+    <Property Name="paddRcvId" Type="Int64" Nullable="false" />
+    <Property Name="sackWeight" Type="Double" Nullable="false" />
+    <Property Name="sackQuantity" Type="Double" Nullable="false" />
+    <Property Name="createDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="STK_tblStock" Relationship="JohanAgroFoodDBModel.FK_STK_tblPaddy_STK_tblStock" FromRole="STK_tblPaddy" ToRole="STK_tblStock" />
+    <NavigationProperty Name="tblProduct" Relationship="JohanAgroFoodDBModel.FK_STK_tblPaddy_tblProduct" FromRole="STK_tblPaddy" ToRole="tblProduct" />
+    <NavigationProperty Name="tblBuy" Relationship="JohanAgroFoodDBModel.FK_STK_tblstkPaddy_tblBuy" FromRole="STK_tblPaddy" ToRole="tblBuy" />
+  </EntityType>
+  <Association Name="FK_STK_tblPaddy_STK_tblStock">
+    <End Type="JohanAgroFoodDBModel.STK_tblStock" Role="STK_tblStock" Multiplicity="1" />
+    <End Type="JohanAgroFoodDBModel.STK_tblPaddy" Role="STK_tblPaddy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="STK_tblStock">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="STK_tblPaddy">
+        <PropertyRef Name="stockId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_STK_tblPaddy_tblProduct">
+    <End Type="JohanAgroFoodDBModel.tblProduct" Role="tblProduct" Multiplicity="1" />
+    <End Type="JohanAgroFoodDBModel.STK_tblPaddy" Role="STK_tblPaddy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduct">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="STK_tblPaddy">
+        <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_STK_tblstkPaddy_tblBuy">
+    <End Type="JohanAgroFoodDBModel.tblBuy" Role="tblBuy" Multiplicity="1" />
+    <End Type="JohanAgroFoodDBModel.STK_tblPaddy" Role="STK_tblPaddy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBuy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="STK_tblPaddy">
+        <PropertyRef Name="paddRcvId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="sp_RptPaddyStockInfo_Result">
+    <Property Type="Int64" Name="rowNum" Nullable="true" />
+    <Property Type="DateTime" Name="date" Nullable="true" />
+    <Property Type="String" Name="productName" Nullable="false" MaxLength="50" />
+    <Property Type="Double" Name="rcvQty" Nullable="true" />
+    <Property Type="Double" Name="releaseQty" Nullable="true" />
+    <Property Type="String" Name="stockName" Nullable="false" MaxLength="50" />
+    <Property Type="Double" Name="remWeight" Nullable="true" />
+    <Property Type="Double" Name="totalRcv" Nullable="true" />
+    <Property Type="Double" Name="totalRelease" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_rptParticleGeneral_Result">
+    <Property Type="DateTime" Name="date" Nullable="false" />
+    <Property Type="Double" Name="income" Nullable="false" />
+    <Property Type="String" Name="name" Nullable="true" MaxLength="50" />
+    <Property Type="Double" Name="withdraw" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="BagTransaction">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="partyId" Type="Int32" />
+    <Property Name="rcvId" Type="Int64" />
+    <Property Name="comRcvBag" Type="Int32" />
+    <Property Name="rcvPrice" Type="Double" />
+    <Property Name="comSentBag" Type="Int32" />
+    <Property Name="sentPrice" Type="Double" />
+    <Property Name="date" Type="DateTime" Precision="0" />
+    <Property Name="bagDues" Type="Int32" />
+    <Property Name="priceDues" Type="Double" />
+    <Property Name="isActive" Type="Boolean" />
+    <NavigationProperty Name="tblParty" Relationship="JohanAgroFoodDBModel.FK_BagTransaction_Party" FromRole="BagTransaction" ToRole="tblParty" />
+    <NavigationProperty Name="tblBuy" Relationship="JohanAgroFoodDBModel.FK_BagTransaction_tblBuy" FromRole="BagTransaction" ToRole="tblBuy" />
+  </EntityType>
+  <Association Name="FK_BagTransaction_Party">
+    <End Type="JohanAgroFoodDBModel.tblParty" Role="tblParty" Multiplicity="0..1" />
+    <End Type="JohanAgroFoodDBModel.BagTransaction" Role="BagTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblParty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BagTransaction">
+        <PropertyRef Name="partyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BagTransaction_tblBuy">
+    <End Type="JohanAgroFoodDBModel.tblBuy" Role="tblBuy" Multiplicity="0..1" />
+    <End Type="JohanAgroFoodDBModel.BagTransaction" Role="BagTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBuy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BagTransaction">
+        <PropertyRef Name="rcvId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="sp_GetPaddyInfo_Result">
+    <Property Type="DateTime" Name="date" Nullable="true" />
+    <Property Type="String" Name="productName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="stockName" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="noOfBag" Nullable="true" />
+    <Property Type="Double" Name="quantityPerBag" Nullable="false" />
+    <Property Type="Double" Name="price" Nullable="true" />
+    <Property Type="String" Name="partyName" Nullable="false" MaxLength="50" />
+    <Property Type="Double" Name="protiMonerPorta" Nullable="false" />
+    <Property Type="Double" Name="totalPrice" Nullable="false" />
+    <Property Type="Double" Name="paidAmount" Nullable="true" />
+    <Property Type="Double" Name="transCost" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="tblDue">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="partyId" Type="Int32" Nullable="false" />
+    <Property Name="buyId" Type="Int64" />
+    <Property Name="costingId" Type="Int64" />
+    <Property Name="openingBalance" Type="Double" />
+    <Property Name="amount" Type="Double" />
+    <Property Name="date" Type="DateTime" Precision="0" />
+    <Property Name="isActive" Type="Byte" />
+    <NavigationProperty Name="tblBuy" Relationship="JohanAgroFoodDBModel.FK_tblDues_tblBuy" FromRole="tblDue" ToRole="tblBuy" />
+    <NavigationProperty Name="tblCostingSource" Relationship="JohanAgroFoodDBModel.FK_tblDues_tblCostingSource" FromRole="tblDue" ToRole="tblCostingSource" />
+    <NavigationProperty Name="tblParty" Relationship="JohanAgroFoodDBModel.FK_tblDues_tblParty" FromRole="tblDue" ToRole="tblParty" />
+  </EntityType>
+  <Association Name="FK_tblDues_tblBuy">
+    <End Type="JohanAgroFoodDBModel.tblBuy" Role="tblBuy" Multiplicity="0..1" />
+    <End Type="JohanAgroFoodDBModel.tblDue" Role="tblDue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBuy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblDue">
+        <PropertyRef Name="buyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblDues_tblCostingSource">
+    <End Type="JohanAgroFoodDBModel.tblCostingSource" Role="tblCostingSource" Multiplicity="0..1" />
+    <End Type="JohanAgroFoodDBModel.tblDue" Role="tblDue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCostingSource">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblDue">
+        <PropertyRef Name="costingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblDues_tblParty">
+    <End Type="JohanAgroFoodDBModel.tblParty" Role="tblParty" Multiplicity="1" />
+    <End Type="JohanAgroFoodDBModel.tblDue" Role="tblDue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblParty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tblDue">
+        <PropertyRef Name="partyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="OpeningBalance">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="partyId" Type="Int32" Nullable="false" />
+    <Property Name="balance" Type="Double" Nullable="false" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="tblParty" Relationship="JohanAgroFoodDBModel.FK_OpeningBalance_tblParty" FromRole="OpeningBalance" ToRole="tblParty" />
+  </EntityType>
+  <Association Name="FK_OpeningBalance_tblParty">
+    <End Type="JohanAgroFoodDBModel.tblParty" Role="tblParty" Multiplicity="1" />
+    <End Type="JohanAgroFoodDBModel.OpeningBalance" Role="OpeningBalance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblParty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OpeningBalance">
+        <PropertyRef Name="partyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="SalaryPayment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="empId" Type="Int64" Nullable="false" />
+    <Property Name="paidAmount" Type="Double" Nullable="false" />
+    <Property Name="month" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="year" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Employee" Relationship="JohanAgroFoodDBModel.FK_SalaryPayment_Employee" FromRole="SalaryPayment" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="empName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="address" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="designation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="joiningDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="currentSalary" Type="Double" Nullable="false" />
+    <Property Name="active" Type="Boolean" />
+    <NavigationProperty Name="SalaryPayments" Relationship="JohanAgroFoodDBModel.FK_SalaryPayment_Employee" FromRole="Employee" ToRole="SalaryPayment" />
+  </EntityType>
+  <Association Name="FK_SalaryPayment_Employee">
+    <End Type="JohanAgroFoodDBModel.Employee" Role="Employee" Multiplicity="1" />
+    <End Type="JohanAgroFoodDBModel.SalaryPayment" Role="SalaryPayment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SalaryPayment">
+        <PropertyRef Name="empId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PaddyTransaction">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="openingStock" Type="Double" Nullable="false" />
+    <Property Name="stockId" Type="Int32" Nullable="false" />
+    <Property Name="prodId" Type="Int32" Nullable="false" />
+    <Property Name="rcvQty" Type="Double" />
+    <Property Name="releaseQty" Type="Double" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="buyId" Type="Int64" />
+    <Property Name="bagWeight" Type="Double" />
+    <Property Name="millCost" Type="Double" />
+    <Property Name="serial" Type="Int32" />
+    <Property Name="fromStock" Type="Int32" />
+  </EntityType>
+  <ComplexType Name="sp_GetPaddyBuyInfo_Result">
+    <Property Type="Int64" Name="ID" Nullable="false" />
+    <Property Type="Int32" Name="partyId" Nullable="false" />
+    <Property Type="Int32" Name="stockId" Nullable="false" />
+    <Property Type="Int32" Name="productId" Nullable="false" />
+    <Property Type="DateTime" Name="date" Nullable="false" />
+    <Property Type="Int32" Name="noOfBag" Nullable="false" />
+    <Property Type="Double" Name="quantityPerBag" Nullable="false" />
+    <Property Type="Byte" Name="unit" Nullable="false" />
+    <Property Type="Double" Name="price" Nullable="false" />
+    <Property Type="String" Name="truckNumber" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="partyName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="productName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="stockName" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="comSentBag" Nullable="true" />
+    <Property Type="Int32" Name="comRcvBag" Nullable="true" />
+    <Property Type="Double" Name="rcvPrice" Nullable="true" />
+    <Property Type="Double" Name="amount" Nullable="true" />
+    <Property Type="Double" Name="transportCost" Nullable="true" />
+    <Property Type="Double" Name="labourCostPerBag" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_getDailyPaddyBuy_Result">
+    <Property Type="String" Name="name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="productName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="stockName" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="noOfBag" Nullable="false" />
+    <Property Type="Double" Name="quantityPerBag" Nullable="false" />
+    <Property Type="Double" Name="price" Nullable="false" />
+    <Property Type="Double" Name="totalPrice" Nullable="false" />
+    <Property Type="Double" Name="parta" Nullable="true" />
+    <Property Type="Double" Name="transportCost" Nullable="false" />
+    <Property Type="Double" Name="paidAmount" Nullable="false" />
+  </ComplexType>
+</Schema>

@@ -1,0 +1,86 @@
+﻿@model Johan.DATA.STK_tblStock
+@{
+    ViewBag.Title = "স্টক";
+}
+<script src="~/App/Components/Stock/stockController.js"></script>
+<script src="~/App/Components/Stock/stockService.js"></script>
+
+<div ng-controller="stockController" class="row">
+    <div class="col-md-4">
+        <form class="form-horizontal" name="stockForm" novalidate>
+            <div class="form-group">
+                <div class="col-sm-8 col-md-offset-2">
+                    <h2>স্টক</h2>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : stockForm.stockName.$invalid && submitted }">
+                <label for="name" class="col-sm-4 control-label">স্টকের নাম</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" name="stockName" data-ng-model="stock.stockName" required>
+                </div>
+                @*<span class="error" ng-show="stockForm.stockName.$error.required">নাম খালি থাকতে পারবে না।</span>*@
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : stockForm.address.$invalid && submitted }">
+                <label for="address" class="col-sm-4 control-label">ঠিকানা</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" name="address" data-ng-model="stock.stockAddress" required>
+                </div>
+                @*<span class="error" ng-show="stockForm.address.$error.required">ঠিকানা খালি থাকতে পারবে না।</span>*@
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button class="btn btn-success" ng-click="save()">
+                        <span class="glyphicon glyphicon-save" aria-hidden="true"> সেভ</span>
+                    </button>
+                    <button class="btn btn-success" ng-click="reset()">
+                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"> রিসেট</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <div class="col-sm-8">
+                <h2>স্টকের লিস্ট</h2>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>নাম</th>
+                        <th>ঠিকানা</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="stk in stocks">
+                        <td>{{stk.stockName}}</td>
+                        <td>{{stk.stockAddress}}</td>
+                        <td>
+                            <button class="btn btn-default" value="Edit" ng-click="edit(stk)">
+                                <span class="glyphicon glyphicon-pencil"></span>  পরিবর্তন
+
+                            </button>
+                            <button class="btn btn-default" value="Delete" ng-click="delete(stk)">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"> মূছুন</span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" style="top:40%; height:100px; overflow:hidden; outline:none;" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4 class="modal-title" id="myModalLabel">Please wait....</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

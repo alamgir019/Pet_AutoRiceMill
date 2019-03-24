@@ -1,0 +1,87 @@
+﻿@model Johan.DATA.tblIncomeSource
+@{
+    ViewBag.Title = "ধানের বাকির খাত";
+}
+<script src="~/App/Components/PaddyDues/paddyDuesCltr.js"></script>
+<script src="~/App/Components/PaddyDues/paddyDuesSvc.js"></script>
+@*<script src="~/App/Components/Sector/sectorService.js"></script>*@
+
+
+<div ng-controller="paddyDuesCltr" class="row">
+    <div class="col-md-4">
+        <form class="form-horizontal" name="paddyDuesForm">
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <h3>বকেয়া পরিশোধ</h3>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="Party" class="col-sm-4 control-label">পার্টির নাম</label>
+                <div class="col-sm-8">
+                    <typeahead items="parties" on-select="getDues()" model="paddyDues.partyName" value="paddyDues.partyId"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="due" class="col-sm-4 control-label">মোট পাওনা</label>
+                <div class="col-sm-6">
+                    <input class="form-control" data-ng-model="paddyDues.totalDue" ng-disabled="true" id="due" />
+                </div>
+                <p class="col-sm-2"><strong>টাকা</strong></p>
+            </div>
+            <div class="form-group">
+                <label for="Party" class="col-sm-4 control-label">উৎসের নাম</label>
+                <div class="col-sm-8">
+                    <select class="form-control" jh-select="paddyDues.sourceName" data-ng-model="paddyDues.srcDescId" ng-options="sector.ID as sector.elementName for sector in sectors" id="sector">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="area" class="col-sm-4 control-label">প্রদান</label>
+                <div class="col-sm-6">
+                    @*<input type="number" class="form-control" name="area" data-ng-model="duePayment.amount" required>*@
+                    <bangla-number input-value="paddyDues.amt" output-value="paddyDues.amount" required="true" />
+                </div>
+                <p class="col-sm-2"><strong>টাকা</strong></p>
+            </div>
+
+            <div class="form-group">
+                <label for="date" class="col-md-4 control-label">তারিখ</label>
+                <div class="input-group date col-md-8">
+                    <input class="form-control" size="16" id="date" name="date" ng-model="paddyDues.date" type="text" required>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+                <script type="text/javascript">
+                    $("#date").datepicker({ dateFormat: 'dd-mm-yy' });
+                </script>
+
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+
+                    <button class="btn btn-success" ng-click="save()">
+                        <span class="glyphicon glyphicon-save" aria-hidden="true"> সেভ</span>
+                    </button>
+                    <button class="btn btn-success" ng-click="reset()">
+                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"> রিসেট</span>
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" style="top:40%; height:100px; overflow:hidden; outline:none;" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4 class="modal-title" id="myModalLabel">Please wait....</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

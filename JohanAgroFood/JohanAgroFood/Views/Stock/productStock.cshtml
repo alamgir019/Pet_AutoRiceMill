@@ -1,0 +1,130 @@
+﻿@model Johan.DATA.STK_Balance
+@{
+    ViewBag.Title = "স্টক পেজ";
+}
+
+<script src="~/App/Components/Stock/productStockController.js"></script>
+<script src="~/App/Components/Stock/productStockService.js"></script>
+<script src="~/App/Components/Common/commonSvc.js"></script>
+
+<div ng-controller="prodStockCtrl" class="row">
+
+    <div class="col-md-4">
+        <div style="height: 20px;"></div>
+        <form class="form-horizontal" name="prodStockForm" novalidate>
+
+            <div class="form-group">
+                <div class="col-sm-8 col-md-offset-2">
+                    <h4>প্রোডাক্টের স্টক</h4>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="typename" class="col-sm-4 control-label">প্রোডাক্টের ধরন</label>
+                <div class="col-sm-8">
+                    <select type="text" class="form-control" name="typename" data-ng-model="prodStock.parentId"
+                            ng-options="parent.ID as parent.productName for parent in parents" ng-change="getChildProd()" required>
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name" class="col-sm-4 control-label">প্রোডাক্টের নাম</label>
+                <div class="col-sm-8">
+                    <select type="text" class="form-control" name="pname" data-ng-model="prodStock.productId"
+                            ng-options="prduct.ID as prduct.productName for prduct in prducts" required>
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name" class="col-sm-4 control-label">স্টক</label>
+                <div class="col-sm-8">
+                    <select type="text" class="form-control" name="sname" data-ng-model="prodStock.stockId"
+                            ng-options="stock.ID as stock.stockName for stock in stocks" required>
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="date" class="col-md-4 control-label">তারিখঃ</label>
+                <div class="input-group date col-md-8">
+                    <input class="form-control" size="16" id="date" name="date" ng-model="prodStock.date" type="text" required>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+                <script type="text/javascript">
+                    $("#date").datepicker({ dateFormat: 'dd-mm-yy' });
+                </script>
+            </div>
+
+            <div class="form-group">
+                <label for="qty" class="col-sm-4 control-label">ব্যাগের সংখ্যা</label>
+                <div class="col-sm-8">
+                    @*<input type="number" class="form-control" name="qty" data-ng-model="prodStock.sackQuantity" required>*@
+                    <bangla-number input-value="prodStock.sckQuantity" output-value="prodStock.sackQuantity" required="true" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button class="btn btn-success" ng-click="save()">
+                        <span class="glyphicon glyphicon-save" aria-hidden="true">সেভ</span>
+                    </button>
+                    <button class="btn btn-success" ng-click="reset()">
+                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"> রিসেট</span>
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="col-md-8">
+        <div style="height: 20px;"></div>
+        <div class="form-group">
+            <div class="col-sm-8">
+                <h4>প্রোডাক্টের স্টকের তালিকা</h4>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th style="width:20%">প্রোডাক্টের নাম</th>
+                        <th style="width:30%">স্টকের নাম</th>
+                        <th style="width:10%">ব্যাগের সংখ্যা</th>
+                        <th style="width:5%"></th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="ln in prodStocks">
+                        <td>{{ln.productName}}</td>
+                        <td>{{ln.stockName}}</td>
+                        <td>{{ln.sckQuantity}}</td>
+                        <td>
+                            <button class="btn btn-default" value="Edit" ng-click="edit(ln)">
+                                @*<span class="glyphicon glyphicon-pencil"></span>*@ পরিবর্তন
+                            </button>
+                        </td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" style="top:40%; height:100px; overflow:hidden; outline:none;" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4 class="modal-title" id="myModalLabel">Please wait....</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

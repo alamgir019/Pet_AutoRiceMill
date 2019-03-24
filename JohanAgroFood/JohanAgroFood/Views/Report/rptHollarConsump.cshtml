@@ -1,0 +1,60 @@
+﻿<script src="~/App/Components/Report/reportCtrl.js"></script>
+<script src="~/App/Components/Report/reportSvc.js"></script>
+<script src="~/App/Components/Common/commonSvc.js"></script>
+
+
+<div class="pageContainer" ng-controller="reportCtrl">
+    <div class="row">
+        <div style="height: 30px;"></div>
+    </div>
+
+    <div class="row">
+
+        <fieldset class="scheduler-border">
+            <legend class="scheduler-border">ধানের হোলার খরচের রিপোর্ট</legend>
+        </fieldset>
+
+        <form class="form-horizontal">
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="fromdate" class="col-md-4 control-label">শুরুর তারিখঃ</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" ng-model="hollarRpt.fromDate" id="fromdate" />
+                    </div>
+                    <script type="text/javascript">
+                        $("#fromdate").datepicker({ dateFormat: 'dd-mm-yy' });
+                    </script>
+                </div>
+                <div class="form-group">
+                    <label for="todate" class="col-md-4 control-label">শেষ তারিখঃ</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" ng-model="hollarRpt.toDate" id="todate" />
+                    </div>
+                    <script type="text/javascript">
+                        $("#todate").datepicker({ dateFormat: 'dd-mm-yy' });
+                    </script>
+                </div>
+                <div class="form-group">
+                    <label for="name" class="col-sm-4 control-label">মিলঃ</label>
+                    <div class="col-sm-8">
+                        <select type="text" class="form-control" name="mill" data-ng-model="hollarRpt.stockId" required>
+                            <option value="5">১ নং রানিং মিল</option>
+                            <option value="6">২ নং রানিং মিল</option>
+                            <option value="0">উভয় মিল</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <a class="btn btn-success" id="link-6" target="_blank"
+                       ng-href="/Report/HollarConsump?startDate={{hollarRpt.fromDate}}&endDate={{hollarRpt.toDate}}&stockId={{hollarRpt.stockId}}">রিপোর্ট দেখুন</a>
+                    <button class="btn btn-success" ng-click="cancelReport()">
+                        <span class="glyphicon glyphicon-refresh" aria-hidden="true">বাতিল</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

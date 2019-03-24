@@ -1,0 +1,502 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="JohanAgroFoodDBModelStoreContainer" CdmEntityContainer="JohanAgroFoodDBEntities">
+    <FunctionImportMapping FunctionImportName="sp_getProductSellInfo" FunctionName="JohanAgroFoodDBModel.Store.sp_getProductSellInfo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="JohanAgroFoodDBModel.sp_getProductSellInfo_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="partyId" ColumnName="partyId" />
+          <ScalarProperty Name="productId" ColumnName="productId" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="noOfBag" ColumnName="noOfBag" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="unit" ColumnName="unit" />
+          <ScalarProperty Name="unitPrice" ColumnName="unitPrice" />
+          <ScalarProperty Name="partyName" ColumnName="partyName" />
+          <ScalarProperty Name="productName" ColumnName="productName" />
+          <ScalarProperty Name="stockId" ColumnName="stockId" />
+          <ScalarProperty Name="stockName" ColumnName="stockName" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="transportCost" ColumnName="transportCost" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="truckNumber" ColumnName="truckNumber" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetHuskInfo" FunctionName="JohanAgroFoodDBModel.Store.sp_GetHuskInfo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="JohanAgroFoodDBModel.sp_GetHuskInfo_Result">
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="productName" ColumnName="productName" />
+          <ScalarProperty Name="stockName" ColumnName="stockName" />
+          <ScalarProperty Name="noOfBag" ColumnName="noOfBag" />
+          <ScalarProperty Name="quantityPerBag" ColumnName="quantityPerBag" />
+          <ScalarProperty Name="paidAmount" ColumnName="paidAmount" />
+          <ScalarProperty Name="unit" ColumnName="unit" />
+          <ScalarProperty Name="unitPrice" ColumnName="unitPrice" />
+          <ScalarProperty Name="transportCost" ColumnName="transportCost" />
+          <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetStockInfo" FunctionName="JohanAgroFoodDBModel.Store.sp_GetStockInfo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="JohanAgroFoodDBModel.sp_GetStockInfo_Result">
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="stockName" ColumnName="stockName" />
+          <ScalarProperty Name="productName" ColumnName="productName" />
+          <ScalarProperty Name="rcvQty" ColumnName="rcvQty" />
+          <ScalarProperty Name="totalRev" ColumnName="totalRev" />
+          <ScalarProperty Name="sellQty" ColumnName="sellQty" />
+          <ScalarProperty Name="totalSell" ColumnName="totalSell" />
+          <ScalarProperty Name="openingStock" ColumnName="openingStock" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetDailySellInfo" FunctionName="JohanAgroFoodDBModel.Store.sp_GetDailySellInfo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="JohanAgroFoodDBModel.sp_GetDailySellInfo_Result">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="productName" ColumnName="productName" />
+          <ScalarProperty Name="stockName" ColumnName="stockName" />
+          <ScalarProperty Name="noOfBag" ColumnName="noOfBag" />
+          <ScalarProperty Name="quantityPerBag" ColumnName="quantityPerBag" />
+          <ScalarProperty Name="unitPrice" ColumnName="unitPrice" />
+          <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+          <ScalarProperty Name="paidAmount" ColumnName="paidAmount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetProductInfo" FunctionName="JohanAgroFoodDBModel.Store.sp_GetProductInfo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="JohanAgroFoodDBModel.sp_GetProductInfo_Result">
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="productName" ColumnName="productName" />
+          <ScalarProperty Name="stockName" ColumnName="stockName" />
+          <ScalarProperty Name="noOfBag" ColumnName="noOfBag" />
+          <ScalarProperty Name="quantityPerBag" ColumnName="quantityPerBag" />
+          <ScalarProperty Name="paidAmount" ColumnName="paidAmount" />
+          <ScalarProperty Name="unit" ColumnName="unit" />
+          <ScalarProperty Name="unitPrice" ColumnName="unitPrice" />
+          <ScalarProperty Name="bagPrice" ColumnName="bagPrice" />
+          <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetHuskIncWithd" FunctionName="JohanAgroFoodDBModel.Store.sp_GetHuskIncWithd">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="JohanAgroFoodDBModel.sp_GetHuskIncWithd_Result">
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="income" ColumnName="income" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="withdraw" ColumnName="withdraw" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="STK_Balance">
+      <EntityTypeMapping TypeName="JohanAgroFoodDBModel.STK_Balance">
+        <MappingFragment StoreEntitySet="STK_Balance">
+          <ScalarProperty Name="sackWeight" ColumnName="sackWeight" />
+          <ScalarProperty Name="sackQuantity" ColumnName="sackQuantity" />
+          <ScalarProperty Name="productId" ColumnName="productId" />
+          <ScalarProperty Name="stockId" ColumnName="stockId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="STK_tblStock">
+      <EntityTypeMapping TypeName="JohanAgroFoodDBModel.STK_tblStock">
+        <MappingFragment StoreEntitySet="STK_tblStock">
+          <ScalarProperty Name="createDate" ColumnName="createDate" />
+          <ScalarProperty Name="stockAddress" ColumnName="stockAddress" />
+          <ScalarProperty Name="stockName" ColumnName="stockName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblBuys">
+      <EntityTypeMapping TypeName="JohanAgroFoodDBModel.tblBuy">
+        <MappingFragment StoreEntitySet="tblBuy">
+          <ScalarProperty Name="truckNumber" ColumnName="truckNumber" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="unit" ColumnName="unit" />
+          <ScalarProperty Name="quantityPerBag" ColumnName="quantityPerBag" />
+          <ScalarProperty Name="noOfBag" ColumnName="noOfBag" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="productId" ColumnName="productId" />
+          <ScalarProperty Name="stockId" ColumnName="stockId" />
+          <ScalarProperty Name="partyId" ColumnName="partyId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCollections">
+      <EntityTypeMapping TypeName="JohanAgroFoodDBModel.tblCollection">
+        <MappingFragment StoreEntitySet="tblCollection">
+          <ScalarProperty Name="discount" ColumnName="discount" />
+          <ScalarProperty Name="dueAmount" ColumnName="dueAmount" />
+          <ScalarProperty Name="collAmount" ColumnName="collAmount" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="sellId" ColumnName="sellId" />
+          <ScalarProperty Name="partyId" ColumnName="partyId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCommonElements">
+      <EntityTypeMapping TypeName="JohanAgroFoodDBModel.tblCommonElement">
+        <MappingFragment StoreEntitySet="tblCommonElement">
+          <ScalarProperty Name="elementCode" ColumnName="elementCode" />
+          <ScalarProperty Name="elementName" ColumnName="elementName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCostingSources">
+      <EntityTypeMapping TypeName="JohanAgroFoodDBModel.tblCostingSource">
+        <MappingFragment StoreEntitySet="tblCostingSource">
+          <ScalarProperty Name="isDue" ColumnName="isDue" />
+          <ScalarProperty Name="transportCost" ColumnName="transportCost" />
+          <ScalarProperty Name="labourCostPerBag" ColumnName="labourCostPerBag" />
+          <ScalarProperty Name="buyId" ColumnName="buyId" />
+          <ScalarProperty Name="sellId" ColumnName="sellId" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="srcDescId" ColumnName="srcDescId" />
+          <ScalarProperty Name="srcDescription" ColumnName="srcDescription" />
+          <ScalarProperty Name="sourceName" ColumnName="sourceName" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="partyId" ColumnName="partyId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblIncomeSources">
+      <EntityTypeMapping TypeName="JohanAgroFoodDBModel.tblIncomeSource">
+        <MappingFragment StoreEntitySet="tblIncomeSource">
+          <ScalarProperty Name="isDue" ColumnName="isDue" />
+          <ScalarProperty Name="srcDescId" ColumnName="srcDescId" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="sourceName" ColumnName="sourceName" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="partyId" ColumnName="partyId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblLoanars">
+      <EntityTypeMapping TypeName="JohanAgroFoodDBModel.tblLoanar">
+        <MappingFragment StoreEntitySet="tblLoanar">
+          <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+          <ScalarProperty Name="createDate" ColumnName="createDate" />
+          <ScalarProperty Name="interest" ColumnName="interest" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="district" ColumnName="district" />
+          <ScalarProperty Name="area" ColumnName="area" />
+          <ScalarProperty Name="contactNo" ColumnName="contactNo" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblParties">
+      <EntityTypeMapping TypeName="JohanAgroFoodDBModel.tblParty">
+        <MappingFragment StoreEntitySet="tblParty">
+          <ScalarProperty Name="isCashParty" ColumnName="isCashParty" />
+          <ScalarProperty Name="zoneId" ColumnName="zoneId" />
+          <ScalarProperty Name="districtId" ColumnName="districtId" />
+          <ScalarProperty Name="area" ColumnName="area" />
+          <ScalarProperty Name="contactNo" ColumnName="contactNo" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="productId" ColumnName="productId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblPayables">
+      <EntityTypeMapping TypeName="JohanAgroFoodDBModel.tblPayable">
+        <MappingFragment StoreEntitySet="tblPayable">
+          <ScalarProperty Name="incSrcId" ColumnName="incSrcId" />
+          <ScalarProperty Name="sellId" ColumnName="sellId" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="openingBalance" ColumnName="openingBalance" />
+          <ScalarProperty Name="partyId" ColumnName="partyId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblPayments">
+      <EntityTypeMapping TypeName="JohanAgroFoodDBModel.tblPayment">
+        <MappingFragment StoreEntitySet="tblPayment">
+          <ScalarProperty Name="discount" ColumnName="discount" />
+          <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
+          <ScalarProperty Name="paidAmount" ColumnName="paidAmount" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="buyId" ColumnName="buyId" />
+          <ScalarProperty Name="partyId" ColumnName="partyId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProducts">
+      <EntityTypeMapping TypeName="JohanAgroFoodDBModel.tblProduct">
+        <MappingFragment StoreEntitySet="tblProduct">
+          <ScalarProperty Name="parentId" ColumnName="parentId" />
+          <ScalarProperty Name="productName" ColumnName="productName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProductPrices">
+      <EntityTypeMapping TypeName="JohanAgroFoodDBModel.tblProductPrice">
+        <MappingFragment StoreEntitySet="tblProductPrice">
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="unitPrice" ColumnName="unitPrice" />
+          <ScalarProperty Name="productId" ColumnName="productId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblSells">
+      <EntityTypeMapping TypeName="JohanAgroFoodDBModel.tblSell">
+        <MappingFragment StoreEntitySet="tblSell">
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="truckNumber" ColumnName="truckNumber" />
+          <ScalarProperty Name="transportCost" ColumnName="transportCost" />
+          <ScalarProperty Name="incSrcId" ColumnName="incSrcId" />
+          <ScalarProperty Name="stockId" ColumnName="stockId" />
+          <ScalarProperty Name="unitPrice" ColumnName="unitPrice" />
+          <ScalarProperty Name="unit" ColumnName="unit" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="noOfBag" ColumnName="noOfBag" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="productId" ColumnName="productId" />
+          <ScalarProperty Name="partyId" ColumnName="partyId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUsers">
+      <EntityTypeMapping TypeName="JohanAgroFoodDBModel.tblUser">
+        <MappingFragment StoreEntitySet="tblUser">
+          <ScalarProperty Name="userType" ColumnName="userType" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblInterests">
+      <EntityTypeMapping TypeName="JohanAgroFoodDBModel.tblInterest">
+        <MappingFragment StoreEntitySet="tblInterest">
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="intrestAmt" ColumnName="intrestAmt" />
+          <ScalarProperty Name="loanarId" ColumnName="loanarId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="STK_Transaction">
+      <EntityTypeMapping TypeName="JohanAgroFoodDBModel.STK_Transaction">
+        <MappingFragment StoreEntitySet="STK_Transaction">
+          <ScalarProperty Name="sellId" ColumnName="sellId" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="operation" ColumnName="operation" />
+          <ScalarProperty Name="sellQty" ColumnName="sellQty" />
+          <ScalarProperty Name="rcvQty" ColumnName="rcvQty" />
+          <ScalarProperty Name="prodId" ColumnName="prodId" />
+          <ScalarProperty Name="stockId" ColumnName="stockId" />
+          <ScalarProperty Name="openingStock" ColumnName="openingStock" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="STK_tblPaddy">
+      <EntityTypeMapping TypeName="JohanAgroFoodDBModel.STK_tblPaddy">
+        <MappingFragment StoreEntitySet="STK_tblPaddy">
+          <ScalarProperty Name="createDate" ColumnName="createDate" />
+          <ScalarProperty Name="sackQuantity" ColumnName="sackQuantity" />
+          <ScalarProperty Name="sackWeight" ColumnName="sackWeight" />
+          <ScalarProperty Name="paddRcvId" ColumnName="paddRcvId" />
+          <ScalarProperty Name="productId" ColumnName="productId" />
+          <ScalarProperty Name="stockId" ColumnName="stockId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_RptPaddyStockInfo" FunctionName="JohanAgroFoodDBModel.Store.sp_RptPaddyStockInfo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="JohanAgroFoodDBModel.sp_RptPaddyStockInfo_Result">
+          <ScalarProperty Name="rowNum" ColumnName="rowNum" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="productName" ColumnName="productName" />
+          <ScalarProperty Name="rcvQty" ColumnName="rcvQty" />
+          <ScalarProperty Name="releaseQty" ColumnName="releaseQty" />
+          <ScalarProperty Name="stockName" ColumnName="stockName" />
+          <ScalarProperty Name="remWeight" ColumnName="remWeight" />
+          <ScalarProperty Name="totalRcv" ColumnName="totalRcv" />
+          <ScalarProperty Name="totalRelease" ColumnName="totalRelease" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_rptParticleGeneral" FunctionName="JohanAgroFoodDBModel.Store.sp_rptParticleGeneral">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="JohanAgroFoodDBModel.sp_rptParticleGeneral_Result">
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="income" ColumnName="income" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="withdraw" ColumnName="withdraw" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="BagTransactions">
+      <EntityTypeMapping TypeName="JohanAgroFoodDBModel.BagTransaction">
+        <MappingFragment StoreEntitySet="BagTransaction">
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="priceDues" ColumnName="priceDues" />
+          <ScalarProperty Name="bagDues" ColumnName="bagDues" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="sentPrice" ColumnName="sentPrice" />
+          <ScalarProperty Name="comSentBag" ColumnName="comSentBag" />
+          <ScalarProperty Name="rcvPrice" ColumnName="rcvPrice" />
+          <ScalarProperty Name="comRcvBag" ColumnName="comRcvBag" />
+          <ScalarProperty Name="rcvId" ColumnName="rcvId" />
+          <ScalarProperty Name="partyId" ColumnName="partyId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetPaddyInfo" FunctionName="JohanAgroFoodDBModel.Store.sp_GetPaddyInfo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="JohanAgroFoodDBModel.sp_GetPaddyInfo_Result">
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="productName" ColumnName="productName" />
+          <ScalarProperty Name="stockName" ColumnName="stockName" />
+          <ScalarProperty Name="noOfBag" ColumnName="noOfBag" />
+          <ScalarProperty Name="quantityPerBag" ColumnName="quantityPerBag" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="partyName" ColumnName="partyName" />
+          <ScalarProperty Name="protiMonerPorta" ColumnName="protiMonerPorta" />
+          <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+          <ScalarProperty Name="paidAmount" ColumnName="paidAmount" />
+          <ScalarProperty Name="transCost" ColumnName="transCost" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="tblDues">
+      <EntityTypeMapping TypeName="JohanAgroFoodDBModel.tblDue">
+        <MappingFragment StoreEntitySet="tblDues">
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="openingBalance" ColumnName="openingBalance" />
+          <ScalarProperty Name="costingId" ColumnName="costingId" />
+          <ScalarProperty Name="buyId" ColumnName="buyId" />
+          <ScalarProperty Name="partyId" ColumnName="partyId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="func_paddyparta" FunctionName="JohanAgroFoodDBModel.Store.func_paddyparta" />
+    <EntitySetMapping Name="OpeningBalances">
+      <EntityTypeMapping TypeName="JohanAgroFoodDBModel.OpeningBalance">
+        <MappingFragment StoreEntitySet="OpeningBalance">
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="balance" ColumnName="balance" />
+          <ScalarProperty Name="partyId" ColumnName="partyId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalaryPayments">
+      <EntityTypeMapping TypeName="JohanAgroFoodDBModel.SalaryPayment">
+        <MappingFragment StoreEntitySet="SalaryPayment">
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="year" ColumnName="year" />
+          <ScalarProperty Name="month" ColumnName="month" />
+          <ScalarProperty Name="paidAmount" ColumnName="paidAmount" />
+          <ScalarProperty Name="empId" ColumnName="empId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="JohanAgroFoodDBModel.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="currentSalary" ColumnName="currentSalary" />
+          <ScalarProperty Name="joiningDate" ColumnName="joiningDate" />
+          <ScalarProperty Name="contact" ColumnName="contact" />
+          <ScalarProperty Name="designation" ColumnName="designation" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="empName" ColumnName="empName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaddyTransactions">
+      <EntityTypeMapping TypeName="JohanAgroFoodDBModel.PaddyTransaction">
+        <MappingFragment StoreEntitySet="PaddyTransaction">
+          <ScalarProperty Name="fromStock" ColumnName="fromStock" />
+          <ScalarProperty Name="serial" ColumnName="serial" />
+          <ScalarProperty Name="millCost" ColumnName="millCost" />
+          <ScalarProperty Name="bagWeight" ColumnName="bagWeight" />
+          <ScalarProperty Name="buyId" ColumnName="buyId" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="releaseQty" ColumnName="releaseQty" />
+          <ScalarProperty Name="rcvQty" ColumnName="rcvQty" />
+          <ScalarProperty Name="prodId" ColumnName="prodId" />
+          <ScalarProperty Name="stockId" ColumnName="stockId" />
+          <ScalarProperty Name="openingStock" ColumnName="openingStock" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetPaddyBuyInfo" FunctionName="JohanAgroFoodDBModel.Store.sp_GetPaddyBuyInfo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="JohanAgroFoodDBModel.sp_GetPaddyBuyInfo_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="partyId" ColumnName="partyId" />
+          <ScalarProperty Name="stockId" ColumnName="stockId" />
+          <ScalarProperty Name="productId" ColumnName="productId" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="noOfBag" ColumnName="noOfBag" />
+          <ScalarProperty Name="quantityPerBag" ColumnName="quantityPerBag" />
+          <ScalarProperty Name="unit" ColumnName="unit" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="truckNumber" ColumnName="truckNumber" />
+          <ScalarProperty Name="partyName" ColumnName="partyName" />
+          <ScalarProperty Name="productName" ColumnName="productName" />
+          <ScalarProperty Name="stockName" ColumnName="stockName" />
+          <ScalarProperty Name="comSentBag" ColumnName="comSentBag" />
+          <ScalarProperty Name="comRcvBag" ColumnName="comRcvBag" />
+          <ScalarProperty Name="rcvPrice" ColumnName="rcvPrice" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="transportCost" ColumnName="transportCost" />
+          <ScalarProperty Name="labourCostPerBag" ColumnName="labourCostPerBag" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_getDailyPaddyBuy" FunctionName="JohanAgroFoodDBModel.Store.sp_getDailyPaddyBuy">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="JohanAgroFoodDBModel.sp_getDailyPaddyBuy_Result">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="productName" ColumnName="productName" />
+          <ScalarProperty Name="stockName" ColumnName="stockName" />
+          <ScalarProperty Name="noOfBag" ColumnName="noOfBag" />
+          <ScalarProperty Name="quantityPerBag" ColumnName="quantityPerBag" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+          <ScalarProperty Name="parta" ColumnName="parta" />
+          <ScalarProperty Name="transportCost" ColumnName="transportCost" />
+          <ScalarProperty Name="paidAmount" ColumnName="paidAmount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

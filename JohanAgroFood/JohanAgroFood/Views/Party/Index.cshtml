@@ -1,0 +1,141 @@
+﻿@model Johan.DATA.tblParty
+@{
+    ViewBag.Title = "পার্টি";
+}
+<script src="~/App/Components/Party/partyController.js"></script>
+<script src="~/App/Components/Party/partyService.js"></script>
+<script src="~/App/Components/Zone/zoneService.js"></script>
+<script src="~/App/Components/Product/productService.js"></script>
+<div class="row">
+    <div style="height:20px;"></div>
+</div>
+<div ng-controller="partyController" class="row">
+    <div class="col-md-4">
+        <form class="form-horizontal" name="partyForm" novalidate>
+            <div class="form-group">
+                <div class="col-sm-8 col-md-offset-2">
+                    <h4>পার্টি</h4>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name" class="col-sm-4 control-label">পার্টির নাম</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" name="name" data-ng-model="party.name" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="contactNo" class="col-sm-4 control-label">মোবাইল নাম্বার</label>
+                <div class="col-sm-8">
+                    <bangla-number input-value="party.contact" output-value="party.contactNo" required="true" />
+                    @*<input type="text" class="form-control" name="contactNo" data-ng-model="party.contactNo" required>*@
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="area" class="col-sm-4 control-label">এলাকা</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" name="area" data-ng-model="party.area">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="zone" class="col-sm-4 control-label">জোন</label>
+                <div class="col-sm-8">
+                    <select class="form-control" jh-select="party.zoneName" required ng-model="party.zoneId" ng-options="zone.ID as zone.elementName for zone in zones">
+                        <option value="">জোন বাছাই করুন</option>
+                    </select>
+                    <span class="error" ng-show="partyForm.zoneId.$error.required">required</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="district" class="col-sm-4 control-label">জেলা</label>
+                <div class="col-sm-8">
+                    <select class="form-control" jh-select="party.districtName" ng-model="party.districtId" ng-options="dist.ID as dist.elementName for dist in district">
+                        <option value="">জেলা বাছাই করুন</option>
+                    </select>
+                    <span class="error" ng-show="partyForm.district.$error.required">required</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Product" class="col-sm-4 control-label">প্রোডাক্ট</label>
+                <div class="col-sm-8">
+                    <select class="form-control" jh-select="party.productName" required ng-model="party.productId" ng-options="prod.ID as prod.productName for prod in products">
+                        <option value="">প্রোডাক্ট বাছাই করুন</option>
+                    </select>
+                    <span class="error" ng-show="partyForm.userType.$error.required">required</span>
+                </div>
+            </div>
+            <div class="checkbox">
+                <input id="active" type="checkbox" data-ng-model="party.isCashParty"> নগদ
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+
+                    <button class="btn btn-success" ng-click="save()">
+                        <span class="glyphicon glyphicon-save" aria-hidden="true"> সেভ</span>
+                    </button>
+                    <button class="btn btn-success" ng-click="reset()">
+                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"> রিসেট</span>
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <div class="col-sm-8">
+                <h4>পার্টির তালিকা</h4>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>নাম</th>
+                        <th>মোবাইল</th>
+                        <th>এলাকা</th>
+                        <th>জোন</th>
+                        <th>জেলা</th> 
+                        <th>প্রোডাক্ট</th>
+                        <th>নগদ</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="pt in parties">
+                        <td>{{pt.name}}</td>
+                        <td>{{pt.contact}}</td>
+                        <td>{{pt.area}}</td>
+                        <td>{{pt.zoneName}}</td>
+                        <td>{{pt.districtName}}</td>
+                        <td>{{pt.productName}}</td>
+                        <td>{{pt.cash}}</td>
+                        <td>
+                            <button class="btn btn-default" value="Edit" ng-click="edit(pt)">
+                                @*<span class="glyphicon glyphicon-pencil"></span>*@ পরিবর্তন
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-default" value="Delete" ng-click="delete(pt)">
+                                @*<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>*@ মূছুন
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" style="top:40%; height:100px; overflow:hidden; outline:none;" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4 class="modal-title" id="myModalLabel">Please wait....</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

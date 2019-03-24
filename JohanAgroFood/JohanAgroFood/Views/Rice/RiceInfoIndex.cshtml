@@ -1,0 +1,187 @@
+﻿@{
+    ViewBag.Title = "প্রোডাক্টের বিক্রয়ের তথ্য";
+}
+<script src="~/App/Components/Rice/riceSellController.js"></script>
+<script src="~/App/Components/Rice/riceSellService.js"></script>
+<script src="~/App/Components/Party/partyService.js"></script>
+<script src="~/App/Components/Common/commonSvc.js"></script>
+
+<div class="pageContainer" ng-controller="riceSellController">
+    <div class="row">
+        <div style="height: 30px;"></div>
+    </div>
+
+    <div class="row">
+        <fieldset class="scheduler-border">
+            <legend class="scheduler-border">চালের তথ্য</legend>
+        </fieldset>
+
+        <form name="riceInfoForm" class="form-horizontal" novalidate>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Party" class="col-md-4 control-label">পার্টিঃ</label>
+                    <div class="col-md-8">
+                        <typeahead items="parties" model="riceInfo.partyName" value="riceInfo.partyId" />
+                        @*<select class="form-control" jh-select="riceInfo.partyName" ng-model="riceInfo.partyId" ng-options="party.ID as party.name for party in parties" id="Party">
+                            <option value=""></option>
+                        </select>*@
+                        @*<input type="checkbox" ng-checked="riceInfo.partyId = 3010" ng-model="isCash" />ng-disabled="isCash" *@
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="stock" class="col-md-4 control-label">স্টকঃ</label>
+                    <div class="col-md-8">
+                        <select class="form-control" jh-select="riceInfo.stockName" ng-model="riceInfo.stockId" ng-options="stock.ID as stock.stockName for stock in stocks" id="rice">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="rice" class="col-md-4 control-label">প্রোডাক্ট</label>
+                    <div class="col-md-8">
+                        <select class="form-control" jh-select="riceInfo.productName" ng-model="riceInfo.productId" ng-options="rice.ID as rice.productName for rice in rices" id="rice">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="date" class="col-md-4 control-label">তারিখঃ</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" ng-model="riceInfo.date" id="date">
+                    </div>
+                    <script type="text/javascript">
+                        $("#date").datepicker({ dateFormat: 'dd-mm-yy' });
+                    </script>
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="rcperbag" class="col-md-4 control-label">প্রতি ব্যাগে পরিমানঃ</label>
+                    <div class="col-md-8">
+                        <label class="col-md-10">
+                            <bangla-number input-value="riceInfo.qty" output-value="riceInfo.quantity" required="true" />
+                        </label>
+                        <p class="col-sm-2"><strong>কেজি</strong></p>
+                        @*<input type="number" class="form-control" ng-model="riceInfo.quantity" id="rcperbag">*@
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="prpermon" class="col-md-4 control-label">প্রতি কেজির মূল্যঃ</label>
+                    <div class="col-md-8">
+                        @*<input type="number" class="form-control" ng-model="riceInfo.unitPrice" id="prpermon" />*@
+                        <label class="col-md-10">
+                            <bangla-number input-value="riceInfo.uPrice" output-value="riceInfo.unitPrice" required="false" />
+                        </label>
+                        <p class="col-sm-2"><strong>টাকা</strong></p>
+                        @*<div class="checkbox">
+                            <label><input type="checkbox" ng-model="riceInfo.isMon" /> মণ</label>
+                        </div>*@
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="totbag" class="col-md-4 control-label">মোট ব্যাগঃ</label>
+                    <div class="col-md-8">
+                        <label class="col-md-10">
+                            <bangla-number input-value="riceInfo.noBag" output-value="riceInfo.noOfBag" required="true" />
+                        </label>
+                            @*<input type="number" class="form-control" ng-model="riceInfo.noOfBag" id="totbag">*@
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="trcost" class="col-md-4 control-label">পরিবহন খরচঃ</label>
+                    <div class="col-md-8">
+                        <label class="col-md-10">
+                            @*<input type="number" class="form-control" ng-model="riceInfo.transportCost" id="trcost" />*@
+                            <bangla-number input-value="riceInfo.transCost" output-value="riceInfo.transportCost" required="false" />
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-1">
+                        <input type="checkbox" data-ng-model="riceInfo.transportCostInclude" id="trcos" />
+                    </div>
+                    
+                    <label for="trcos" >পরিবহন খরচ অর্ন্তভুক্ত</label>
+                    
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                
+                
+                <div class="form-group">
+                    <label for="trno" class="col-md-4 control-label">ট্রাক নাম্বারঃ</label>
+                    <div class="col-md-8">
+                        <label class="col-md-10">
+                            <input type="text" class="form-control" ng-model="riceInfo.truckNumber" id="trno">
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="trno" class="col-md-4 control-label">বর্ণনাঃ</label>
+                    <div class="col-md-8">
+                        <label class="col-md-10">
+                        <input type="text" class="form-control" ng-model="riceInfo.description" id="trno">
+                            </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="totprice" class="col-md-4 control-label">মোট মূল্য</label>
+                    <div class="col-md-8">
+                        <label class="col-md-10">
+                            <input type="text" class="form-control" readonly ng-model="riceInfo.totalpr" ng-click="getTotal()" id="totprice">
+                        </label>
+                        <p class="col-sm-2"><strong>টাকা</strong></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="paid" class="col-md-4 control-label">প্রদানকৃত টাকাঃ</label>
+                    <div class="col-md-8">
+                        <label class="col-md-10">
+                            <bangla-number input-value="riceInfo.paidAmnt" output-value="riceInfo.paidAmount" required="false" />
+                        @*<input type="number" class="form-control" ng-model="riceInfo.paidAmount" id="paid" />*@
+                            </label>
+</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+
+                    <button class="btn btn-success" ng-click="save()">
+                        সেভ
+                        @*<span class="glyphicon glyphicon-save" aria-hidden="true"> Save</span>*@
+                    </button>
+                    <button class="btn btn-success" ng-click="reset()">
+                        রিসেট
+                        @*<span class="glyphicon glyphicon-refresh" aria-hidden="true"> Reset</span>*@
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="row">
+        <fieldset class="fsStyle">
+            <legend class="legendStyle">
+                <a data-toggle="collapse" data-target="#demo" href="#">বিক্রয়ের তালিকা</a>
+            </legend>
+            @*<div ui-grid="{ data: myData }" class="myGrid"></div>*@
+            <div class="gridStyle" ui-grid="gridOptions"></div>
+        </fieldset>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" style="top:40%; height:100px; overflow:hidden; outline:none;" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4 class="modal-title" id="myModalLabel">Please wait....</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

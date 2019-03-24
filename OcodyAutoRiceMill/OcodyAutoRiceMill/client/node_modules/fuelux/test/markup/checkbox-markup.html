@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><title>Sample Markup</title></head>
+<body>
+<div id="MyCheckboxContainer">
+
+	<div class="checkbox">
+		<label class="checkbox-custom" id="CheckboxCheckedEnabled" >
+			<input class="sr-only checked" type="checkbox" checked="checked" />
+			<span class="checkbox-label">Checked/Enabled</span>
+		</label>
+	</div>
+
+	<div class="checkbox">
+		<label class="checkbox-custom" id="CheckboxCheckedDisabled">
+			<input class="sr-only checked" type="checkbox" checked="checked" disabled="disabled" />
+			<span class="checkbox-label">Checked/Disabled</span>
+		</label>
+	</div>
+
+	<div class="checkbox">
+		<label class="checkbox-custom" id="CheckboxUncheckedEnabled">
+			<input class="sr-only checked" type="checkbox" />
+			<span class="checkbox-label">Unchecked/Enabled</span>
+		</label>
+	</div>
+
+	<div class="checkbox">
+		<label class="checkbox-custom" id="CheckboxUncheckedDisabled">
+			<input class="sr-only checked" type="checkbox" disabled="disabled" />
+			<span class="checkbox-label">Unchecked/Disabled</span>
+		</label>
+	</div>
+
+
+	<div>
+		<div class="checkbox">
+			<label class="checkbox-custom" id="CheckboxToggle">
+				<input type="checkbox" class="sr-only" data-toggle=".checkboxToggle" />
+				Custom checkbox toggles by class
+			</label>
+		</div>
+		<div class="checkboxToggle hidden">This message's visibility toggles by class with a checkbox above.</div>
+	</div>
+
+	<div class="checkbox">
+		<label class="checkbox-custom" id="CheckboxHidden">
+			<input class="sr-only checked" type="checkbox" checked="checked" style="visibility: hidden;" />
+			<span class="checkbox-label">Checked/Enabled</span>
+		</label>
+	</div>
+
+</div>
+</body>
+</html>

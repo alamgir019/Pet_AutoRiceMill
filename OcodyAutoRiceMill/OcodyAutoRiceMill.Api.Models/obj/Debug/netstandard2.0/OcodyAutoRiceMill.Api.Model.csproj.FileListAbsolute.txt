@@ -1,0 +1,6 @@
+D:\Development\Projects\auto-rice-mill\OcodyAutoRiceMill\OcodyAutoRiceMill.Api.Model\bin\Debug\netstandard2.0\OcodyAutoRiceMill.Api.Model.deps.json
+D:\Development\Projects\auto-rice-mill\OcodyAutoRiceMill\OcodyAutoRiceMill.Api.Model\bin\Debug\netstandard2.0\OcodyAutoRiceMill.Api.Model.dll
+D:\Development\Projects\auto-rice-mill\OcodyAutoRiceMill\OcodyAutoRiceMill.Api.Model\obj\Debug\netstandard2.0\OcodyAutoRiceMill.Api.Model.csprojAssemblyReference.cache
+D:\Development\Projects\auto-rice-mill\OcodyAutoRiceMill\OcodyAutoRiceMill.Api.Model\obj\Debug\netstandard2.0\OcodyAutoRiceMill.Api.Model.csproj.CoreCompileInputs.cache
+D:\Development\Projects\auto-rice-mill\OcodyAutoRiceMill\OcodyAutoRiceMill.Api.Model\obj\Debug\netstandard2.0\OcodyAutoRiceMill.Api.Model.AssemblyInfoInputs.cache
+D:\Development\Projects\auto-rice-mill\OcodyAutoRiceMill\OcodyAutoRiceMill.Api.Model\obj\Debug\netstandard2.0\OcodyAutoRiceMill.Api.Model.AssemblyInfo.cs

@@ -1,0 +1,137 @@
+﻿@{
+    ViewBag.Title = "paddyTransferTransferIndex";
+}
+
+<script src="~/App/Components/PaddyTransfer/paddyTransferCtrl.js"></script>
+<script src="~/App/Components/PaddyTransfer/paddyTransferSvc.js"></script>
+<script src="~/App/Components/Common/commonSvc.js"></script>
+
+<div ng-controller="paddyTransferCtrl" class="row">
+
+    <div class="col-md-4">
+
+        <div style="height: 20px;"></div>
+
+        <form class="form-horizontal" name="paddyTransferForm" novalidate>
+
+            <div class="form-group">
+                <div class="col-sm-10 col-md-offset-2">
+                    <h3>ধানের স্টক স্থানান্তর</h3>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="typename" class="col-sm-4 control-label">উৎস গোডাউন</label>
+                <div class="col-sm-8">
+                    <select type="text" class="form-control" name="typename" data-ng-model="paddyTransfer.stockId"
+                            ng-options="stock.ID as stock.stockName for stock in stocks" required>
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name" class="col-sm-4 control-label">লক্ষ্য গোডাউন</label>
+               
+                <div class="col-sm-8">
+                    <select type="text" class="form-control" name="pname" data-ng-model="paddyTransfer.targetStockId"
+                            ng-options="stock.ID as stock.stockName for stock in stocks" required>
+                        <option value=""></option>
+                    </select>
+                    <div ng-hide="paddyTransfer.targetStockId!=hollar.ID">
+                        <bangla-number place-holder="placeholder" input-value="paddyTransfer.seril" output-value="paddyTransfer.serial" required="false" />
+
+                    </div>
+                    <div ng-hide="paddyTransfer.targetStockId!=hollar.ID">
+                        <bangla-number place-holder="millCost" input-value="paddyTransfer.milCst" output-value="paddyTransfer.millCost" required="false" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name" class="col-sm-4 control-label">ধানের ধরণ</label>
+                <div class="col-sm-8">
+                    <select type="text" class="form-control" name="sname" data-ng-model="paddyTransfer.productId"
+                            ng-options="paddy.ID as paddy.productName for paddy in paddies" ng-change="getSackWeights()" required>
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name" class="col-sm-4 control-label">ব্যাগের ওজন</label>
+                <div class="col-sm-8">
+                    <label class="col-sm-10">
+                        <select type="text" class="form-control" name="sname" data-ng-model="paddyTransfer.sackWeight"
+                                ng-options="sackType.sackWeight as sackType.bagWeight for sackType in sackTypes" required>
+                            <option value=""></option>
+                        </select>
+                    </label>
+                    <label class="col-sm-1">কেজি</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="qty" class="col-sm-4 control-label">ব্যাগের সংখ্যা</label>
+                <div class="col-sm-8">
+                    <bangla-number input-value="paddyTransfer.sckQuantity" output-value="paddyTransfer.sackQuantity" ng-keydown="totalAmount()" required="true" />
+                    
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="qty" class="col-sm-4 control-label">মোট পরিমাণ</label>
+                <div class="col-sm-8">
+                    <label class="col-sm-10">
+                        <bangla-number input-value="paddyTransfer.totQuantityMon" output-value="paddyTransfer.totalQuantityMon" required="true" />
+                    </label>
+                    <p class="col-sm-2"><strong>মণ</strong></p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="date" class="col-md-4 control-label">তারিখঃ</label>
+                <div class="input-group date col-md-8">
+                    <input class="form-control" size="16" id="date" name="date" ng-model="paddyTransfer.date" type="text" required>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+                <script type="text/javascript">
+                    $("#date").datepicker({ dateFormat: 'dd-mm-yy' });
+                </script>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-6">
+                    <button class="btn btn-success" ng-click="save()">
+                        <span class="glyphicon glyphicon-save" aria-hidden="true">সেভ</span>
+                    </button>
+                    <button class="btn btn-success" ng-click="reset()">
+                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"> রিসেট</span>
+                    </button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="col-md-8">
+        <fieldset class="fsStyle">
+            <legend class="legendStyle">
+                <a data-toggle="collapse" data-target="#demo" href="#">ধানের গোডাউন এর তালিকা</a>
+            </legend>
+            @*<div ui-grid="{ data: myData }" class="myGrid"></div>*@
+            <div class="gridStyle" ui-grid="gridOptions"></div>
+        </fieldset>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" style="top:40%; height:100px; overflow:hidden; outline:none;" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4 class="modal-title" id="myModalLabel">Please wait....</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

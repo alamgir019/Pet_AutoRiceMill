@@ -1,0 +1,153 @@
+﻿@model Johan.DATA.tblCar
+@{
+    ViewBag.Title = "গাড়ি পেজ";
+}
+
+<script src="~/App/Components/Car/carController.js"></script>
+<script src="~/App/Components/Car/carService.js"></script>
+
+
+<div ng-controller="carCtrl" class="row">
+
+    <div class="col-md-4">
+        <form class="form-horizontal" name="carForm" novalidate>
+
+            <div class="form-group">
+                <div class="col-sm-8 col-md-offset-2">
+                    <h2>গাড়ির স্টক</h2>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="qty" class="col-sm-4 control-label">গাড়ি নং</label>
+                <div class="col-sm-8">
+                    
+                    <bangla-number input-value="car.carN" output-value="car.carNo" required="true" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="weight" class="col-sm-4 control-label">ড্রাইভারের নাম</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" name="driverName" data-ng-model="car.driverName" required="true" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="qty" class="col-sm-4 control-label">১ম গাড়ির সময়</label>
+                <div class="col-sm-8">
+                    
+                    <bangla-number input-value="car.firsttweight" output-value=" car.firstTimeWeight" required="true" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="weight" class="col-sm-4 control-label">২য় গাড়ির সময়</label>
+                <div class="col-sm-8">
+                    <bangla-number input-value="car.secondtweight" output-value=" car.secondTimeWeight" required="true" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="qty" class="col-sm-4 control-label">খরচ</label>
+                <div class="col-sm-8">
+                   
+                    <bangla-number input-value="car.expend" output-value="car.expenditure" required="true" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="weight" class="col-sm-4 control-label">টাকা</label>
+                <div class="col-sm-8">
+                    <bangla-number input-value="car.amt" output-value="car.amount" required="true" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="date" class="col-md-4 control-label">তারিখঃ</label>
+                <div class="input-group date col-md-8">
+                    <input class="form-control" size="16" id="date" name="date" ng-model="car.carWeightDate" type="text" required>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+                <script type="text/javascript">
+                    $("#date").datepicker({ dateFormat: 'dd-mm-yy' });
+                </script>
+            </div>
+
+            
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button class="btn btn-success" ng-click="save()">
+                        <span class="glyphicon glyphicon-save" aria-hidden="true">সেভ</span>
+                    </button>
+                    <button class="btn btn-success" ng-click="reset()">
+                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"> রিসেট</span>
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="col-md-8">
+
+        <div class="form-group">
+            <div class="col-sm-8">
+                <h2>গাড়ির তালিকা</h2>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                       
+                        <th style="width:10%">গাড়ি নং</th>
+                        <th style="width:20%">তারিখ</th>
+                        <th style="width:20%">ড্রাইভারের নাম</th>
+                        <th style="width:10%">১ম গাড়ির সময়</th>
+                        <th style="width:10%">২য় গাড়ির সময়</th>
+                        <th style="width:10%">খরচ</th>
+                        <th style="width:10%">টাকা</th>
+                        
+                        <th style="width:5%"></th>
+                        <th style="width:5%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="ln in cars">
+                        
+                        <td>{{ln.carN}}</td>
+                        <td>{{ln.carWeightDate}}</td>
+                        <td>{{ln.driverName}}</td>
+                        <td>{{ln.firsttweight}}</td>
+                        <td>{{ln.secondtweight}}</td>
+                        <td>{{ln.expend}}</td>
+                        <td>{{ln.amt}}</td>
+                        <td>
+                            <button class="btn btn-default" value="Edit" ng-click="edit(ln)">
+                                @*<span class="glyphicon glyphicon-pencil"></span>*@ পরিবর্তন
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-default" value="Delete" ng-click="delete(ln)">
+                                @*<span class="glyphicon glyphicon-trash" aria-hidden="true"> Delete</span>*@ মূছুন
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" style="top:40%; height:100px; overflow:hidden; outline:none;" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4 class="modal-title" id="myModalLabel">Please wait....</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

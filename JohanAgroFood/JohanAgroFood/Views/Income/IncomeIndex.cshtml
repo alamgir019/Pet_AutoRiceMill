@@ -1,0 +1,120 @@
+﻿@model Johan.DATA.tblIncomeSource
+@{
+    ViewBag.Title = "আয়ের খাত";
+}
+
+<script src="~/App/Components/Income/incomeController.js"></script>
+<script src="~/App/Components/Income/incomeService.js"></script>
+<script src="~/App/Components/Sector/sectorService.js"></script>
+
+<div ng-controller="incomeController" class="row">
+    <div class="col-md-4">
+        <form class="form-horizontal" name="incomeForm">
+            <div class="form-group">
+                <div class="col-sm-8 col-md-offset-2">
+                    <h2>আয়ের খাত</h2>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name" class="col-sm-4 control-label">খাতের নাম</label>
+                <div class="col-sm-8">
+                    <select type="text" class="form-control" name="name" data-ng-model="income.srcDescId" jh-select="income.sourceName"
+                            ng-options="sector.ID as sector.elementName for sector in sectors" required>
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="contactNo" class="col-sm-4 control-label">বর্ণনা</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" name="contactNo" data-ng-model="income.description">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="area" class="col-sm-4 control-label">মূল্য</label>
+                <div class="col-sm-8">
+                    <bangla-number input-value="income.amt" output-value="income.amount" required="true" />
+                    @*<input type="number" class="form-control" name="area" data-ng-model="income.amount" required>*@
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="date" class="col-md-4 control-label">তারিখ</label>
+                <div class="input-group date col-md-8">
+                    <input class="form-control" size="16" id="date" name="date" ng-model="income.date" type="text" required>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+                <script type="text/javascript">
+                    $("#date").datepicker({ dateFormat: 'dd-mm-yy' });
+                </script>
+
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+
+                    <button class="btn btn-success" ng-click="save(income)">
+                        <span class="glyphicon glyphicon-save" aria-hidden="true"> সেভ</span>
+                    </button>
+                    <button class="btn btn-success" ng-click="reset()">
+                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"> রিসেট</span>
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="col-md-8">
+        <div class="form-group">
+            <div class="col-sm-8">
+                <h2>আয়ের খাতের তালিকা</h2>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th style="width:20%">খাতের নাম</th>
+                        <th style="width:20%">বর্ণনা</th>
+                        <th style="width:20%">তারিখ</th>
+                        <th style="width:20%">মূল্য</th>
+                        <th style="width:10%"></th>
+                        <th style="width:10%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="ln in incomes">
+                        <td>{{ln.sourceName}}</td>
+                        <td>{{ln.description}}</td>
+                        <td>{{ln.date}}</td>
+                        <td>{{ln.amount}}</td>
+                        <td>
+                            <button class="btn btn-default" value="Edit" ng-click="edit(ln)">
+                                <span class="glyphicon glyphicon-pencil">পরিবর্তন</span>  
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-default" value="Delete" ng-click="delete(ln)">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true">মূছুন</span>
+                            </button>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" style="top:40%; height:100px; overflow:hidden; outline:none;" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4 class="modal-title" id="myModalLabel">Please wait....</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

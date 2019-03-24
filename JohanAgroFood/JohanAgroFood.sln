@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Johan.DATA", "Johan.DATA\Johan.DATA.csproj", "{4C1BA6D6-E544-494D-B91E-AC845CCB328F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Johan.Repository", "Johan.Repository\Johan.Repository.csproj", "{ECE3DE6E-174D-4A3C-A0F0-1DAEFEB0DD7C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D36979B3-E846-4550-B9EB-042B13D6B32C}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JohanAgroFood", "JohanAgroFood\JohanAgroFood.csproj", "{EF4BDDBB-1145-44F6-BE58-32B80CB7EAA0}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://alamgirtfs.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Johan.DATA\\Johan.DATA.csproj
+		SccProjectName1 = Johan.DATA
+		SccLocalPath1 = Johan.DATA
+		SccProjectUniqueName2 = Johan.Repository\\Johan.Repository.csproj
+		SccProjectName2 = Johan.Repository
+		SccLocalPath2 = Johan.Repository
+		SccProjectUniqueName3 = JohanAgroFood\\JohanAgroFood.csproj
+		SccProjectName3 = JohanAgroFood
+		SccLocalPath3 = JohanAgroFood
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4C1BA6D6-E544-494D-B91E-AC845CCB328F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C1BA6D6-E544-494D-B91E-AC845CCB328F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C1BA6D6-E544-494D-B91E-AC845CCB328F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C1BA6D6-E544-494D-B91E-AC845CCB328F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECE3DE6E-174D-4A3C-A0F0-1DAEFEB0DD7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECE3DE6E-174D-4A3C-A0F0-1DAEFEB0DD7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECE3DE6E-174D-4A3C-A0F0-1DAEFEB0DD7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECE3DE6E-174D-4A3C-A0F0-1DAEFEB0DD7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF4BDDBB-1145-44F6-BE58-32B80CB7EAA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF4BDDBB-1145-44F6-BE58-32B80CB7EAA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF4BDDBB-1145-44F6-BE58-32B80CB7EAA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF4BDDBB-1145-44F6-BE58-32B80CB7EAA0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

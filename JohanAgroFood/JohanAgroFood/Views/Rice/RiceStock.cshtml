@@ -1,0 +1,135 @@
+﻿
+@{
+    ViewBag.Title = "স্টক পেজ";
+}
+
+<script src="~/App/Components/Rice/riceStockController.js"></script>
+<script src="~/App/Components/Rice/riceStockService.js"></script>
+<script src="~/App/Components/Product/productService.js"></script>
+
+<div ng-controller="riceStockController" class="row">
+
+    <div class="col-md-4">
+        <form class="form-horizontal" name="riceStockForm" novalidate>
+
+            <div class="form-group">
+                <div class="col-sm-8 col-md-offset-2">
+                    <h2>চালের স্টক</h2>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name" class="col-sm-4 control-label">চাল</label>
+                <div class="col-sm-8">
+                    <select type="text" class="form-control" name="pname" data-ng-model="riceStock.productId"
+                            ng-options="rice.ID as rice.productName for rice in rices" required>
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name" class="col-sm-4 control-label">স্টক</label>
+                <div class="col-sm-8">
+                    <select type="text" class="form-control" name="sname" data-ng-model="riceStock.stockId"
+                            ng-options="stock.ID as stock.stockName for stock in stocks" required>
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="date" class="col-md-4 control-label">তারিখঃ</label>
+                <div class="input-group date col-md-8">
+                    <input class="form-control" size="16" id="date" name="date" ng-model="riceStock.createDate" type="text" required>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+                <script type="text/javascript">
+                    $("#date").datepicker({ dateFormat: 'dd-mm-yy' });
+                </script>
+            </div>
+
+            <div class="form-group">
+                <label for="qty" class="col-sm-4 control-label">ব্যাগের সংখ্যা</label>
+                <div class="col-sm-8">
+                    @*<input type="number" class="form-control" name="qty" data-ng-model="riceStock.sackQuantity" required>*@
+                    <bangla-number input-value="riceStock.sckQuantity" output-value="riceStock.sackQuantity" required="true" />
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                <label for="weight" class="col-sm-4 control-label">প্রতি ব্যাগে চাল</label>
+                <div class="col-sm-8">
+                    <bangla-number input-value="riceStock.sckWeight" output-value="riceStock.sackWeight" required="true" />
+                </div>
+            </div>*@
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button class="btn btn-success" ng-click="save(riceStock)">
+                        <span class="glyphicon glyphicon-save" aria-hidden="true">সেভ</span>
+                    </button>
+                    <button class="btn btn-success" ng-click="reset()">
+                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"> রিসেট</span>
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="col-md-8">
+
+        <div class="form-group">
+            <div class="col-sm-8">
+                <h2>চালের স্টকের তালিকা</h2>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th style="width:20%">চালের নাম</th>
+                        <th style="width:30%">স্টকের নাম</th>
+                        <th style="width:20%">তারিখ</th>
+                        <th style="width:10%">ব্যাগের সংখ্যা</th>
+                        <th style="width:10%">প্রতি ব্যাগে চাল</th>
+                        <th style="width:5%"></th>
+                        <th style="width:5%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="ln in riceStocks">
+                        <td>{{ln.productName}}</td>
+                        <td>{{ln.stockName}}</td>
+                        <td>{{ln.createDate}}</td>
+                        <td>{{ln.sckQuantity}}</td>
+                        <td>{{ln.sckWeight}}</td>
+                        <td>
+                            <button class="btn btn-default" value="Edit" ng-click="edit(ln)">
+                                @*<span class="glyphicon glyphicon-pencil"></span>*@ পরিবর্তন
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-default" value="Delete" ng-click="delete(ln)">
+                                @*<span class="glyphicon glyphicon-trash" aria-hidden="true"> Delete</span>*@ মূছুন
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="myModal" tabindex="-1" style="top:40%; height:100px; overflow:hidden; outline:none;" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4 class="modal-title" id="myModalLabel">Please wait....</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

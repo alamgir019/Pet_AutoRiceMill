@@ -1,0 +1,83 @@
+﻿<script src="~/App/Components/Employee/employeeController.js"></script>
+<script src="~/App/Components/Employee/employeeService.js"></script>
+
+<div class="pageContainer" ng-controller="employeeCtrl">
+
+    <div class="row">
+        <div style="height:30px;"></div>
+    </div>
+
+    <div class="row">
+
+        <fieldset class="scheduler-border">
+            <legend class="scheduler-border">কর্মচারী/কর্মকর্তার বেতন প্রদান</legend>
+        </fieldset>
+
+        <div class="col-md-4">
+            <form class="form-horizontal" name="salryForm" novalidate>
+                <div class="form-group">
+                    <label for="month" class="col-sm-4 control-label">মাস</label>
+                    <div class="col-sm-8">
+                        <select class="col-sm-5" name="month" ng-model="salary.month" ng-options="mnt for mnt in months">
+                            <option value=""></option>
+                        </select>বছর
+                        <select class="col-sm-5" name="month" ng-model="salary.year" ng-options="yr for yr in years">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="emp" class="col-sm-4 control-label">কর্মচারী বাছাই করুন</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" ng-change="getEmpSal()" name="emp" ng-model="salary.empId" ng-options="emp.ID as emp.empName for emp in employees" required>
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="contact" class="col-sm-4 control-label">বেতন</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="contact" ng-model="salary.curSal" ng-disabled="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="title" class="col-sm-4 control-label">প্রদানকৃত টাকা</label>
+                    <div class="col-sm-8">
+                        <bangla-number input-value="salary.pAmount" output-value="salary.paidAmount" required="false" />
+                        @*<input type="text" class="form-control" name="title" ng-model="salary.paidAmount">*@
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="date" class="col-sm-4 control-label">তারিখ</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="date" required ng-model="salary.date" id="date">
+                    </div>
+                    <script type="text/javascript">
+                        $("#date").datepicker({ dateFormat: 'dd-mm-yy' });
+                    </script>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="button" class="btn btn-success" ng-click="saveSalary()">
+                            <span class="glyphicon glyphicon-save" aria-hidden="true">সেভ</span>
+                        </button>
+                        <button class="btn btn-success" ng-click="reset()">
+                            <span class="glyphicon glyphicon-refresh" aria-hidden="true"> রিসেট</span>
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+        <div class="col-md-8">
+            <fieldset class="fsStyle">
+                <legend class="legendStyle">
+                    <a data-toggle="collapse" data-target="#demo" href="#">বেতন প্রদানের তালিকা</a>
+                </legend>
+                <div class="gridStyle" ui-grid="gridOptionsSalary"></div>
+            </fieldset>
+        </div>
+    </div>
+
+</div>

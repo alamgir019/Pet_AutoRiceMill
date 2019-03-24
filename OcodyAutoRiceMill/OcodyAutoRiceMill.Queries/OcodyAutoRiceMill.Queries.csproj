@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OcodyAutoRiceMill.Api.Common\OcodyAutoRiceMill.Api.Common.csproj" />
+    <ProjectReference Include="..\OcodyAutoRiceMill.Api.Models\OcodyAutoRiceMill.Api.Models.csproj" />
+    <ProjectReference Include="..\OcodyAutoRiceMill.Data.Access\OcodyAutoRiceMill.Data.Access.csproj" />
+    <ProjectReference Include="..\OcodyAutoRiceMill.Data.Model\OcodyAutoRiceMill.Data.Model.csproj" />
+    <ProjectReference Include="..\OcodyAutoRiceMill.Security\OcodyAutoRiceMill.Security.csproj" />
+  </ItemGroup>
+
+</Project>

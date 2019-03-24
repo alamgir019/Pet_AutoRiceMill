@@ -1,0 +1,22 @@
+﻿<input type="text" class="form-control" ng-model="model" ng-keydown="selected=false" />
+<div class="items jh-overflow col-md-11" ng-hide="!model.length || selected">
+    <div class="item" ng-repeat="item in items| filter:model  track by $index " ng-click="handleSelection(item)" style="cursor:pointer" ng-class="{active:isCurrent($index)}" ng-mouseenter="setCurrent($index)">
+
+        <p>{{item.name}}-{{item.area}}</p>
+    </div>
+</div>
+<style>
+    .active {
+        background-color: #C44741;
+        color: #f2f2f2;
+    }
+    .jh-overflow{
+        position:absolute;
+        z-index:1010;
+        background-clip: padding-box;
+        background-color: #ffffff;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 6px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+</style>

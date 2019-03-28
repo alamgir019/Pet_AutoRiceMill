@@ -5,11 +5,12 @@ using Abp.Domain.Repositories;
 using AutoRiceMill.Authorization;
 using AutoRiceMill.Parties.Dtos;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Abp.Linq.Extensions;
+using System.Collections.Generic;
+using Abp.UI;
+using Abp.AutoMapper;
 
 namespace AutoRiceMill.Parties
 {
@@ -25,12 +26,30 @@ namespace AutoRiceMill.Parties
         {
             var parties = await _partyRepository
                 .GetAll()
-                .Where(p => p.isActive == input.IsActive)
+                .WhereIf(input.IsActive.HasValue, p => p.isActive == input.IsActive)
                 .OrderByDescending(p => p.CreationTime)
-                .ToListAsync();
+                .ToListAsync();                
             return new ListResultDto<PartyDto>(
                 ObjectMapper.Map<List<PartyDto>>(parties)
                 );
+        }
+        public async Task Create(CreatePartyInput input)
+        {
+            Logger.Info("Creating a party for input: " + input);
+            var party = ObjectMapper.Map<Party>(input);            
+            await _partyRepository.InsertAsync(party);
+        }
+        [AbpAuthorize(PermissionNames.Pages_Parties_Update)]
+        public async Task UpdateParty(UpdatePartyInput input)
+        {
+            Logger.Info("Updating a party for input: " + input);
+
+            var party = await _partyRepository.FirstOrDefaultAsync(input.Id);
+            if (party == null)
+            {
+                throw new UserFriendlyException(L("CouldNotFindThePartyMessage"));
+            }
+            ObjectMapper.Map(input, party);
         }
     }
 }

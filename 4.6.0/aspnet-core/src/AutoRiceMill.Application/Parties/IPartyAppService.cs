@@ -11,5 +11,7 @@ namespace AutoRiceMill.Parties
     public interface IPartyAppService: IApplicationService
     {
         Task<ListResultDto<PartyDto>> GetAll(GetAllPartiesInput input);
+        Task Create(CreatePartyInput input);
+        Task UpdateParty(UpdatePartyInput input);
     }
 }

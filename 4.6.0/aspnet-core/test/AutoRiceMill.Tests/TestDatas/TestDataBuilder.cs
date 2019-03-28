@@ -18,7 +18,7 @@ namespace AutoRiceMill.Tests.TestDatas
 
         public void Build()
         {
-            var neo = new Party() { Id = 1, Area = "Dhaka", ContactNo = "01", isActive = true, isCashParty = false, Name = "neo" };
+            var neo = new Party() {Area = "Dhaka", ContactNo = "01", isActive = true, isCashParty = false, Name = "neo" };
             _context.Parties.Add(neo);
             _context.SaveChanges();
 

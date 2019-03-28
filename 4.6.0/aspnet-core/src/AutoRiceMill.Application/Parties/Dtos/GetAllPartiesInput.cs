@@ -6,6 +6,6 @@ namespace AutoRiceMill.Parties.Dtos
 {
     public class GetAllPartiesInput
     {
-        public bool IsActive { get; set; }
+        public bool? IsActive { get; set; }
     }
 }

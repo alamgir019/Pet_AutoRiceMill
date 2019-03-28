@@ -11,7 +11,9 @@ namespace AutoRiceMill.Authorization
             context.CreatePermission(PermissionNames.Pages_Users, L("Users"));
             context.CreatePermission(PermissionNames.Pages_Roles, L("Roles"));
             context.CreatePermission(PermissionNames.Pages_Tenants, L("Tenants"), multiTenancySides: MultiTenancySides.Host);
-            context.CreatePermission(PermissionNames.Pages_Parties,L("Parties"));
+
+            var party= context.CreatePermission(PermissionNames.Pages_Parties,L("Parties"));
+            party.CreateChildPermission(PermissionNames.Pages_Parties_Update,L("UpdateParties"));
         }
 
         private static ILocalizableString L(string name)

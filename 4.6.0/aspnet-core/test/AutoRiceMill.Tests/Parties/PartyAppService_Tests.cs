@@ -1,8 +1,10 @@
-﻿using AutoRiceMill.Parties;
+﻿using Abp.Runtime.Validation;
+using AutoRiceMill.Parties;
 using AutoRiceMill.Parties.Dtos;
 using Shouldly;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Xunit;
 
@@ -16,12 +18,78 @@ namespace AutoRiceMill.Tests.Parties
         {
             _partyAppService = Resolve<IPartyAppService>();
         }
+        [Fact]
+        public async System.Threading.Tasks.Task Should_Create_Party_With_Name()
+        {
+            await _partyAppService.Create(new CreatePartyInput { Name = "My first party" });
+            UsingDbContext(context =>
+            {
+                var party1 = context.Parties.FirstOrDefault(p => p.Name == "My first party");
+                party1.ShouldNotBeNull();
+            });
+        }
+        [Fact]
+        public async System.Threading.Tasks.Task Should_Create_Party_With_AllProperty()
+        {
+            await _partyAppService.Create(new CreatePartyInput {
+                Name="Party2", Area="Area2",ContactNo="Contact1"
+            });
+            UsingDbContext(context=>
+            {
+                var party1 = context.Parties.FirstOrDefault(p=>p.Name=="Party2" && p.Area=="Area2");
+                party1.ShouldNotBeNull();
+            });
+        }
+        [Fact]
+        public async System.Threading.Tasks.Task Should_Not_Create_Party_Without_Name()
+        {
+            await Assert.ThrowsAsync<AbpValidationException>(async () =>
+            {
+                await _partyAppService.Create(new CreatePartyInput
+                {
+                    Area = "Area2",
+                    ContactNo = "Contact1"
+                });
+            });
+        }
 
+        [Fact]
+        public void Should_Change_Party()
+        {
+            //We can work with repositories instead of DbContext
+            var partyRepository = LocalIocManager.Resolve<IPartyRepository>();
+
+            //Obtain test data
+            var party = GetParty("neo");
+            party.ShouldNotBe(null);
+            UpdatePartyInput newParty = new UpdatePartyInput
+            {
+                Id = party.Id,
+                Name = "vio",
+                Area = "cio",
+                ContactNo = "01",
+                IsActive = true
+            };
+            //Run SUT
+            _partyAppService.UpdateParty(newParty);
+            //partyRepository.Get(party.Id).Name.ShouldBe(newParty.Name);
+            //Check result
+            var upadateParty = partyRepository.Get(party.Id);
+            upadateParty.Name.ShouldBe(newParty.Name);
+            upadateParty.Area.ShouldBe(newParty.Area);
+            upadateParty.ContactNo.ShouldBe(newParty.ContactNo);
+            upadateParty.isActive.ShouldBe(newParty.IsActive);
+        }
+
+        private Party GetParty(string name)
+        {
+            return UsingDbContext(context => context.Parties.Single(p => p.Name == name));
+        }
         [Fact]
         public async System.Threading.Tasks.Task Should_Get_All_Parties()
         {
             //Act
-            var output = await _partyAppService.GetAll(new GetAllPartiesInput() { IsActive=true});
+            var output = await _partyAppService.GetAll(new GetAllPartiesInput() { IsActive = true });
 
             //Assert
             output.Items.Count.ShouldBe(1);

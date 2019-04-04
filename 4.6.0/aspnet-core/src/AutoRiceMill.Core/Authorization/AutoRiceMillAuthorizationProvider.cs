@@ -14,6 +14,7 @@ namespace AutoRiceMill.Authorization
 
             var party= context.CreatePermission(PermissionNames.Pages_Parties,L("Parties"));
             party.CreateChildPermission(PermissionNames.Pages_Parties_Update,L("UpdateParties"));
+            party.CreateChildPermission(PermissionNames.Pages_Parties_Delete,L("DeleteParty"));
         }
 
         private static ILocalizableString L(string name)

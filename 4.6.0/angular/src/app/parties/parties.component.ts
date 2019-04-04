@@ -5,6 +5,7 @@ import { PartyDto, PartyServiceProxy, ListResultDtoOfPartyDto } from "@shared/se
 import { finalize } from "rxjs/operators";
 import { MatDialog } from "@angular/material";
 import { CreatePartyDialogComponent } from "./create-party/create-party-dialog.component";
+import { EditPartyDialogComponent } from "./edit-party/edit-party-dialog.component";
 //import * as ApiServiceProxies from '@shared/service-proxies/service-proxies';
 
 class PagedPartiesRequestDto extends PagedRequestDto {
@@ -18,7 +19,7 @@ class PagedPartiesRequestDto extends PagedRequestDto {
 })
 
 export class PartiesComponent extends PagedListingComponentBase<PartyDto>{
-    parties: PartyDto[] = [];    
+    parties: PartyDto[] = [];  
     constructor(
         injector:Injector,
         private _partyService: PartyServiceProxy,
@@ -26,7 +27,10 @@ export class PartiesComponent extends PagedListingComponentBase<PartyDto>{
         ){
         super(injector);
     }
-    
+    editParty(party:PartyDto){
+        this.showCreateOrEditUserDialog(party.id);
+    }
+
     protected list(
         request: PagedPartiesRequestDto,
         pageNumber: number,
@@ -41,12 +45,23 @@ export class PartiesComponent extends PagedListingComponentBase<PartyDto>{
             )
             .subscribe((result: ListResultDtoOfPartyDto) => {
                 this.parties = result.items;
+                this.totalItems=result.items.length;
                 //this.showPaging(result, pageNumber);
             });
     }
     protected delete(party: PartyDto)
     {
-
+        abp.message.confirm(
+        this.l('UserDeleteWarningMessage', party.name),
+        (result: boolean) => {
+            if (result) {
+                this._partyService.delete(party.id).subscribe(() => {
+                    abp.notify.success(this.l('SuccessfullyDeleted'));
+                    this.refresh();
+                });
+            }
+        }
+    );
     }
     
     createParty(): void {
@@ -57,6 +72,13 @@ export class PartiesComponent extends PagedListingComponentBase<PartyDto>{
         if(id==undefined||id<=0)
         {
             createOrEditPartyDialog=this._dialog.open(CreatePartyDialogComponent);
+        }
+        else
+        {
+            createOrEditPartyDialog = this._dialog.open(EditPartyDialogComponent, {
+                data: id
+            });
+
         }
         
         createOrEditPartyDialog.afterClosed().subscribe(result => {

@@ -39,6 +39,7 @@ import { ChangePasswordComponent } from './users/change-password/change-password
 import { ResetPasswordDialogComponent } from './users/reset-password/reset-password.component';
 import { PartiesComponent } from './parties/parties.component';
 import { CreatePartyDialogComponent } from './parties/create-party/create-party-dialog.component';
+import { EditPartyDialogComponent } from './parties/edit-party/edit-party-dialog.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { CreatePartyDialogComponent } from './parties/create-party/create-party-
     ResetPasswordDialogComponent,
     //parties
     PartiesComponent,
-    CreatePartyDialogComponent
+    CreatePartyDialogComponent,
+    EditPartyDialogComponent
   ],
   imports: [
     CommonModule,
@@ -95,7 +97,9 @@ import { CreatePartyDialogComponent } from './parties/create-party/create-party-
     EditUserDialogComponent,
     ResetPasswordDialogComponent,
     // parties
-    CreatePartyDialogComponent
+    CreatePartyDialogComponent,
+    EditPartyDialogComponent
+
   ]
 })
 export class AppModule {}

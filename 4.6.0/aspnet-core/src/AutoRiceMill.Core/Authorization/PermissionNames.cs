@@ -11,5 +11,6 @@
         public const string Pages_Parties = "Pages.Parties";
 
         public const string Pages_Parties_Update = "UpdateParties";
+        public const string Pages_Parties_Delete = "DeleteParty";
     }
 }

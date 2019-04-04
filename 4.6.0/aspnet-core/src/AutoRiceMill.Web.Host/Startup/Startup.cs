@@ -75,7 +75,6 @@ namespace AutoRiceMill.Web.Host.Startup
                     Type = "apiKey"
                 });
             });
-
             // Configure Abp and Dependency Injection
             return services.AddAbp<AutoRiceMillWebHostModule>(
                 // Configure Log4Net logging

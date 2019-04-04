@@ -11,6 +11,10 @@
     <RootNamespace>AutoRiceMill</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Parties\Dtos\PartyDetailOutput.cs" />
+    <Compile Remove="Parties\Dtos\PartyMapProfile.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\AutoRiceMill.Core\AutoRiceMill.Core.csproj" />
   </ItemGroup>
 </Project>

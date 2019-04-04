@@ -24,6 +24,10 @@ namespace AutoRiceMill.Parties
         }
         public async Task<ListResultDto<PartyDto>> GetAll(GetAllPartiesInput input)
         {
+            Calling objCalling = new Calling();
+            objCalling.call1();
+            objCalling.call2();
+
             var parties = await _partyRepository
                 .GetAll()
                 .WhereIf(input.IsActive.HasValue, p => p.isActive == input.IsActive)
@@ -50,6 +54,23 @@ namespace AutoRiceMill.Parties
                 throw new UserFriendlyException(L("CouldNotFindThePartyMessage"));
             }
             ObjectMapper.Map(input, party);
+        }
+        public async Task<PartyDto> Get(EntityDto input) {
+            var party = await _partyRepository
+                .GetAll()
+                .Where(e => e.Id == input.Id)
+                .FirstOrDefaultAsync();
+
+            if (party == null)
+            {
+                throw new UserFriendlyException("Could not found the party, maybe it's deleted.");
+            }
+            return ObjectMapper.Map<PartyDto>(party);
+        }
+        [AbpAuthorize(PermissionNames.Pages_Parties_Delete)]
+        public async Task Delete(EntityDto input)
+        {
+            await _partyRepository.DeleteAsync(input.Id);
         }
     }
 }

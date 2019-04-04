@@ -1,4 +1,5 @@
-﻿using Abp.Runtime.Validation;
+﻿using Abp.Application.Services.Dto;
+using Abp.Runtime.Validation;
 using AutoRiceMill.Parties;
 using AutoRiceMill.Parties.Dtos;
 using Shouldly;
@@ -83,8 +84,11 @@ namespace AutoRiceMill.Tests.Parties
 
         private Party GetParty(string name)
         {
-            return UsingDbContext(context => context.Parties.Single(p => p.Name == name));
+            var party= UsingDbContext(context => context.Parties.FirstOrDefault(p => p.Name == name));
+            //party.ShouldNotBeNull();
+            return party;
         }
+
         [Fact]
         public async System.Threading.Tasks.Task Should_Get_All_Parties()
         {
@@ -103,6 +107,30 @@ namespace AutoRiceMill.Tests.Parties
 
             //Assert
             output.Items.ShouldAllBe(t => t.isActive == true);
+        }
+
+
+        [Fact]
+        public async System.Threading.Tasks.Task Should_Get_Party_Details()
+        {
+            //Obtain test data
+            var party = GetParty("neo");
+            party.ShouldNotBe(null);
+            //Act
+            var output = await _partyAppService.Get(new EntityDto { Id = party.Id });
+            //Assert
+            output.ShouldNotBe(null);
+        }
+        [Fact]
+        public async System.Threading.Tasks.Task Should_Delete_Party()
+        {
+            //Obtain test data
+            var party = GetParty("neo");
+            party.ShouldNotBe(null);
+            //Act
+            await _partyAppService.Delete(new EntityDto() { Id=party.Id});
+            //Assert
+            GetParty("neo").ShouldBe(null);
         }
     }
 }

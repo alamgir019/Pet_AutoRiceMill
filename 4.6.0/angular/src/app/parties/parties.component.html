@@ -82,7 +82,7 @@
                                     <mat-icon>menu</mat-icon>
                                 </button>
                                 <mat-menu #actionsMenu="matMenu">
-                                    <button mat-menu-item >
+                                    <button mat-menu-item  (click)="editParty(party)">
                                         <mat-icon>edit</mat-icon>
                                         <span>{{ "Edit" | localize }}</span>
                                     </button>
